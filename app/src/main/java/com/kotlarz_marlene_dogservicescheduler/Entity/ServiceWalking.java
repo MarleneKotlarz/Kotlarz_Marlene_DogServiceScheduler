@@ -6,20 +6,22 @@ import androidx.room.ForeignKey;
 
 @Entity(tableName = "service_walking_table")
 public class ServiceWalking extends Service {
-    private int intensity;
+    private String option;
 
     // Constructor ServiceWalking
-    public ServiceWalking(String duration, String location, String type, int intensity) {
+    public ServiceWalking(String duration, String location, String type, String option) {
         super(duration, location, type);
-        this.intensity = intensity;
+        this.option = option;
     }
+
+
 
     // Getter and Setter
-    public int getIntensity() {
-        return intensity;
+    public String getOption() {
+        return option;
     }
 
-    public void setIntensity(int intensity) {
-        this.intensity = intensity;
+    public void setOption(String option) {
+        this.option = option;
     }
 }

@@ -259,13 +259,14 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             String option = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_OPTION);
 
             if(serviceType.equals("Walking")) {
-                int intensity = Integer.parseInt(option);
-                ServiceWalking serviceWalking = new ServiceWalking(duration, location, serviceType,intensity);
+//                int intensity = Integer.parseInt(option);
+                ServiceWalking serviceWalking = new ServiceWalking(duration, location, serviceType, option);
                 serviceWalkingViewModel.insert(serviceWalking);
 
             }
             if(serviceType.equals("Playing")) {
-                ServicePlaying servicePlaying = new ServicePlaying(duration, location, serviceType, option);
+
+                ServicePlaying servicePlaying = new ServicePlaying(duration, serviceType, option);
                 servicePlayingViewModel.insert(servicePlaying);
             }
 

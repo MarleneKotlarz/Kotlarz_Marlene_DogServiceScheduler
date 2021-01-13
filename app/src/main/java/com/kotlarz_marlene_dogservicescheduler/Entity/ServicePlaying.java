@@ -5,20 +5,21 @@ import androidx.room.ForeignKey;
 
 @Entity(tableName = "service_playing_table")
 public class ServicePlaying extends Service {
-    private String toy;
+    private String option;
 
     // Constructor ServicePlaying
-    public ServicePlaying(String duration, String location, String type, String toy) {
-        super(duration, location, type);
-        this.toy = toy;
+    public ServicePlaying(String duration, String type, String option) {
+        super(duration, type);
+        setLocation("Home");
+        this.option = option;
     }
 
     // Getter and Setter
-    public String getToy() {
-        return toy;
+    public String getOption() {
+        return option;
     }
 
-    public void setToy(String toy) {
-        this.toy = toy;
+    public void setOption(String option) {
+        this.option = option;
     }
 }

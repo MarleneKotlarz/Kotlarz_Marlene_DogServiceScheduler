@@ -116,10 +116,10 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 Appointment appointment2 = new Appointment(1, 2, 2, "2/14/21", "14:00");
                 appointmentDao.insert(appointment2);
 
-                ServiceWalking service1 = new ServiceWalking("15 minutes", "Home", "Walking", 2);
+                ServiceWalking service1 = new ServiceWalking("15 minutes", "Home", "Walking", "2");
                 serviceWalkingDao.insert(service1);
 
-                ServicePlaying service2 = new ServicePlaying("30 minutes", "Home", "Playing", "Ball");
+                ServicePlaying service2 = new ServicePlaying("30 minutes",  "Playing", "Ball");
                 servicePlayingDao.insert(service2);
 
 

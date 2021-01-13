@@ -18,6 +18,12 @@ public abstract class Service {
 
     }
 
+    public Service(String duration, String type) {
+        this.duration = duration;
+
+        this.type = type;
+    }
+
     // Getters and Setters
     public int getService_id() {
         return service_id;

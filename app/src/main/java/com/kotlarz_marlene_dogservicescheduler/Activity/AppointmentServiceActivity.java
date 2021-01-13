@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +18,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.kotlarz_marlene_dogservicescheduler.Entity.Service;
 import com.kotlarz_marlene_dogservicescheduler.R;
-import com.kotlarz_marlene_dogservicescheduler.ViewModel.AppointmentViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AppointmentServiceActivity extends AppCompatActivity {
 
@@ -57,7 +54,7 @@ public class AppointmentServiceActivity extends AppCompatActivity {
     ArrayList<String> arrayList_duration;
     ArrayAdapter<String> arrayAdapter_duration;
 
-    ArrayList<String> arrayList_location;
+    ArrayList<String> arrayList_playing_location, arrayList_walking_location;
     ArrayAdapter<String> arrayAdapter_location;
 
     ArrayList<String> arrayList_type;
@@ -84,7 +81,7 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         spinnerOption = (Spinner) findViewById(R.id.spinner_appointmentAdd_option);
 
 
-        //==== Duration spinner starts ====
+        // Assign Duration spinner
 
         arrayList_duration = new ArrayList<>();
         arrayList_duration.add("15 minutes");
@@ -95,24 +92,8 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         arrayAdapter_duration = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_duration);
         spinnerDuration.setAdapter(arrayAdapter_duration);
 
-        //==== Duration spinner ends ====
 
-
-        //==== Location spinner starts ====
-
-        arrayList_location = new ArrayList<>();
-        arrayList_location.add("Home");
-        arrayList_location.add("Park");
-        arrayList_location.add("Beach");
-
-        arrayAdapter_location = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_location);
-        spinnerLocation.setAdapter(arrayAdapter_location);
-
-        //==== Location spinner ends ====
-
-
-        //==== Type spinner starts ====
-
+        // Assign Type spinner
         arrayList_type = new ArrayList<>();
         arrayList_type.add("Walking");
         arrayList_type.add("Playing");
@@ -120,17 +101,22 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         arrayAdapter_type = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_type);
         spinnerType.setAdapter(arrayAdapter_type);
 
-        //==== Type spinner ends ====
+
+        // Assign Location spinner
+        arrayList_walking_location = new ArrayList<>();
+        arrayList_walking_location.add("Home");
+        arrayList_walking_location.add("Park");
+        arrayList_walking_location.add("Beach");
+
+        arrayList_playing_location = new ArrayList<>();
+        arrayList_playing_location.add("Home");
 
 
-        //===== Option spinner starts ====
-
+        // Assign Option spinner
         arrayList_intensity = new ArrayList<>();
-        arrayList_intensity.add("1");
-        arrayList_intensity.add("2");
-        arrayList_intensity.add("3");
-        arrayList_intensity.add("4");
-        arrayList_intensity.add("5");
+        arrayList_intensity.add("Low intensity");
+        arrayList_intensity.add("Moderate intensity");
+        arrayList_intensity.add("High intensity");
 
         arrayList_toy = new ArrayList<>();
         arrayList_toy.add("Rope");
@@ -142,11 +128,18 @@ public class AppointmentServiceActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 if (position == 0) {
+
+                    arrayAdapter_location = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_walking_location);
                     arrayAdapter_option = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_intensity);
+
                 }
                 if (position == 1) {
+
+                    arrayAdapter_location = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_playing_location);
                     arrayAdapter_option = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_toy);
+
                 }
+                spinnerLocation.setAdapter(arrayAdapter_location);
                 spinnerOption.setAdapter(arrayAdapter_option);
 
             }
@@ -156,9 +149,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
 
             }
         });
-
-        //===== Option spinner ends ====
-
 
 
     }
@@ -172,8 +162,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         String notes = editText_notes.getText().toString();
         String type = spinnerType.getSelectedItem().toString();
         String option = spinnerOption.getSelectedItem().toString();
-
-
 
 
         Intent dataIntent = new Intent();
