@@ -6,6 +6,7 @@ import androidx.room.ForeignKey;
 
 @Entity(tableName = "service_walking_table")
 public class ServiceWalking extends Service {
+
     private String option;
 
     // Constructor ServiceWalking
