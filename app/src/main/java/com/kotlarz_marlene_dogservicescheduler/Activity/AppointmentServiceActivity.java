@@ -67,7 +67,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Add Service");
 
-        editText_notes = findViewById(R.id.editText_appointmentAdd_note);
         spinnerDuration = (Spinner) findViewById(R.id.spinner_appointmentAdd_duration);
         spinnerLocation = (Spinner) findViewById(R.id.spinner_appointmentAdd_location);
         spinnerType = (Spinner) findViewById(R.id.spinner_appointmentAdd_type);
@@ -75,7 +74,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
 
 
         // Assign Duration spinner
-
         arrayList_duration = new ArrayList<>();
         arrayList_duration.add("15 minutes");
         arrayList_duration.add("30 minutes");
