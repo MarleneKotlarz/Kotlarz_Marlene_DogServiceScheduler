@@ -12,8 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.kotlarz_marlene_dogservicescheduler.Database.SchedulerDatabase;
 import com.kotlarz_marlene_dogservicescheduler.Database.SchedulerRepository;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
+import com.kotlarz_marlene_dogservicescheduler.Entity.Pet;
 
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class AppointmentViewModel extends AndroidViewModel {
     // Member variables
     private SchedulerRepository schedulerRepository;
     private LiveData<List<Appointment>> allAppointments;
+//    LiveData<Integer> getAppointmentIdForService;
+    Integer getAppointmentIdForService;
 
 
     // Constructor
@@ -30,6 +34,8 @@ public class AppointmentViewModel extends AndroidViewModel {
         // Instantiate repository and allAppointments
         schedulerRepository = new SchedulerRepository(application);
         allAppointments = schedulerRepository.getAllAppointments();
+//        getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
+        getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
     }
 
     // Wrapper methods for the data operation methods(created in the repository).
@@ -54,6 +60,15 @@ public class AppointmentViewModel extends AndroidViewModel {
         return allAppointments;
     }
 
-//    public String getAppointmentCustomerName() {schedulerRepository.getAppointmentCustomerName();
-//    return null;}
+
+//    public LiveData<List<Appointment>> getAppointmentIdForService(int appointmentId) {
+//        return schedulerRepository.getAppointmentIdForService(appointmentId);
+//    }
+
+    public Integer getAppointmentIdForService() {return getAppointmentIdForService;}
+
+
+//    public  LiveData<Integer> getAppointmentIdForService() {return getAppointmentIdForService;}
+
+
 }

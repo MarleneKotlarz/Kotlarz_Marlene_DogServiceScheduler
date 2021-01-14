@@ -16,6 +16,7 @@ public class ServiceOptionViewModel extends AndroidViewModel {
     private SchedulerRepository schedulerRepository;
     private LiveData<List<ServiceOption>> allServiceOptions;
 
+
     public ServiceOptionViewModel(@NonNull Application application) {
         super(application);
         schedulerRepository = new SchedulerRepository(application);
@@ -36,5 +37,11 @@ public class ServiceOptionViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<ServiceOption>> getAllServiceOptions() { return allServiceOptions; }
+
+    public LiveData<List<ServiceOption>> getAppointmentIdForService() { return allServiceOptions; }
+
+//    public int getApptIdForService(ServiceOption serviceOption) {schedulerRepository.getApptIdForService(serviceOption);
+//        return 0;
+//    }
 
 }

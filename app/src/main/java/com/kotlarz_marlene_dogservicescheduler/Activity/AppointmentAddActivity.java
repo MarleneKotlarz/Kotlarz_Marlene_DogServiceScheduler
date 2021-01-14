@@ -25,8 +25,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
 import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.Utilities.AppointmentAddReceiver;
@@ -39,6 +41,7 @@ import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceOptionViewModel;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 public class AppointmentAddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -71,9 +74,10 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     private EditText editText_appointmentTime;
     private TextView textView_customerName, textView_petName, textView_serviceType;
     private String date, time, customerName, petName;
-    private int customerId, petId, serviceId;
+    private int customerId, petId, serviceId, appointmentId;
     private int notificationId = 1;
     private Button buttonService;
+    Appointment appointment;
 
     private AppointmentViewModel appointmentViewModel;
     private CustomerViewModel customerViewModel;
@@ -89,8 +93,42 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Add Appointment");
 
+        appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         petViewModel = new ViewModelProvider(this).get(PetViewModel.class);
         serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
+
+
+
+
+
+
+
+//        Intent intent = new Intent();
+//        int appointmentId = getIntent().getIntExtra(EXTRA_APPOINTMENT_ID, -1);
+//
+//        Log.v(TAG, "Scheduler - AppointmentAddActivity - onCreate - appointmentId" + appointmentId);
+
+//        if (appointmentId == -1) {
+//            appointmentViewModel.getAppointmentIdForService(appointmentId);
+//            appointmentId++;
+//        }
+//        if (appointmentId != -1) {
+//            appointmentViewModel.getAppointmentIdForService(appointmentId);
+//        }
+
+//        appointmentViewModel.getAppointmentIdForService(appointmentId).observe(this, new Observer<List<Appointment>>() {
+//            @Override
+//            public void onChanged(List<Appointment> appointments) {
+//                for (Appointment appointment : appointments)
+//                    if (appointment.getAppointment_id() == -1)
+//                        appointment.getAppointment_id();
+//
+//
+//
+//            }
+//        });
+
+
 
 
         // Assign fields
@@ -149,7 +187,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         });
 
 
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onCreate - customerId " + customerId);
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - onCreate - appointmentId, customerId " + appointmentId + " " + customerId);
 
     }
 
@@ -244,13 +282,21 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             textView_serviceType.setText(serviceType);
             String option = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_OPTION);
 
-//            serviceId = getIntent().getIntExtra(EXTRA_SERVICE_ID, -1);
-//            if (serviceId != -1) {
-//                data.putExtra(EXTRA_SERVICE_ID, serviceId);
-//            }
+
+
 
 
             if (serviceType.equals("Walking")) {
+
+                int test1 = appointmentViewModel.getAppointmentIdForService();
+                test1++;
+
+//                appointmentViewModel.getAppointmentIdForService();
+
+
+                Log.v(TAG, "Scheduler - AppointmentAddActivity - onActivityResult getAppointmentIdForService " + appointmentViewModel.getAppointmentIdForService()
+                + " new appointemntId " + test1);
+
                 ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, option);
                 serviceOptionViewModel.insert(serviceOption1);
                 Toast.makeText(this, "Service saved", Toast.LENGTH_SHORT).show();
@@ -266,8 +312,9 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             Toast.makeText(this, "Changes are not saved", Toast.LENGTH_SHORT).show();
         }
 
+
         Log.v(TAG, "Scheduler - AppointmentAddActivity - onActivityResult - customerId " + customerId
-                + "petId" + petId + " serviceId " +serviceId);
+                + "petId" + petId);
 
     }
 

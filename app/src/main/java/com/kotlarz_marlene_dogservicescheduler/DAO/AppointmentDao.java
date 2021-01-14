@@ -37,5 +37,10 @@ public interface AppointmentDao {
 //    String getAppointmentCustomerName();
 
 
+//    @Query("SELECT appointment_id FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
+//    LiveData<Integer> getAppointmentIdForService();
+
+    @Query("SELECT appointment_id FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
+    Integer getAppointmentIdForService();
 
 }
