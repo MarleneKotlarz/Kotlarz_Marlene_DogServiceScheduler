@@ -31,6 +31,8 @@ public class AppointmentListActivity extends AppCompatActivity {
 
     public static final String EXTRA_EMPLOYEE_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_EMPLOYEE_ID";
+    public static final String EXTRA_APPOINTMENT_ID =
+            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_APPOINTMENT_ID";
 
     private static final String TAG = "ServiceScheduler";
 
@@ -48,6 +50,8 @@ public class AppointmentListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         intent.getIntExtra(EXTRA_EMPLOYEE_ID, -1);
+        intent.getIntExtra(EXTRA_APPOINTMENT_ID, -1);
+
 
         // Reference RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView_appointmentList);
@@ -118,7 +122,12 @@ public class AppointmentListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AppointmentListActivity.this, AppointmentAddActivity.class);
-                startActivityForResult(intent, ADD_APPOINTMENT_REQUEST);
+                int employeeId = getIntent().getIntExtra(EXTRA_EMPLOYEE_ID, -1);
+                if(employeeId != -1) {
+                    intent.putExtra(AppointmentAddActivity.EXTRA_EMPLOYEE_ID, employeeId);
+                }
+                startActivity(intent);
+//                startActivityForResult(intent, ADD_APPOINTMENT_REQUEST);
             }
         });
 
@@ -129,41 +138,41 @@ public class AppointmentListActivity extends AppCompatActivity {
     }
 
     // Get results back from AppointmentAddActivity saveAppointment method.
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == ADD_APPOINTMENT_REQUEST && resultCode == RESULT_OK) {
-            // Get Intent Keys from other AppointmentAddActivity.
-            String date = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_DATE);
-            String time = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_TIME);
-            String customerName = data.getStringExtra(AppointmentAddActivity.EXTRA_CUSTOMER_NAME);
-            int customerId = data.getIntExtra(AppointmentAddActivity.EXTRA_CUSTOMER_ID, -1);
-            int pedId = data.getIntExtra(AppointmentAddActivity.EXTRA_PET_ID, -1);
-//            int serviceId = data.getIntExtra(AppointmentAddActivity.EXTRA_SERVICE_ID, -1);
-
-
-            int employeeId = getIntent().getIntExtra(EXTRA_EMPLOYEE_ID, -1);
-            if(employeeId != -1) {
-                data.putExtra(EXTRA_EMPLOYEE_ID, employeeId);
-            }
-
-            // Create new Appointment
-            Appointment appointment = new Appointment(employeeId, customerId, pedId, date, time);
-            appointmentViewModel.insert(appointment);
-
-            Log.v(TAG, "Scheduler - AppointmentListActivity - onActivityResult employeeId " + employeeId);
-
-            Toast.makeText(this, "Appointment saved", Toast.LENGTH_SHORT).show();
-
-        }
-
-        else {
-            Toast.makeText(this, "Appointment not saved", Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == ADD_APPOINTMENT_REQUEST && resultCode == RESULT_OK) {
+//            // Get Intent Keys from other AppointmentAddActivity.
+//            String date = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_DATE);
+//            String time = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_TIME);
+//            String customerName = data.getStringExtra(AppointmentAddActivity.EXTRA_CUSTOMER_NAME);
+//            int customerId = data.getIntExtra(AppointmentAddActivity.EXTRA_CUSTOMER_ID, -1);
+//            int petId = data.getIntExtra(AppointmentAddActivity.EXTRA_PET_ID, -1);
+////            int serviceId = data.getIntExtra(AppointmentAddActivity.EXTRA_SERVICE_ID, -1);
+//
+//
+//            int employeeId = getIntent().getIntExtra(EXTRA_EMPLOYEE_ID, -1);
+//            if(employeeId != -1) {
+//                data.putExtra(EXTRA_EMPLOYEE_ID, employeeId);
+//            }
+//
+//            // Create new Appointment
+//            Appointment appointment = new Appointment(employeeId, customerId, petId, date, time);
+//            appointmentViewModel.insert(appointment);
+//
+//            Log.v(TAG, "Scheduler - AppointmentListActivity - onActivityResult employeeId " + employeeId);
+//
+//            Toast.makeText(this, "Appointment saved", Toast.LENGTH_SHORT).show();
+//
+//        }
+//
+//        else {
+//            Toast.makeText(this, "Appointment not saved", Toast.LENGTH_SHORT).show();
+//        }
+//
+//
+//    }
 
     // Handle backwards arrow in actionbar
     @Override

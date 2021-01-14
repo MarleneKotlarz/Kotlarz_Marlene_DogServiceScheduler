@@ -8,6 +8,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,7 +26,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
@@ -41,7 +41,6 @@ import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceOptionViewModel;
 
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.List;
 
 public class AppointmentAddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -50,7 +49,10 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     public static final int ADD_SERVICE_TO_APPOINTMENT_REQUEST = 3;
 
 
+
     // Intent Extra Keys
+    public static final String EXTRA_EMPLOYEE_ID =
+            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_EMPLOYEE_ID";
     public static final String EXTRA_APPOINTMENT_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_APPOINTMENT_ID";
     public static final String EXTRA_APPOINTMENT_DATE =
@@ -74,7 +76,8 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     private EditText editText_appointmentTime;
     private TextView textView_customerName, textView_petName, textView_serviceType;
     private String date, time, customerName, petName;
-    private int customerId, petId, serviceId, appointmentId;
+    private String location, duration, serviceType, option;
+    private int customerId, petId, serviceId, appointmentId, employeeId;
     private int notificationId = 1;
     private Button buttonService;
     Appointment appointment;
@@ -98,38 +101,8 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
 
 
-
-
-
-
-
-//        Intent intent = new Intent();
-//        int appointmentId = getIntent().getIntExtra(EXTRA_APPOINTMENT_ID, -1);
-//
-//        Log.v(TAG, "Scheduler - AppointmentAddActivity - onCreate - appointmentId" + appointmentId);
-
-//        if (appointmentId == -1) {
-//            appointmentViewModel.getAppointmentIdForService(appointmentId);
-//            appointmentId++;
-//        }
-//        if (appointmentId != -1) {
-//            appointmentViewModel.getAppointmentIdForService(appointmentId);
-//        }
-
-//        appointmentViewModel.getAppointmentIdForService(appointmentId).observe(this, new Observer<List<Appointment>>() {
-//            @Override
-//            public void onChanged(List<Appointment> appointments) {
-//                for (Appointment appointment : appointments)
-//                    if (appointment.getAppointment_id() == -1)
-//                        appointment.getAppointment_id();
-//
-//
-//
-//            }
-//        });
-
-
-
+        Intent intent = getIntent();
+        employeeId = intent.getIntExtra(EXTRA_EMPLOYEE_ID, -1);
 
         // Assign fields
         editText_appointmentDate = findViewById(R.id.editText_appointmentAdd_date);
@@ -275,39 +248,37 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             }
         } else if (requestCode == ADD_SERVICE_TO_APPOINTMENT_REQUEST && resultCode == RESULT_OK) {
 
-            String duration = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_DURATION);
-            String location = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_LOCATION);
+            duration = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_DURATION);
+            location = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_LOCATION);
             textView_serviceType = findViewById(R.id.textView_appointmentAdd_serviceType);
-            String serviceType = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_TYPE);
+            serviceType = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_TYPE);
             textView_serviceType.setText(serviceType);
-            String option = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_OPTION);
+            option = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_OPTION);
 
 
+//            if (serviceType.equals("Walking")) {
+//
+//                int newAppointmentId = appointmentViewModel.getAppointmentIdForService();
+//                newAppointmentId++;
+//
+//
+//                Log.v(TAG, "Scheduler - AppointmentAddActivity - onActivityResult getAppointmentIdForService " + appointmentViewModel.getAppointmentIdForService()
+//                        + " new appointemntId " + newAppointmentId);
+//
+//                ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, option);
+//                serviceOptionViewModel.insert(serviceOption1);
+//                Toast.makeText(this, "Service saved", Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//            if (serviceType.equals("Playing")) {
 
-
-
-            if (serviceType.equals("Walking")) {
-
-                int test1 = appointmentViewModel.getAppointmentIdForService();
-                test1++;
-
-//                appointmentViewModel.getAppointmentIdForService();
-
-
-                Log.v(TAG, "Scheduler - AppointmentAddActivity - onActivityResult getAppointmentIdForService " + appointmentViewModel.getAppointmentIdForService()
-                + " new appointemntId " + test1);
-
-                ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, option);
-                serviceOptionViewModel.insert(serviceOption1);
-                Toast.makeText(this, "Service saved", Toast.LENGTH_SHORT).show();
-
-            }
-
-            if (serviceType.equals("Playing")) {
-                ServiceOption serviceOption = new ServiceOption(duration, serviceType, option);
-                serviceOptionViewModel.insert(serviceOption);
-                Toast.makeText(this, "Service saved", Toast.LENGTH_SHORT).show();
-            }
+//                int newAppointmentId = appointmentViewModel.getAppointmentIdForService();
+//                newAppointmentId++;
+//                ServiceOption serviceOption = new ServiceOption(duration, serviceType, newAppointmentId,  option);
+//                serviceOptionViewModel.insert(serviceOption);
+//                Toast.makeText(this, "Service saved", Toast.LENGTH_SHORT).show();
+//            }
         } else {
             Toast.makeText(this, "Changes are not saved", Toast.LENGTH_SHORT).show();
         }
@@ -348,27 +319,67 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             return;
         }
 
-        // Accept input and save appointment - send data back
-        Intent dataIntent = new Intent();
-        dataIntent.putExtra(EXTRA_APPOINTMENT_TIME, time);
-        dataIntent.putExtra(EXTRA_APPOINTMENT_DATE, date);
-        dataIntent.putExtra(EXTRA_CUSTOMER_ID, customerId);
-        dataIntent.putExtra(EXTRA_CUSTOMER_NAME, customerName);
-        dataIntent.putExtra(EXTRA_PET_ID, petId);
+
+
+            // Accept input and save appointment - send data back
+//            Intent dataIntent = new Intent(this, AppointmentListActivity.class);
+//            dataIntent.putExtra(EXTRA_APPOINTMENT_TIME, time);
+//            dataIntent.putExtra(EXTRA_APPOINTMENT_DATE, date);
+//            dataIntent.putExtra(EXTRA_CUSTOMER_ID, customerId);
+//            dataIntent.putExtra(EXTRA_CUSTOMER_NAME, customerName);
+//            dataIntent.putExtra(EXTRA_PET_ID, petId);
 //        dataIntent.putExtra(EXTRA_SERVICE_ID, serviceId);
 
+                int newAppointmentId = appointmentViewModel.getAppointmentIdForService();
+                newAppointmentId++;
 
-        int appointmentId = getIntent().getIntExtra(EXTRA_APPOINTMENT_ID, -1);
-        if (appointmentId != -1) {
-            dataIntent.putExtra(EXTRA_APPOINTMENT_ID, appointmentId);
+
+        Appointment appointment = new Appointment(employeeId, customerId, petId, date, time);
+        appointmentViewModel.insert(appointment);
+
+
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment newAppointmentId --------= " + newAppointmentId);
+
+//        int appointmentId = getIntent().getIntExtra(EXTRA_APPOINTMENT_ID, -1);
+//        if (appointmentId != -1) {
+//            dataIntent.putExtra(EXTRA_APPOINTMENT_ID, appointmentId);
+//        }
+
+        //        int newAppointmentId = appointmentViewModel.getAppointmentIdForService();
+//        newAppointmentId++;
+//
+
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                // yourMethod();
+//            }
+//        }, 10000);
+
+        if (serviceType.equals("Walking")) {
+            ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
+            serviceOptionViewModel.insert(serviceOption1);
+        } else if (serviceType.equals("Playing")) {
+            ServiceOption serviceOption = new ServiceOption(duration, serviceType, newAppointmentId, option);
+            serviceOptionViewModel.insert(serviceOption);
+        }else {
+            Toast.makeText(this, "Service not saved", Toast.LENGTH_SHORT).show();
         }
 
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment ");
 
-        setResult(RESULT_OK, dataIntent);
+        Intent dataIntent = new Intent(this, AppointmentListActivity.class);
+//        dataIntent.putExtra(EXTRA_APPOINTMENT_ID, newAppointmentId);
+
+            Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment newAppointmentId --------= " + newAppointmentId);
+
+//            setResult(RESULT_OK, dataIntent);
+//            finish();
+
         finish();
+        startActivity(dataIntent);
 
-    }
+
+        }
 
 
     // Create actionbar menu
@@ -388,6 +399,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
                 return true;
             case R.id.save_appointment:
                 saveAppointment();
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

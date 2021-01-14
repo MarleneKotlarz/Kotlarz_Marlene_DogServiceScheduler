@@ -110,17 +110,27 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 Pet pet2 = new Pet(2, "4", "Rosie", "French Bulldog", "Does not like big dogs");
                 petDao.insert(pet2);
 
-                ServiceOption service1 = new ServiceOption("45 minutes", "Park", "Walking", "Moderate intensity");
-                serviceOptionDao.insert(service1);
-
-                ServiceOption service2 = new ServiceOption("30 minutes", "Playing", "Ball");
-                serviceOptionDao.insert(service2);
 
                 Appointment appointment1 = new Appointment(1, 1, 1, "2/22/21", "9:30");
                 appointmentDao.insert(appointment1);
 
                 Appointment appointment2 = new Appointment(1, 2, 2, "2/14/21", "14:00");
                 appointmentDao.insert(appointment2);
+
+                ServiceOption service1 = new ServiceOption("45 minutes", "Park", "Walking", 1, "Moderate intensity");
+                serviceOptionDao.insert(service1);
+
+                ServiceOption service2 = new ServiceOption("30 minutes", "Playing", 2, "Ball");
+                serviceOptionDao.insert(service2);
+
+
+
+//                ServiceOption service1 = new ServiceOption("45 minutes", "Park", "Walking", 1, "Moderate intensity");
+//                serviceOptionDao.insert(service1);
+//
+//                ServiceOption service2 = new ServiceOption("30 minutes", "Playing", 2, "Ball");
+//                serviceOptionDao.insert(service2);
+
 
             });
         }

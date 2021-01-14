@@ -32,14 +32,6 @@ public interface AppointmentDao {
     @Query("SELECT * FROM appointment_table WHERE customer_id_fk = :customerIdFk")
     LiveData<List<Appointment>> getAppointmentByCustomerId(int customerIdFk);
 
-//    @Query("SELECT customer_name FROM customer_table INNER JOIN appointment_table on :customerId = customer_id_fk")
-//    @Query("SELECT customer_name FROM customer_table WHERE customer_id = 1")
-//    String getAppointmentCustomerName();
-
-
-//    @Query("SELECT appointment_id FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
-//    LiveData<Integer> getAppointmentIdForService();
-
     @Query("SELECT appointment_id FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
     Integer getAppointmentIdForService();
 
