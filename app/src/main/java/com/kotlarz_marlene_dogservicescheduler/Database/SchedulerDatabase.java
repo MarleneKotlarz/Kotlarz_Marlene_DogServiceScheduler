@@ -14,19 +14,17 @@ import com.kotlarz_marlene_dogservicescheduler.DAO.CustomerDao;
 import com.kotlarz_marlene_dogservicescheduler.DAO.EmployeeDao;
 import com.kotlarz_marlene_dogservicescheduler.DAO.PetDao;
 import com.kotlarz_marlene_dogservicescheduler.DAO.ServicePlayingDao;
-import com.kotlarz_marlene_dogservicescheduler.DAO.ServiceWalkingDao;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Customer;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Employee;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Pet;
 import com.kotlarz_marlene_dogservicescheduler.Entity.ServicePlaying;
-import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceWalking;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {Appointment.class, Customer.class, Employee.class, Pet.class, ServicePlaying.class, ServiceWalking.class}, version = 1, exportSchema = false)
+@Database(entities = {Appointment.class, Customer.class, Employee.class, Pet.class, ServicePlaying.class}, version = 1, exportSchema = false)
 public abstract class SchedulerDatabase extends RoomDatabase {
 
     private static final String TAG = "Scheduler";
@@ -34,11 +32,14 @@ public abstract class SchedulerDatabase extends RoomDatabase {
 
     // Create methods that return/access the Dao Interfaces
     public abstract AppointmentDao appointmentDao();
+
     public abstract CustomerDao customerDao();
+
     public abstract EmployeeDao employeeDao();
+
     public abstract PetDao petDao();
+
     public abstract ServicePlayingDao servicePlayingDao();
-    public abstract ServiceWalkingDao serviceWalkingDao();
 
 
     // Create singleton
@@ -80,7 +81,6 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 EmployeeDao employeeDao = INSTANCE.employeeDao();
                 PetDao petDao = INSTANCE.petDao();
                 ServicePlayingDao servicePlayingDao = INSTANCE.servicePlayingDao();
-                ServiceWalkingDao serviceWalkingDao = INSTANCE.serviceWalkingDao();
 
 
                 Log.v(TAG, "Scheduler SchedulerDatabase - roomCallback method ");
@@ -116,14 +116,11 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 Appointment appointment2 = new Appointment(1, 2, 2, "2/14/21", "14:00");
                 appointmentDao.insert(appointment2);
 
-                ServiceWalking service1 = new ServiceWalking("15 minutes", "Home", "Walking", "2");
-                serviceWalkingDao.insert(service1);
+                ServicePlaying service1 = new ServicePlaying("45 minutes", "Park", "Walking", "Moderate intensity");
+                servicePlayingDao.insert(service1);
 
-                ServicePlaying service2 = new ServicePlaying("30 minutes",  "Playing", "Ball");
+                ServicePlaying service2 = new ServicePlaying("30 minutes", "Playing", "Ball");
                 servicePlayingDao.insert(service2);
-
-                ServicePlaying service3 = new ServicePlaying("30 minutes", "Park",  "Playing", "Ball");
-                servicePlayingDao.insert(service3);
 
 
             });

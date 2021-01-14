@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 
 import com.kotlarz_marlene_dogservicescheduler.Database.SchedulerRepository;
 import com.kotlarz_marlene_dogservicescheduler.Entity.ServicePlaying;
-import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceWalking;
 
 import java.util.List;
 

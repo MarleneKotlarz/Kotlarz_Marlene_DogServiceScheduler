@@ -8,8 +8,6 @@ import androidx.room.Ignore;
 public class ServicePlaying extends Service {
     private String option;
 
-
-
     // Constructor ServiceWalking
     public ServicePlaying(String duration, String location, String type, String option) {
         super(duration, location, type);

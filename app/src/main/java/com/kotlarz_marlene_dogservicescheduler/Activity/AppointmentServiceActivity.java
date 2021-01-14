@@ -14,11 +14,8 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.kotlarz_marlene_dogservicescheduler.Entity.Service;
 import com.kotlarz_marlene_dogservicescheduler.R;
-import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceViewModel;
 
 import java.util.ArrayList;
 
@@ -42,8 +39,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
 
     private static final String TAG = "Scheduler";
 
-    ServiceViewModel serviceViewModel;
-    Service service;
 
     EditText editText_notes;
     Spinner spinnerDuration;
@@ -71,8 +66,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_appointment_service);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Add Service");
-
-        serviceViewModel = new ViewModelProvider(this).get(ServiceViewModel.class);
 
         editText_notes = findViewById(R.id.editText_appointmentAdd_note);
         spinnerDuration = (Spinner) findViewById(R.id.spinner_appointmentAdd_duration);
@@ -128,13 +121,11 @@ public class AppointmentServiceActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 if (position == 0) {
-
                     arrayAdapter_location = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_walking_location);
                     arrayAdapter_option = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_intensity);
 
                 }
                 if (position == 1) {
-
                     arrayAdapter_location = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_playing_location);
                     arrayAdapter_option = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_toy);
 
@@ -146,7 +137,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -162,7 +152,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         String notes = editText_notes.getText().toString();
         String type = spinnerType.getSelectedItem().toString();
         String option = spinnerOption.getSelectedItem().toString();
-
 
         Intent dataIntent = new Intent();
         dataIntent.putExtra(EXTRA_SERVICE_DURATION, duration);
