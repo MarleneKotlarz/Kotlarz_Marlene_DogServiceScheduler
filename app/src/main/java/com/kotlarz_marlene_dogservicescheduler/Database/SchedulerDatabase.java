@@ -13,18 +13,18 @@ import com.kotlarz_marlene_dogservicescheduler.DAO.AppointmentDao;
 import com.kotlarz_marlene_dogservicescheduler.DAO.CustomerDao;
 import com.kotlarz_marlene_dogservicescheduler.DAO.EmployeeDao;
 import com.kotlarz_marlene_dogservicescheduler.DAO.PetDao;
-import com.kotlarz_marlene_dogservicescheduler.DAO.ServicePlayingDao;
+import com.kotlarz_marlene_dogservicescheduler.DAO.ServiceOptionDao;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Customer;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Employee;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Pet;
-import com.kotlarz_marlene_dogservicescheduler.Entity.ServicePlaying;
+import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceOption;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {Appointment.class, Customer.class, Employee.class, Pet.class, ServicePlaying.class}, version = 1, exportSchema = false)
+@Database(entities = {Appointment.class, Customer.class, Employee.class, Pet.class, ServiceOption.class}, version = 1, exportSchema = false)
 public abstract class SchedulerDatabase extends RoomDatabase {
 
     private static final String TAG = "Scheduler";
@@ -39,7 +39,7 @@ public abstract class SchedulerDatabase extends RoomDatabase {
 
     public abstract PetDao petDao();
 
-    public abstract ServicePlayingDao servicePlayingDao();
+    public abstract ServiceOptionDao serviceOptionDao();
 
 
     // Create singleton
@@ -80,7 +80,7 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 CustomerDao customerDao = INSTANCE.customerDao();
                 EmployeeDao employeeDao = INSTANCE.employeeDao();
                 PetDao petDao = INSTANCE.petDao();
-                ServicePlayingDao servicePlayingDao = INSTANCE.servicePlayingDao();
+                ServiceOptionDao serviceOptionDao = INSTANCE.serviceOptionDao();
 
 
                 Log.v(TAG, "Scheduler SchedulerDatabase - roomCallback method ");
@@ -93,7 +93,7 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 petDao.deleteAllPets();
 
 
-                // Sample Code
+                // Sample Code - make sure FK entity is created first
 
                 Employee employee1 = new Employee("Anna Conrad", "938-342-23423", "test");
                 employeeDao.insert(employee1);
@@ -110,18 +110,17 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 Pet pet2 = new Pet(2, "4", "Rosie", "French Bulldog", "Does not like big dogs");
                 petDao.insert(pet2);
 
+                ServiceOption service1 = new ServiceOption("45 minutes", "Park", "Walking", "Moderate intensity");
+                serviceOptionDao.insert(service1);
+
+                ServiceOption service2 = new ServiceOption("30 minutes", "Playing", "Ball");
+                serviceOptionDao.insert(service2);
+
                 Appointment appointment1 = new Appointment(1, 1, 1, "2/22/21", "9:30");
                 appointmentDao.insert(appointment1);
 
                 Appointment appointment2 = new Appointment(1, 2, 2, "2/14/21", "14:00");
                 appointmentDao.insert(appointment2);
-
-                ServicePlaying service1 = new ServicePlaying("45 minutes", "Park", "Walking", "Moderate intensity");
-                servicePlayingDao.insert(service1);
-
-                ServicePlaying service2 = new ServicePlaying("30 minutes", "Playing", "Ball");
-                servicePlayingDao.insert(service2);
-
 
             });
         }

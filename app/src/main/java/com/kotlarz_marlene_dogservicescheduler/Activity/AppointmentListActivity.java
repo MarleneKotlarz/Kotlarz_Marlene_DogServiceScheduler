@@ -19,11 +19,9 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kotlarz_marlene_dogservicescheduler.Adapter.AppointmentAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
-import com.kotlarz_marlene_dogservicescheduler.Entity.Customer;
 import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.AppointmentViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentListActivity extends AppCompatActivity {
@@ -31,10 +29,11 @@ public class AppointmentListActivity extends AppCompatActivity {
     public static final int ADD_APPOINTMENT_REQUEST = 1;
     public static final int EDIT_APPOINTMENT_REQUEST = 2;
 
-    public static final String EXTRA_CUSTOMER_EMPLOYEE_ID =
+    public static final String EXTRA_EMPLOYEE_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_EMPLOYEE_ID";
 
     private static final String TAG = "ServiceScheduler";
+
     private AppointmentViewModel appointmentViewModel;
     private Appointment appointment;
     private String customerName;
@@ -48,7 +47,7 @@ public class AppointmentListActivity extends AppCompatActivity {
         setTitle("AppointmentList");
 
         Intent intent = getIntent();
-        intent.getIntExtra(EXTRA_CUSTOMER_EMPLOYEE_ID, -1);
+        intent.getIntExtra(EXTRA_EMPLOYEE_ID, -1);
 
         // Reference RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView_appointmentList);
@@ -97,7 +96,8 @@ public class AppointmentListActivity extends AppCompatActivity {
                 intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_TIME, appointment.getTime());
                 intent.putExtra(AppointmentDetailsActivity.EXTRA_CUSTOMER_ID, appointment.getCustomer_id_fk());
                 intent.putExtra(AppointmentDetailsActivity.EXTRA_PET_ID, appointment.getPet_id_fk());
-                intent.putExtra(CustomerDetailsActivity.EXTRA_CUSTOMER_EMPLOYEE_ID, appointment.getEmployee_id_fk());
+                intent.putExtra(AppointmentDetailsActivity.EXTRA_EMPLOYEE_ID, appointment.getEmployee_id_fk());
+//                intent.putExtra(AppointmentDetailsActivity.EXTRA_CUSTOMER_SERVICE_ID, appointment.getService_id_fk());
 
                 startActivity(intent);
 //                startActivityForResult(intent, EDIT_APPOINTMENT_REQUEST);
@@ -140,11 +140,12 @@ public class AppointmentListActivity extends AppCompatActivity {
             String customerName = data.getStringExtra(AppointmentAddActivity.EXTRA_CUSTOMER_NAME);
             int customerId = data.getIntExtra(AppointmentAddActivity.EXTRA_CUSTOMER_ID, -1);
             int pedId = data.getIntExtra(AppointmentAddActivity.EXTRA_PET_ID, -1);
-//            int employeeId =1;
+//            int serviceId = data.getIntExtra(AppointmentAddActivity.EXTRA_SERVICE_ID, -1);
 
-            int employeeId = getIntent().getIntExtra(EXTRA_CUSTOMER_EMPLOYEE_ID, -1);
+
+            int employeeId = getIntent().getIntExtra(EXTRA_EMPLOYEE_ID, -1);
             if(employeeId != -1) {
-                data.putExtra(EXTRA_CUSTOMER_EMPLOYEE_ID, employeeId);
+                data.putExtra(EXTRA_EMPLOYEE_ID, employeeId);
             }
 
             // Create new Appointment

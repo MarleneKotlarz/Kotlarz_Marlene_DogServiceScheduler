@@ -8,12 +8,12 @@ import com.kotlarz_marlene_dogservicescheduler.DAO.AppointmentDao;
 import com.kotlarz_marlene_dogservicescheduler.DAO.CustomerDao;
 import com.kotlarz_marlene_dogservicescheduler.DAO.EmployeeDao;
 import com.kotlarz_marlene_dogservicescheduler.DAO.PetDao;
-import com.kotlarz_marlene_dogservicescheduler.DAO.ServicePlayingDao;
+import com.kotlarz_marlene_dogservicescheduler.DAO.ServiceOptionDao;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Customer;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Employee;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Pet;
-import com.kotlarz_marlene_dogservicescheduler.Entity.ServicePlaying;
+import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceOption;
 
 import java.util.List;
 
@@ -24,13 +24,13 @@ public class SchedulerRepository {
     private CustomerDao customerDao;
     private EmployeeDao employeeDao;
     private PetDao petDao;
-    public ServicePlayingDao servicePlayingDao;
+    public ServiceOptionDao serviceOptionDao;
 
     private LiveData<List<Appointment>> allAppointments;
     private LiveData<List<Customer>> allCustomers;
     private LiveData<List<Employee>> allEmployees;
     private LiveData<List<Pet>> allPets;
-    private LiveData<List<ServicePlaying>> allPlayingServices;
+    private LiveData<List<ServiceOption>> allServiceOptions;
 
 
     // Constructor = Application is a subclass of Context
@@ -41,14 +41,14 @@ public class SchedulerRepository {
         customerDao = schedulerDatabase.customerDao();
         employeeDao = schedulerDatabase.employeeDao();
         petDao = schedulerDatabase.petDao();
-        servicePlayingDao = schedulerDatabase.servicePlayingDao();
+        serviceOptionDao = schedulerDatabase.serviceOptionDao();
 
 
         allAppointments = appointmentDao.getAllAppointments();
         allCustomers = customerDao.getAllCustomers();
         allEmployees = employeeDao.getAllEmployees();
         allPets = petDao.getAllPets();
-        allPlayingServices = servicePlayingDao.getAllPlayingServices();
+        allServiceOptions = serviceOptionDao.getAllServiceOptions();
 
 
     }
@@ -185,26 +185,26 @@ public class SchedulerRepository {
     //************ SERVICE DB OPERATIONS ************//
 
 
-    public void insert(ServicePlaying servicePlaying) {
+    public void insert(ServiceOption serviceOption) {
         SchedulerDatabase.executorServiceDB.execute(() -> {
-            servicePlayingDao.insert(servicePlaying);
+            serviceOptionDao.insert(serviceOption);
         });
     }
 
-    public void update(ServicePlaying servicePlaying) {
+    public void update(ServiceOption serviceOption) {
         SchedulerDatabase.executorServiceDB.execute(() -> {
-            servicePlayingDao.update(servicePlaying);
+            serviceOptionDao.update(serviceOption);
         });
     }
 
-    public void delete(ServicePlaying servicePlaying) {
+    public void delete(ServiceOption serviceOption) {
         SchedulerDatabase.executorServiceDB.execute(() -> {
-            servicePlayingDao.delete(servicePlaying);
+            serviceOptionDao.delete(serviceOption);
         });
     }
 
-    public LiveData<List<ServicePlaying>> getAllPlayingServices() {
-        return allPlayingServices;
+    public LiveData<List<ServiceOption>> getAllServiceOptions() {
+        return allServiceOptions;
     }
 
 

@@ -27,8 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.kotlarz_marlene_dogservicescheduler.Entity.Customer;
-import com.kotlarz_marlene_dogservicescheduler.Entity.ServicePlaying;
+import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.Utilities.AppointmentAddReceiver;
 import com.kotlarz_marlene_dogservicescheduler.Utilities.DatePickerFragment;
@@ -36,11 +35,10 @@ import com.kotlarz_marlene_dogservicescheduler.Utilities.TimePickerFragment;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.AppointmentViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.CustomerViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.PetViewModel;
-import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServicePlayingViewModel;
+import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceOptionViewModel;
 
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.List;
 
 public class AppointmentAddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -72,19 +70,15 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     private EditText editText_appointmentDate;
     private EditText editText_appointmentTime;
     private TextView textView_customerName, textView_petName, textView_serviceType;
-    private String date, customerName, petName;
-    private String time;
-    private List<Customer> filteredCustomer;
-    private int numCustomer;
-    private int appointmentId;
-    private int customerId, petId;
+    private String date, time, customerName, petName;
+    private int customerId, petId, serviceId;
     private int notificationId = 1;
     private Button buttonService;
 
     private AppointmentViewModel appointmentViewModel;
     private CustomerViewModel customerViewModel;
     private PetViewModel petViewModel;
-    private ServicePlayingViewModel servicePlayingViewModel;
+    private ServiceOptionViewModel serviceOptionViewModel;
 
 
 
@@ -96,7 +90,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         setTitle("Add Appointment");
 
         petViewModel = new ViewModelProvider(this).get(PetViewModel.class);
-        servicePlayingViewModel = new ViewModelProvider(this).get(ServicePlayingViewModel.class);
+        serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
 
 
         // Assign fields
@@ -245,28 +239,35 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 
             String duration = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_DURATION);
             String location = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_LOCATION);
-            String notes = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_NOTES);
             textView_serviceType = findViewById(R.id.textView_appointmentAdd_serviceType);
             String serviceType = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_TYPE);
             textView_serviceType.setText(serviceType);
             String option = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_OPTION);
 
+//            serviceId = getIntent().getIntExtra(EXTRA_SERVICE_ID, -1);
+//            if (serviceId != -1) {
+//                data.putExtra(EXTRA_SERVICE_ID, serviceId);
+//            }
+
 
             if (serviceType.equals("Walking")) {
-                ServicePlaying servicePlaying1 = new ServicePlaying(duration, location, serviceType, option);
-                servicePlayingViewModel.insert(servicePlaying1);
+                ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, option);
+                serviceOptionViewModel.insert(serviceOption1);
+                Toast.makeText(this, "Service saved", Toast.LENGTH_SHORT).show();
 
             }
 
             if (serviceType.equals("Playing")) {
-                ServicePlaying servicePlaying = new ServicePlaying(duration, serviceType, option);
-                servicePlayingViewModel.insert(servicePlaying);
+                ServiceOption serviceOption = new ServiceOption(duration, serviceType, option);
+                serviceOptionViewModel.insert(serviceOption);
+                Toast.makeText(this, "Service saved", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(this, "Changes are not saved", Toast.LENGTH_SHORT).show();
         }
 
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onActivityResult - customerId " + customerId + "petId" + petId);
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - onActivityResult - customerId " + customerId
+                + "petId" + petId + " serviceId " +serviceId);
 
     }
 
@@ -279,7 +280,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     // ImageButton Pet
     public void enter_petList(View view) {
         Intent intent = new Intent(AppointmentAddActivity.this, AppointmentPetListActivity.class);
-
         customerId = getIntent().getIntExtra(EXTRA_CUSTOMER_ID, customerId);
         petViewModel.getPetByCustomerId(customerId);
         intent.putExtra(AppointmentPetListActivity.EXTRA_CUSTOMER_ID, customerId);
@@ -308,6 +308,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         dataIntent.putExtra(EXTRA_CUSTOMER_ID, customerId);
         dataIntent.putExtra(EXTRA_CUSTOMER_NAME, customerName);
         dataIntent.putExtra(EXTRA_PET_ID, petId);
+//        dataIntent.putExtra(EXTRA_SERVICE_ID, serviceId);
 
 
         int appointmentId = getIntent().getIntExtra(EXTRA_APPOINTMENT_ID, -1);

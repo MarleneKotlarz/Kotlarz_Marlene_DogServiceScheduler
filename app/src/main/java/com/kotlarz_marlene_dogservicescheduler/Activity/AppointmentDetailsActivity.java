@@ -8,10 +8,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -49,8 +47,10 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_NAME";
     public static final String EXTRA_PET_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_PET_ID";
-    public static final String EXTRA_CUSTOMER_EMPLOYEE_ID =
+    public static final String EXTRA_EMPLOYEE_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_EMPLOYEE_ID";
+    public static final String EXTRA_CUSTOMER_SERVICE_ID =
+            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_SERVICE_ID";
 
 
     private static final String TAG = "Scheduler";
@@ -105,7 +105,7 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         time = intent.getStringExtra(EXTRA_APPOINTMENT_TIME);
         customerId = intent.getIntExtra(EXTRA_CUSTOMER_ID, -1);
         petId = intent.getIntExtra(EXTRA_PET_ID, -1);
-        employeeId = intent.getIntExtra(EXTRA_CUSTOMER_EMPLOYEE_ID, -1);
+        employeeId = intent.getIntExtra(EXTRA_EMPLOYEE_ID, -1);
 
         Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate employeeId " + employeeId);
 

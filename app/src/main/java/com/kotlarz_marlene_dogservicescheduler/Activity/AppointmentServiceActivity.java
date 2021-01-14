@@ -9,12 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.R;
 
 import java.util.ArrayList;
@@ -29,8 +29,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_DURATION";
     public static final String EXTRA_SERVICE_LOCATION =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_LOCATION";
-    public static final String EXTRA_SERVICE_NOTES =
-            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_NOTES";
     public static final String EXTRA_SERVICE_TYPE =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_TYPE";
     public static final String EXTRA_SERVICE_OPTION =
@@ -40,7 +38,8 @@ public class AppointmentServiceActivity extends AppCompatActivity {
     private static final String TAG = "Scheduler";
 
 
-    EditText editText_notes;
+    ServiceOption serviceOption;
+
     Spinner spinnerDuration;
     Spinner spinnerLocation;
     Spinner spinnerType;
@@ -138,7 +137,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
 
@@ -147,23 +145,21 @@ public class AppointmentServiceActivity extends AppCompatActivity {
 
         String duration = spinnerDuration.getSelectedItem().toString();
         String location = spinnerLocation.getSelectedItem().toString();
-        String notes = editText_notes.getText().toString();
         String type = spinnerType.getSelectedItem().toString();
         String option = spinnerOption.getSelectedItem().toString();
 
         Intent dataIntent = new Intent();
         dataIntent.putExtra(EXTRA_SERVICE_DURATION, duration);
         dataIntent.putExtra(EXTRA_SERVICE_LOCATION, location);
-        dataIntent.putExtra(EXTRA_SERVICE_NOTES, notes);
         dataIntent.putExtra(EXTRA_SERVICE_TYPE, type);
         dataIntent.putExtra(EXTRA_SERVICE_OPTION, option);
-        int id = getIntent().getIntExtra(EXTRA_SERVICE_ID, -1);
-        if (id != -1) {
-            dataIntent.putExtra(EXTRA_SERVICE_ID, id);
-        }
+//        int id = getIntent().getIntExtra(EXTRA_SERVICE_ID, -1);
+//        if (id != -1) {
+//            dataIntent.putExtra(EXTRA_SERVICE_ID, id);
+//        }
 
 
-        Log.v(TAG, "Scheduler - AppointmentServiceActivity - save Service - serviceId " + id);
+        Log.v(TAG, "Scheduler - AppointmentServiceActivity - save Service ");
 
         setResult(RESULT_OK, dataIntent);
         finish();

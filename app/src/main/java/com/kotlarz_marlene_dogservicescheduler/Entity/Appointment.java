@@ -20,12 +20,7 @@ import androidx.room.PrimaryKey;
                         entity = Pet.class,
                         parentColumns = "pet_id",
                         childColumns = "pet_id_fk",
-                        onDelete = ForeignKey.CASCADE),
-//                @ForeignKey(
-//                        entity = Service.class,
-//                        parentColumns = "service_id",
-//                        childColumns = "service_id_fk",
-//                        onDelete = ForeignKey.CASCADE),
+                        onDelete = ForeignKey.CASCADE)
         })
 public class Appointment {
     @PrimaryKey(autoGenerate = true)
@@ -34,12 +29,21 @@ public class Appointment {
     private int customer_id_fk;
     private int pet_id_fk;
 //    private int service_id_fk;
-
     private String date, time;
 
 
-
     // Constructor
+
+//    public Appointment(int employee_id_fk, int customer_id_fk, int pet_id_fk, int service_id_fk, String date, String time) {
+//        this.employee_id_fk = employee_id_fk;
+//        this.customer_id_fk = customer_id_fk;
+//        this.pet_id_fk = pet_id_fk;
+//        this.service_id_fk = service_id_fk;
+//        this.date = date;
+//        this.time = time;
+//    }
+
+
     public Appointment(int employee_id_fk, int customer_id_fk, int pet_id_fk, String date, String time) {
         this.employee_id_fk = employee_id_fk;
         this.customer_id_fk = customer_id_fk;
@@ -80,6 +84,14 @@ public class Appointment {
     public void setPet_id_fk(int pet_id_fk) {
         this.pet_id_fk = pet_id_fk;
     }
+
+//    public int getService_id_fk() {
+//        return service_id_fk;
+//    }
+//
+//    public void setService_id_fk(int service_id_fk) {
+//        this.service_id_fk = service_id_fk;
+//    }
 
     public String getDate() {
         return date;
