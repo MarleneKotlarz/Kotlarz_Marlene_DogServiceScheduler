@@ -87,8 +87,8 @@ public class CustomerDetailsActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(CustomerDetailsActivity.this, CustomerAddEditActivity.class);
                 intent.putExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_NAME, customerName);
-//                intent.putExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_ADDRESS, customerAddress);
-//                intent.putExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_PHONE, customerPhone);
+                intent.putExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_ADDRESS, customerAddress);
+                intent.putExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_PHONE, customerPhone);
                 customerId = getIntent().getIntExtra(EXTRA_CUSTOMER_ID, -1);
                 if (customerId != -1) {
                     intent.putExtra(EXTRA_CUSTOMER_ID, customerId);
@@ -125,7 +125,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
             TextView textView_customerPhone = findViewById(R.id.textView_customer_phone);
 
             customerName = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_NAME);
-            customerAddress = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_ADRESS);
+            customerAddress = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_ADDRESS);
             customerPhone = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_PHONE);
 
             textView_customerName.setText(customerName);

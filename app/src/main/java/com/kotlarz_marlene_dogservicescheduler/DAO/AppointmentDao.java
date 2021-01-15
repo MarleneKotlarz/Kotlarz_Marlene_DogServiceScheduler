@@ -31,7 +31,7 @@ public interface AppointmentDao {
     @Query("DELETE FROM appointment_table")
     void deleteAllAppointments();
 
-    @Query("SELECT * FROM appointment_table")
+    @Query("SELECT * FROM appointment_table ORDER BY date ASC")
     LiveData<List<Appointment>> getAllAppointments();
 
     @Query("SELECT * FROM appointment_table WHERE customer_id_fk = :customerIdFk")

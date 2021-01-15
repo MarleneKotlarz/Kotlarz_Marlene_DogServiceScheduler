@@ -56,7 +56,7 @@ public class AppointmentListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("AppointmentList");
+        setTitle("Appointment List by date");
 
 
         // Reference RecyclerView

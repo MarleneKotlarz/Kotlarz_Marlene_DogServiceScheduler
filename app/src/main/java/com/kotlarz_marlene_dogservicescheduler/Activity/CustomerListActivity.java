@@ -132,7 +132,7 @@ public class CustomerListActivity extends AppCompatActivity {
         if (requestCode == ADD_CUSTOMER_REQUEST && resultCode == RESULT_OK) {
             // Get Intent Keys from other CustomerAddEditActivity.
             String customerName = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_NAME);
-            String customerAddress = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_ADRESS);
+            String customerAddress = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_ADDRESS);
             String customerPhone = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_PHONE);
 
             // Create new Customer

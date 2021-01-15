@@ -21,8 +21,8 @@ public class CustomerAddEditActivity extends AppCompatActivity {
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_ID";
     public static final String EXTRA_CUSTOMER_NAME =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_NAME";
-    public static final String EXTRA_CUSTOMER_ADRESS =
-            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_ADRESS";
+    public static final String EXTRA_CUSTOMER_ADDRESS =
+            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_ADDRESS";
     public static final String EXTRA_CUSTOMER_PHONE =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_PHONE";
 
@@ -53,7 +53,7 @@ public class CustomerAddEditActivity extends AppCompatActivity {
         if (dataIntent.hasExtra(EXTRA_CUSTOMER_ID)) {
             setTitle("Edit Customer");
             editText_customerName.setText(dataIntent.getStringExtra(EXTRA_CUSTOMER_NAME));
-            editText_customerAddress.setText(dataIntent.getStringExtra(EXTRA_CUSTOMER_ADRESS));
+            editText_customerAddress.setText(dataIntent.getStringExtra(EXTRA_CUSTOMER_ADDRESS));
             editText_customerPhone.setText(dataIntent.getStringExtra(EXTRA_CUSTOMER_PHONE));
         } else {
             setTitle("Add Customer");
@@ -80,7 +80,7 @@ public class CustomerAddEditActivity extends AppCompatActivity {
         // Accept input and save customer - send data back
         Intent dataIntent = new Intent() ;
         dataIntent.putExtra(EXTRA_CUSTOMER_NAME, customerName);
-        dataIntent.putExtra(EXTRA_CUSTOMER_ADRESS, customerAddress);
+        dataIntent.putExtra(EXTRA_CUSTOMER_ADDRESS, customerAddress);
         dataIntent.putExtra(EXTRA_CUSTOMER_PHONE, customerPhone);
 
         int id = getIntent().getIntExtra(EXTRA_CUSTOMER_ID, -1);

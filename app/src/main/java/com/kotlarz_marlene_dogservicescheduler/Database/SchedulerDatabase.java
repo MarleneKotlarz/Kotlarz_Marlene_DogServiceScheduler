@@ -95,7 +95,7 @@ public abstract class SchedulerDatabase extends RoomDatabase {
 
                 // Sample Code - make sure FK entity is created first
 
-                Employee employee1 = new Employee("Anna Conrad", "938-342-23423", "test");
+                Employee employee1 = new Employee("Anna Conrad", "938-342-2342", "test");
                 employeeDao.insert(employee1);
 
                 Customer customer1 = new Customer(1, "Julia Roberts", "74 Rosebud, Charleston, SC 29414", "938-493 5323");
@@ -110,11 +110,10 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 Pet pet2 = new Pet(2, "4", "Rosie", "French Bulldog", "Does not like big dogs");
                 petDao.insert(pet2);
 
-
                 Appointment appointment1 = new Appointment(1, 1, 1, "2/22/21", "9:30");
                 appointmentDao.insert(appointment1);
 
-                Appointment appointment2 = new Appointment(1, 2, 2, "2/14/21", "14:00");
+                Appointment appointment2 = new Appointment(1, 2, 2, "2/26/21", "14:00");
                 appointmentDao.insert(appointment2);
 
                 ServiceOption service1 = new ServiceOption("45 minutes", "Park", "Walking", 1, "Moderate intensity");
@@ -122,14 +121,6 @@ public abstract class SchedulerDatabase extends RoomDatabase {
 
                 ServiceOption service2 = new ServiceOption("30 minutes", "Playing", 2, "Ball");
                 serviceOptionDao.insert(service2);
-
-
-
-//                ServiceOption service1 = new ServiceOption("45 minutes", "Park", "Walking", 1, "Moderate intensity");
-//                serviceOptionDao.insert(service1);
-//
-//                ServiceOption service2 = new ServiceOption("30 minutes", "Playing", 2, "Ball");
-//                serviceOptionDao.insert(service2);
 
 
             });
