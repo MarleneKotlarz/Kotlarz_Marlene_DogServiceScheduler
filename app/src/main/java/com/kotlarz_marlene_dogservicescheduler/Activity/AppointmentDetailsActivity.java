@@ -162,26 +162,28 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         });
 
 
-        // FAB to edit Appointment in AppointmentEditActivity
-        FloatingActionButton fabEditAppointment = findViewById(R.id.fab_appointment_edit);
-        fabEditAppointment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                date = textView_date.getText().toString();
-                time = textView_time.getText().toString();
+// TODO remove appointmentEditActivity
 
-                Intent intent = new Intent(AppointmentDetailsActivity.this, AppointmentEditActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                intent.putExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_DATE, date);
-                intent.putExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_TIME, time);
-                appointmentId = getIntent().getIntExtra(EXTRA_APPOINTMENT_ID, -1);
-                if (appointmentId != -1) {
-                    intent.putExtra(EXTRA_APPOINTMENT_ID, appointmentId);
-                }
-                startActivityForResult(intent, EDIT_APPOINTMENT_REQUEST);
-//                startActivity(intent);
-            }
-        });
+        // FAB to edit Appointment in AppointmentEditActivity
+//        FloatingActionButton fabEditAppointment = findViewById(R.id.fab_appointment_edit);
+//        fabEditAppointment.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                date = textView_date.getText().toString();
+//                time = textView_time.getText().toString();
+//
+//                Intent intent = new Intent(AppointmentDetailsActivity.this, AppointmentEditActivity.class);
+////                intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+//                intent.putExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_DATE, date);
+//                intent.putExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_TIME, time);
+//                appointmentId = getIntent().getIntExtra(EXTRA_APPOINTMENT_ID, -1);
+//                if (appointmentId != -1) {
+//                    intent.putExtra(EXTRA_APPOINTMENT_ID, appointmentId);
+//                }
+//                startActivityForResult(intent, EDIT_APPOINTMENT_REQUEST);
+////                startActivity(intent);
+//            }
+//        });
 
         Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onClick edit appointment " );
 

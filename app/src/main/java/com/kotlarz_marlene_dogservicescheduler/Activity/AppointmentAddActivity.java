@@ -187,7 +187,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 
     }
 
-    // TimePicker - set up EditText to selected time
+    // TimePicker - set up textView to selected time
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String currentTime = String.format("%02d:%02d", hourOfDay, minute); // set date as String to include leading zeros
