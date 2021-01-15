@@ -152,25 +152,18 @@ public class AppointmentListActivity extends AppCompatActivity {
             customerName = data.getStringExtra(AppointmentAddActivity.EXTRA_CUSTOMER_NAME);
             customerId = data.getIntExtra(AppointmentAddActivity.EXTRA_CUSTOMER_ID, -1);
             petId = data.getIntExtra(AppointmentAddActivity.EXTRA_PET_ID, -1);
-//            int serviceId = data.getIntExtra(AppointmentAddActivity.EXTRA_SERVICE_ID, -1);
-
             duration = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_DURATION);
             location = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_LOCATION);
             serviceType = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_TYPE);
             option = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_OPTION);
-//            appointmentId = data.getIntExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_ID, -1);
 
-
-//            employeeId = getIntent().getIntExtra(EXTRA_EMPLOYEE_ID, -1);
-//            if(employeeId != -1) {
-//                data.putExtra(EXTRA_EMPLOYEE_ID, employeeId);
-//            }
 
             // Create new Appointment
             Appointment appointment = new Appointment(employeeId, customerId, petId, date, time);
             appointmentViewModel.insert(appointment);
 
-            Log.v(TAG, "Scheduler - AppointmentListActiviy //////////////////////////////////////////// ");
+
+            Log.v(TAG, "Scheduler - AppointmentListActivity //////////////////////////////////////////// ");
 
 
             Thread thread = new Thread();

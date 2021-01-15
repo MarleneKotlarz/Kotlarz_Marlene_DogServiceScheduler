@@ -2,11 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp">
@@ -15,23 +16,29 @@
             android:id="@+id/textView_appointment_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Id" />
+            android:text="Id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView_appointment_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
-            android:layout_marginLeft="16dp" />
+            android:layout_marginLeft="16dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView_appointment_id"
+            app:layout_constraintStart_toEndOf="@+id/textView_appointment_id" />
 
         <TextView
             android:id="@+id/textView_appointment_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="Time" />
+            android:text="Time"
+            app:layout_constraintStart_toEndOf="@+id/textView_appointment_date"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.cardview.widget.CardView>
