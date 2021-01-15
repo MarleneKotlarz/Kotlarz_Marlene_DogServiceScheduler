@@ -1,5 +1,7 @@
 package com.kotlarz_marlene_dogservicescheduler.DAO;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -11,8 +13,11 @@ import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
 
 import java.util.List;
 
+
+
 @Dao
 public interface AppointmentDao {
+
 
     @Insert
     void insert(Appointment appointment);
@@ -34,5 +39,8 @@ public interface AppointmentDao {
 
     @Query("SELECT appointment_id FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
     Integer getAppointmentIdForService();
+
+//    @Query("SELECT * FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
+//    LiveData<List<Appointment>> getAppointmentIdForService();
 
 }

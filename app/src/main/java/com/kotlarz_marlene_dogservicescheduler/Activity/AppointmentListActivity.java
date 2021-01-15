@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,8 +21,10 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kotlarz_marlene_dogservicescheduler.Adapter.AppointmentAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
+import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.AppointmentViewModel;
+import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceOptionViewModel;
 
 import java.util.List;
 
@@ -37,8 +41,14 @@ public class AppointmentListActivity extends AppCompatActivity {
     private static final String TAG = "ServiceScheduler";
 
     private AppointmentViewModel appointmentViewModel;
+    private ServiceOptionViewModel serviceOptionViewModel;
     private Appointment appointment;
-    private String customerName;
+    private String customerName, date, time,petName;
+    private String location, duration, serviceType, option;
+    private int customerId, petId, appointmentId;
+    private int employeeId=1;
+    int newAppointmentId = 0;
+
 
 
     @Override
@@ -47,10 +57,6 @@ public class AppointmentListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_appointment_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("AppointmentList");
-
-        Intent intent = getIntent();
-        intent.getIntExtra(EXTRA_EMPLOYEE_ID, -1);
-        intent.getIntExtra(EXTRA_APPOINTMENT_ID, -1);
 
 
         // Reference RecyclerView
@@ -64,6 +70,7 @@ public class AppointmentListActivity extends AppCompatActivity {
 
         // Assign ViewModel
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
+        serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
         // Create observer which updates the UI and
         // observe the LiveData method, passing in this activity as the LifecycleOwner and the observer
         // as an anonymous innerclass
@@ -122,12 +129,8 @@ public class AppointmentListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AppointmentListActivity.this, AppointmentAddActivity.class);
-                int employeeId = getIntent().getIntExtra(EXTRA_EMPLOYEE_ID, -1);
-                if(employeeId != -1) {
-                    intent.putExtra(AppointmentAddActivity.EXTRA_EMPLOYEE_ID, employeeId);
-                }
-                startActivity(intent);
-//                startActivityForResult(intent, ADD_APPOINTMENT_REQUEST);
+//                startActivity(intent);
+                startActivityForResult(intent, ADD_APPOINTMENT_REQUEST);
             }
         });
 
@@ -138,41 +141,89 @@ public class AppointmentListActivity extends AppCompatActivity {
     }
 
     // Get results back from AppointmentAddActivity saveAppointment method.
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == ADD_APPOINTMENT_REQUEST && resultCode == RESULT_OK) {
-//            // Get Intent Keys from other AppointmentAddActivity.
-//            String date = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_DATE);
-//            String time = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_TIME);
-//            String customerName = data.getStringExtra(AppointmentAddActivity.EXTRA_CUSTOMER_NAME);
-//            int customerId = data.getIntExtra(AppointmentAddActivity.EXTRA_CUSTOMER_ID, -1);
-//            int petId = data.getIntExtra(AppointmentAddActivity.EXTRA_PET_ID, -1);
-////            int serviceId = data.getIntExtra(AppointmentAddActivity.EXTRA_SERVICE_ID, -1);
-//
-//
-//            int employeeId = getIntent().getIntExtra(EXTRA_EMPLOYEE_ID, -1);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ADD_APPOINTMENT_REQUEST && resultCode == RESULT_OK) {
+            // Get Intent Keys from other AppointmentAddActivity.
+            date = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_DATE);
+            time = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_TIME);
+            customerName = data.getStringExtra(AppointmentAddActivity.EXTRA_CUSTOMER_NAME);
+            customerId = data.getIntExtra(AppointmentAddActivity.EXTRA_CUSTOMER_ID, -1);
+            petId = data.getIntExtra(AppointmentAddActivity.EXTRA_PET_ID, -1);
+//            int serviceId = data.getIntExtra(AppointmentAddActivity.EXTRA_SERVICE_ID, -1);
+
+            duration = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_DURATION);
+            location = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_LOCATION);
+            serviceType = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_TYPE);
+            option = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_OPTION);
+//            appointmentId = data.getIntExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_ID, -1);
+
+
+//            employeeId = getIntent().getIntExtra(EXTRA_EMPLOYEE_ID, -1);
 //            if(employeeId != -1) {
 //                data.putExtra(EXTRA_EMPLOYEE_ID, employeeId);
 //            }
-//
-//            // Create new Appointment
-//            Appointment appointment = new Appointment(employeeId, customerId, petId, date, time);
-//            appointmentViewModel.insert(appointment);
-//
-//            Log.v(TAG, "Scheduler - AppointmentListActivity - onActivityResult employeeId " + employeeId);
-//
-//            Toast.makeText(this, "Appointment saved", Toast.LENGTH_SHORT).show();
-//
-//        }
-//
-//        else {
-//            Toast.makeText(this, "Appointment not saved", Toast.LENGTH_SHORT).show();
-//        }
-//
-//
-//    }
+
+            // Create new Appointment
+            Appointment appointment = new Appointment(employeeId, customerId, petId, date, time);
+            appointmentViewModel.insert(appointment);
+
+            Log.v(TAG, "Scheduler - AppointmentListActiviy //////////////////////////////////////////// ");
+
+
+            Thread thread = new Thread();
+            try {
+                Log.v(TAG, "Scheduler - AppointmentListActiviy ===================SLEEP START========================================= ");
+                thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+            Log.v(TAG, "Scheduler - AppointmentListActiviy ===================SLEEP END========================================= ");
+
+
+            newAppointmentId = appointmentViewModel.getAppointmentIdForService();
+
+
+            if (serviceType.equals("Walking")) {
+
+                newAppointmentId++;
+                Log.v(TAG, "Scheduler - AppointmentListActiviy ===================newAppointmentId================ " +newAppointmentId);
+                ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
+                serviceOptionViewModel.insert(serviceOption1);
+            }
+
+            if (serviceType.equals("Playing")) {
+
+                newAppointmentId++;
+                Log.v(TAG, "Scheduler - AppointmentListActiviy ===================newAppointmentId================ " +newAppointmentId);
+                ServiceOption serviceOption = new ServiceOption(duration, serviceType, newAppointmentId, option);
+                serviceOptionViewModel.insert(serviceOption);
+            }
+
+
+
+
+
+
+            Log.v(TAG, "Scheduler - AppointmentListActivity - onActivityResult " +
+                    "  employeeId " + employeeId +
+                    "customerId " + customerId + " petId " + petId);
+
+            Toast.makeText(this, "Appointment saved", Toast.LENGTH_SHORT).show();
+
+            Log.v(TAG, "Scheduler - AppointmentListActiviy ============================================================ ");
+        }
+
+        else {
+            Toast.makeText(this, "Appointment not saved", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
 
     // Handle backwards arrow in actionbar
     @Override

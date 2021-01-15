@@ -89,13 +89,19 @@ public class SchedulerRepository {
     }
 
 
-//    public LiveData<Integer> getAppointmentIdForService() {
-//        return getAppointmentIdForService;
-//    }
+
 
     public int getAppointmentIdForService() {
         return getAppointmentIdForService;
     }
+
+//    public int getAppointmentIdForService() {
+//        SchedulerDatabase.executorServiceDB.execute(() -> {
+//            appointmentDao.getAppointmentIdForService();
+//
+//        });
+//        return getAppointmentIdForService;
+//    }
 
 
     //************ CUSTOMER DB OPERATIONS ************//

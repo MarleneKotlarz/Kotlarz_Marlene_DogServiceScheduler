@@ -42,6 +42,7 @@ public class CustomerListActivity extends AppCompatActivity {
     private static final String TAG = "Scheduler";
     private CustomerViewModel customerViewModel;
     private CustomerAdapter customerAdapter;
+    private int employeeId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,11 +136,6 @@ public class CustomerListActivity extends AppCompatActivity {
             String customerName = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_NAME);
             String customerAddress = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_ADRESS);
             String customerPhone = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_PHONE);
-
-            int employeeId = getIntent().getIntExtra(EXTRA_CUSTOMER_EMPLOYEE_ID, -1);
-            if(employeeId != -1) {
-                data.putExtra(EXTRA_CUSTOMER_EMPLOYEE_ID, employeeId);
-            }
 
             // Create new Customer
             Customer customer = new Customer(employeeId, customerName, customerAddress, customerPhone);

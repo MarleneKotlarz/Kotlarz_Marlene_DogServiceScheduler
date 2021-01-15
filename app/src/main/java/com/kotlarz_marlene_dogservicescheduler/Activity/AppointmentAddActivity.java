@@ -67,6 +67,17 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_NAME";
     public static final String EXTRA_PET_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_PET_ID";
+    public static final String EXTRA_SERVICE_DURATION =
+            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_DURATION";
+    public static final String EXTRA_SERVICE_LOCATION =
+            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_LOCATION";
+    public static final String EXTRA_SERVICE_TYPE =
+            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_TYPE";
+    public static final String EXTRA_SERVICE_OPTION =
+            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_OPTION";
+
+
+
 
     private static final String TAG = "Scheduler";
 
@@ -77,8 +88,9 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     private TextView textView_customerName, textView_petName, textView_serviceType;
     private String date, time, customerName, petName;
     private String location, duration, serviceType, option;
-    private int customerId, petId, serviceId, appointmentId, employeeId;
+    private int customerId, petId, serviceId, appointmentId;
     private int notificationId = 1;
+    private int employeeId = 1;
     private Button buttonService;
     Appointment appointment;
 
@@ -101,8 +113,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
 
 
-        Intent intent = getIntent();
-        employeeId = intent.getIntExtra(EXTRA_EMPLOYEE_ID, -1);
+
 
         // Assign fields
         editText_appointmentDate = findViewById(R.id.editText_appointmentAdd_date);
@@ -160,7 +171,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         });
 
 
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onCreate - appointmentId, customerId " + appointmentId + " " + customerId);
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - onCreate - employeeId " + employeeId);
 
     }
 
@@ -322,23 +333,31 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 
 
             // Accept input and save appointment - send data back
-//            Intent dataIntent = new Intent(this, AppointmentListActivity.class);
-//            dataIntent.putExtra(EXTRA_APPOINTMENT_TIME, time);
-//            dataIntent.putExtra(EXTRA_APPOINTMENT_DATE, date);
-//            dataIntent.putExtra(EXTRA_CUSTOMER_ID, customerId);
-//            dataIntent.putExtra(EXTRA_CUSTOMER_NAME, customerName);
-//            dataIntent.putExtra(EXTRA_PET_ID, petId);
-//        dataIntent.putExtra(EXTRA_SERVICE_ID, serviceId);
-
-                int newAppointmentId = appointmentViewModel.getAppointmentIdForService();
-                newAppointmentId++;
+            Intent dataIntent = new Intent();
+            dataIntent.putExtra(EXTRA_APPOINTMENT_TIME, time);
+            dataIntent.putExtra(EXTRA_APPOINTMENT_DATE, date);
+            dataIntent.putExtra(EXTRA_CUSTOMER_ID, customerId);
+            dataIntent.putExtra(EXTRA_CUSTOMER_NAME, customerName);
+            dataIntent.putExtra(EXTRA_PET_ID, petId);
+//             dataIntent.putExtra(EXTRA_SERVICE_ID, serviceId);
 
 
-        Appointment appointment = new Appointment(employeeId, customerId, petId, date, time);
-        appointmentViewModel.insert(appointment);
+        dataIntent.putExtra(EXTRA_SERVICE_DURATION, duration);
+        dataIntent.putExtra(EXTRA_SERVICE_LOCATION, location);
+        dataIntent.putExtra(EXTRA_SERVICE_TYPE, serviceType);
+        dataIntent.putExtra(EXTRA_SERVICE_OPTION, option);
 
 
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment newAppointmentId --------= " + newAppointmentId);
+
+//                int newAppointmentId = appointmentViewModel.getAppointmentIdForService();
+//                newAppointmentId++;
+
+
+//        Appointment appointment = new Appointment(employeeId, customerId, petId, date, time);
+//        appointmentViewModel.insert(appointment);
+
+
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment newAppointmentId" );
 
 //        int appointmentId = getIntent().getIntExtra(EXTRA_APPOINTMENT_ID, -1);
 //        if (appointmentId != -1) {
@@ -356,27 +375,27 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 //            }
 //        }, 10000);
 
-        if (serviceType.equals("Walking")) {
-            ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
-            serviceOptionViewModel.insert(serviceOption1);
-        } else if (serviceType.equals("Playing")) {
-            ServiceOption serviceOption = new ServiceOption(duration, serviceType, newAppointmentId, option);
-            serviceOptionViewModel.insert(serviceOption);
-        }else {
-            Toast.makeText(this, "Service not saved", Toast.LENGTH_SHORT).show();
-        }
+//        if (serviceType.equals("Walking")) {
+//            ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
+//            serviceOptionViewModel.insert(serviceOption1);
+//        } else if (serviceType.equals("Playing")) {
+//            ServiceOption serviceOption = new ServiceOption(duration, serviceType, newAppointmentId, option);
+//            serviceOptionViewModel.insert(serviceOption);
+//        }else {
+//            Toast.makeText(this, "Service not saved", Toast.LENGTH_SHORT).show();
+//        }
 
-
-        Intent dataIntent = new Intent(this, AppointmentListActivity.class);
+//
+//        Intent dataIntent = new Intent(this, AppointmentListActivity.class);
 //        dataIntent.putExtra(EXTRA_APPOINTMENT_ID, newAppointmentId);
 
-            Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment newAppointmentId --------= " + newAppointmentId);
+            Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment appointmentId " + appointmentId);
 
-//            setResult(RESULT_OK, dataIntent);
-//            finish();
+            setResult(RESULT_OK, dataIntent);
+            finish();
 
-        finish();
-        startActivity(dataIntent);
+//        finish();
+//        startActivity(dataIntent);
 
 
         }
