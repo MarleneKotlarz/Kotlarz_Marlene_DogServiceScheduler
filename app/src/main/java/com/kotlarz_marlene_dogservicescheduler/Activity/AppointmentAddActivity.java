@@ -8,7 +8,6 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,7 +28,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
-import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.Utilities.AppointmentAddReceiver;
 import com.kotlarz_marlene_dogservicescheduler.Utilities.DatePickerFragment;
@@ -274,7 +272,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 //
 //
 //                Log.v(TAG, "Scheduler - AppointmentAddActivity - onActivityResult getAppointmentIdForService " + appointmentViewModel.getAppointmentIdForService()
-//                        + " new appointemntId " + newAppointmentId);
+//                        + " newAppointmentId " + newAppointmentId);
 //
 //                ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, option);
 //                serviceOptionViewModel.insert(serviceOption1);
@@ -324,24 +322,22 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         date = editText_appointmentDate.getText().toString();
         time = editText_appointmentTime.getText().toString();
         customerName = textView_customerName.getText().toString();
+        petName = textView_petName.getText().toString();
+        serviceType = textView_serviceType.getText().toString();
         // Input validation for empty fields
-        if (date.trim().isEmpty() || time.trim().isEmpty()) {
+        if (date.trim().isEmpty() || time.trim().isEmpty() || serviceType.trim().isEmpty() || customerName.trim().isEmpty() || petName.trim().isEmpty()) {
             Toast.makeText(this, "Please fill out all fields.", Toast.LENGTH_SHORT).show();
             return;
         }
 
 
-
-            // Accept input and save appointment - send data back
-            Intent dataIntent = new Intent();
-            dataIntent.putExtra(EXTRA_APPOINTMENT_TIME, time);
-            dataIntent.putExtra(EXTRA_APPOINTMENT_DATE, date);
-            dataIntent.putExtra(EXTRA_CUSTOMER_ID, customerId);
-            dataIntent.putExtra(EXTRA_CUSTOMER_NAME, customerName);
-            dataIntent.putExtra(EXTRA_PET_ID, petId);
-//             dataIntent.putExtra(EXTRA_SERVICE_ID, serviceId);
-
-
+        // Accept input and save appointment - send data back
+        Intent dataIntent = new Intent();
+        dataIntent.putExtra(EXTRA_APPOINTMENT_TIME, time);
+        dataIntent.putExtra(EXTRA_APPOINTMENT_DATE, date);
+        dataIntent.putExtra(EXTRA_CUSTOMER_ID, customerId);
+        dataIntent.putExtra(EXTRA_CUSTOMER_NAME, customerName);
+        dataIntent.putExtra(EXTRA_PET_ID, petId);
         dataIntent.putExtra(EXTRA_SERVICE_DURATION, duration);
         dataIntent.putExtra(EXTRA_SERVICE_LOCATION, location);
         dataIntent.putExtra(EXTRA_SERVICE_TYPE, serviceType);
@@ -368,12 +364,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 //        newAppointmentId++;
 //
 
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            public void run() {
-//                // yourMethod();
-//            }
-//        }, 10000);
 
 //        if (serviceType.equals("Walking")) {
 //            ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
@@ -385,20 +375,14 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 //            Toast.makeText(this, "Service not saved", Toast.LENGTH_SHORT).show();
 //        }
 
-//
-//        Intent dataIntent = new Intent(this, AppointmentListActivity.class);
-//        dataIntent.putExtra(EXTRA_APPOINTMENT_ID, newAppointmentId);
 
-            Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment appointmentId " + appointmentId);
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment appointmentId " + appointmentId);
 
             setResult(RESULT_OK, dataIntent);
             finish();
 
-//        finish();
-//        startActivity(dataIntent);
 
-
-        }
+    }
 
 
     // Create actionbar menu

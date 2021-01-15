@@ -1,5 +1,6 @@
 package com.kotlarz_marlene_dogservicescheduler.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.kotlarz_marlene_dogservicescheduler.Adapter.ReportAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
@@ -30,6 +32,8 @@ public class ReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Report");
 
         recyclerView = findViewById(R.id.recyclerView_reportList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -51,5 +55,16 @@ public class ReportActivity extends AppCompatActivity {
 
     }
 
+    // Handle backwards arrow in actionbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

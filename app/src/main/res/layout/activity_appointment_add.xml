@@ -8,12 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_marginLeft="32dp"
         tools:context=".Activity.AppointmentAddActivity">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp">
 
             <TextView
@@ -42,7 +42,6 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp">
 
             <TextView
@@ -73,7 +72,6 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp">
 
             <TextView
@@ -99,13 +97,20 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Select a service by clicking the icon" />
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
         <Button
             android:id="@+id/button_addService"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="@color/colorPrimary"
             android:text="Select pet service"
             android:textColor="@color/colorWhite" />
@@ -117,20 +122,19 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
             android:text="Service type" />
-
+</LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:text="Select a customer and pet by clicking the icons" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="64dp"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="8dp">
 
             <ImageButton
                 android:layout_width="50dp"

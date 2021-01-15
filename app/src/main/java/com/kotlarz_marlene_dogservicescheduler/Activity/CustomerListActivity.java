@@ -3,14 +3,12 @@ package com.kotlarz_marlene_dogservicescheduler.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -156,14 +154,9 @@ public class CustomerListActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.customer_list_menu, menu);
 
-
-
-            SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
-            SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
-
+        SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
             search.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
-
             search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
                 @Override
@@ -181,11 +174,8 @@ public class CustomerListActivity extends AppCompatActivity {
                         }
                         customerAdapter.setCustomers(currentList);
                     }
-
                     customerAdapter.notifyDataSetChanged();
-
                     return true;
-
                 }
 
                 @Override

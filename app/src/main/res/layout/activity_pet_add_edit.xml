@@ -43,8 +43,8 @@
         android:id="@+id/editText_petAddEdit_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter a pet age"
-        android:inputType="text" />
+        android:hint="Enter pet age"
+        android:inputType="number" />
 
     <TextView
         android:layout_width="wrap_content"

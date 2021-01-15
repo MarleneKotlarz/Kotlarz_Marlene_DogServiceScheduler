@@ -22,10 +22,10 @@
         android:id="@+id/textView_customer_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="64dp"
         android:text="Customer address"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_customer_name" />
 
@@ -33,10 +33,10 @@
         android:id="@+id/textView_customer_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:text="Customer phone"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_customer_address" />
 
@@ -45,22 +45,23 @@
         android:id="@+id/textView_pet_information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="64dp"
         android:text="Pet information"
         app:layout_constraintBottom_toTopOf="@id/imageButton_pet"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintTop_toBottomOf="@id/textView_customer_phone" />
 
     <ImageButton
         android:id="@+id/imageButton_pet"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
         android:scaleType="fitXY"
         android:src="@drawable/ic_pet"
-        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_pet_information" />
 

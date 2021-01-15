@@ -38,8 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:hint="Enter a customer address"
-        android:inputType="text" />
+        android:hint="Enter an address (e.g. Street, City, State, Zip)"
+        android:inputType="textMultiLine|textPostalAddress" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:hint="Enter a customer phone number"
+        android:hint="Enter a phone number"
         android:inputType="phone" />
 
 </LinearLayout>
