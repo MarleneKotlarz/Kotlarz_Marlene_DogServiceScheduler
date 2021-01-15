@@ -83,7 +83,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     private Calendar calendar;
     private EditText editText_appointmentDate;
     private EditText editText_appointmentTime;
-    private TextView textView_customerName, textView_petName, textView_serviceType;
+    private TextView textView_date, textView_time, textView_customerName, textView_petName, textView_serviceType;
     private String date, time, customerName, petName;
     private String location, duration, serviceType, option;
     private int customerId, petId, serviceId, appointmentId;
@@ -114,8 +114,8 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 
 
         // Assign fields
-        editText_appointmentDate = findViewById(R.id.editText_appointmentAdd_date);
-        editText_appointmentTime = findViewById(R.id.editText_appointmentAdd_time);
+        textView_date = findViewById(R.id.textView_appointmentAdd_date);
+        textView_time = findViewById(R.id.textView_appointmentAdd_time);
         textView_serviceType = findViewById(R.id.textView_appointmentAdd_serviceType);
         textView_customerName = findViewById(R.id.textView_appointmentAdd_customerName);
         textView_petName = findViewById(R.id.textView_appointmentAdd_petName);
@@ -183,7 +183,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         String currentDateString = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
-        editText_appointmentDate.setText(currentDateString);
+        textView_date.setText(currentDateString);
 
     }
 
@@ -191,7 +191,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String currentTime = String.format("%02d:%02d", hourOfDay, minute); // set date as String to include leading zeros
-        editText_appointmentTime.setText(currentTime);
+        textView_time.setText(currentTime);
     }
 
     // Create alarm for due date
@@ -199,8 +199,8 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     private void startAlarm(Calendar c) {
         customerName = textView_customerName.getText().toString();
         petName = textView_petName.getText().toString();
-        date = editText_appointmentDate.getText().toString();
-        time = editText_appointmentTime.getText().toString();
+        date = textView_date.getText().toString();
+        time = textView_time.getText().toString();
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AppointmentAddReceiver.class);
@@ -319,8 +319,8 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     // Save appointment iconButton method
     private void saveAppointment() {
         // Get input from editText views
-        date = editText_appointmentDate.getText().toString();
-        time = editText_appointmentTime.getText().toString();
+        date = textView_date.getText().toString();
+        time = textView_time.getText().toString();
         customerName = textView_customerName.getText().toString();
         petName = textView_petName.getText().toString();
         serviceType = textView_serviceType.getText().toString();
@@ -402,7 +402,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
                 return true;
             case R.id.save_appointment:
                 saveAppointment();
-                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }
