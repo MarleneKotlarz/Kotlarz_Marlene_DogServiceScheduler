@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         android:layout_marginTop="64dp">
 
         <ImageButton
@@ -59,6 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         android:layout_marginTop="64dp">
 
         <ImageButton
@@ -81,16 +83,30 @@
 
     </LinearLayout>
 
-
-    <Button
-        android:id="@+id/button_employeeInfo"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="64dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="Employee Info"
-        android:layout_marginBottom="32dp"
-        android:textColor="@color/colorWhite" />
+        android:layout_marginRight="16dp">
+
+        <Button
+            android:id="@+id/button_report"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Generate Report"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/button_employeeInfo"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Employee Info"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
 
 </LinearLayout>

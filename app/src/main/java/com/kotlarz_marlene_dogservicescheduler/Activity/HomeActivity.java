@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.kotlarz_marlene_dogservicescheduler.Adapter.ReportAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Employee;
 import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.EmployeeViewModel;
@@ -33,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
 
     String password, employeeName, employeePhone;
     int employeeId;
-    Button button_employeeInfo;
+    Button button_employeeInfo, button_report;
     TextView textView_employeeName;
     EmployeeViewModel employeeViewModel;
     Employee employee;
@@ -47,6 +48,7 @@ public class HomeActivity extends AppCompatActivity {
 
         textView_employeeName = findViewById(R.id.textView_home_employeeName);
         button_employeeInfo = findViewById(R.id.button_employeeInfo);
+        button_report = findViewById(R.id.button_report);
 
 
         // Receiving data from MainActivity
@@ -81,7 +83,21 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+        button_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(HomeActivity.this, ReportActivity.class);
+                startActivity(intent1);
+
+            }
+        });
+
+
     }
+
+
+
 
     public void onClick_appointmentList(View view) {
         Intent intent = new Intent(HomeActivity.this, AppointmentListActivity.class);
