@@ -38,6 +38,11 @@ public class AppointmentViewModel extends AndroidViewModel {
         getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
     }
 
+   public int grabNewApptIDForService() {
+        getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
+       return getAppointmentIdForService;
+    }
+
     // Wrapper methods for the data operation methods(created in the repository).
     public void insert(Appointment appointment) {
         schedulerRepository.insert(appointment);

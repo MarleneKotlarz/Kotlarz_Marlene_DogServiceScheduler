@@ -3,13 +3,16 @@ package com.kotlarz_marlene_dogservicescheduler.DAO;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
+import com.kotlarz_marlene_dogservicescheduler.Entity.AppointmentAndServiceOption;
 
 import java.util.List;
 
@@ -39,6 +42,11 @@ public interface AppointmentDao {
 
     @Query("SELECT appointment_id FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
     Integer getAppointmentIdForService();
+
+//    @Transaction
+//    @Query("SELECT * FROM service_option_table")
+//    List<AppointmentAndServiceOption> getAppointmentAndServiceOptions();
+
 
 //    @Query("SELECT * FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
 //    LiveData<List<Appointment>> getAppointmentIdForService();

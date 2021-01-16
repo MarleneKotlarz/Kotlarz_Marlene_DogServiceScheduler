@@ -160,8 +160,8 @@ public class AppointmentListActivity extends AppCompatActivity{
 
 
 
-            newAppointmentId = appointmentViewModel.getAppointmentIdForService();
-            newAppointmentId++;
+            newAppointmentId = appointmentViewModel.grabNewApptIDForService();
+//            newAppointmentId++;
 
 
             Log.v(TAG, "Scheduler - AppointmentListActivity ========" + appointmentViewModel.getAppointmentIdForService().toString());

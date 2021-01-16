@@ -91,6 +91,7 @@ public class SchedulerRepository {
 
 
     public int getAppointmentIdForService() {
+        getAppointmentIdForService = appointmentDao.getAppointmentIdForService();
         return getAppointmentIdForService;
     }
 

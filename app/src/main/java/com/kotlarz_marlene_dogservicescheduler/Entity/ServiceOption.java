@@ -16,6 +16,9 @@ public class ServiceOption extends Service {
     private int appointment_id_fk;
     private String option;
 
+
+
+
     // Constructor ServiceWalking
     public ServiceOption(String duration, String location, String type, int appointment_id_fk, String option) {
         super(duration, location, type);

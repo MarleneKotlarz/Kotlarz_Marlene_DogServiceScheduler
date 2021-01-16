@@ -12,18 +12,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
+import com.kotlarz_marlene_dogservicescheduler.Entity.AppointmentAndServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder> {
-    
+
     // Set to new ArrayList, otherwise it would be set to null to avoid null-checks
+//    private List<Appointment> appointments = new ArrayList<>();
+
     private List<Appointment> appointments = new ArrayList<>();
+
     private OnItemClickListener listener; // First create the methods at the end of this code, then choose the one with my package name.
 
     public AppointmentAdapter() {
