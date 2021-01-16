@@ -216,6 +216,7 @@ public class AppointmentListActivity extends AppCompatActivity implements Appoin
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this, AppointmentDetailsActivity.class);
+        Appointment appointment = new Appointment(employeeId, customerId, petId, date, time);
 //        intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_ID, appointment.getAppointment_id());
 //        intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_DATE, appointment.getDate());
 //        intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_TIME, appointment.getTime());
