@@ -55,7 +55,7 @@ public class EmployeeDetailsActivity extends AppCompatActivity {
         employeePhone = intent.getStringExtra(EXTRA_EMPLOYEE_PHONE);
         employeePassword = intent.getStringExtra(EXTRA_EMPLOYEE_PASSWORD);
 
-        Log.v(TAG,"Scheduler - EmployeeDetailsActivity - onCreate ");
+        Log.v(TAG,"Scheduler - EmployeeDetailsActivity - onCreate employeeId " + employeeId);
 
     }
 

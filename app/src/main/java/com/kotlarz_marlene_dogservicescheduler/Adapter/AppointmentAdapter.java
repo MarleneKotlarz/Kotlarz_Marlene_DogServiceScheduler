@@ -28,6 +28,9 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     private List<Appointment> appointments = new ArrayList<>();
     private OnItemClickListener listener; // First create the methods at the end of this code, then choose the one with my package name.
 
+
+
+
     public AppointmentAdapter() {
     }
 
@@ -41,6 +44,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         return new AppointmentHolder(itemView);
     }
 
+    // TODO remove appointmentId from List
 
     // Takes care of getting the data from the single AppointmentList java objects into the
     // views of the AppointmentHolder. Get item and pass it into the textView
@@ -71,8 +75,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     public Appointment getAppointmentAt(int position) {
         return appointments.get(position);
     }
-
-
 
 
     // Create ViewHolder class - Will hold the views in our single RecyclerView items

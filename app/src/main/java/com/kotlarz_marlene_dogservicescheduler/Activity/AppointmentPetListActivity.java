@@ -79,7 +79,7 @@ public class AppointmentPetListActivity extends AppCompatActivity {
 
                 setResult(RESULT_OK, data);
                 finish();
-                Log.v(TAG, "Scheduler - AppointmentPetListActivity - onItemClick - customerId " + customerId);
+                Log.v(TAG, "Scheduler - AppointmentPetListActivity - onItemClick ");
 
             }
         });
