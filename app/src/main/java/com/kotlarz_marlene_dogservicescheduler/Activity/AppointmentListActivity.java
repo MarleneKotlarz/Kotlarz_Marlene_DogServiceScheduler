@@ -1,5 +1,12 @@
 package com.kotlarz_marlene_dogservicescheduler.Activity;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,15 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kotlarz_marlene_dogservicescheduler.Adapter.AppointmentAdapter;
@@ -31,7 +29,6 @@ import java.util.List;
 public class AppointmentListActivity extends AppCompatActivity {
 
     public static final int ADD_APPOINTMENT_REQUEST = 1;
-    public static final int EDIT_APPOINTMENT_REQUEST = 2;
 
     public static final String EXTRA_EMPLOYEE_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_EMPLOYEE_ID";
@@ -42,13 +39,11 @@ public class AppointmentListActivity extends AppCompatActivity {
 
     private AppointmentViewModel appointmentViewModel;
     private ServiceOptionViewModel serviceOptionViewModel;
-    private Appointment appointment;
     private String customerName, date, time,petName;
     private String location, duration, serviceType, option;
     private int customerId, petId, appointmentId;
     private int employeeId=1;
     int newAppointmentId = 0;
-
 
 
     @Override
@@ -58,22 +53,18 @@ public class AppointmentListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Appointment List by date");
 
-
         // Reference RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView_appointmentList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true); // If size(height and width) doesn't change.
-
         // Reference Adapter
         final AppointmentAdapter adapter = new AppointmentAdapter();
         recyclerView.setAdapter(adapter);
-
         // Assign ViewModel
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
-        // Create observer which updates the UI and
-        // observe the LiveData method, passing in this activity as the LifecycleOwner and the observer
-        // as an anonymous innerclass
+        // Create observer which updates the UI and observe the LiveData method, passing in this
+        // activity as the LifecycleOwner and the observer as an anonymous innerclass
         appointmentViewModel.getAllAppointments().observe(this, new Observer<List<Appointment>>() {
             @Override
             public void onChanged(List<Appointment> appointments) {
@@ -88,7 +79,6 @@ public class AppointmentListActivity extends AppCompatActivity {
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
             }
-
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 // Get positionAt method from CourseAdapter
@@ -108,19 +98,13 @@ public class AppointmentListActivity extends AppCompatActivity {
                 intent.putExtra(AppointmentDetailsActivity.EXTRA_CUSTOMER_ID, appointment.getCustomer_id_fk());
                 intent.putExtra(AppointmentDetailsActivity.EXTRA_PET_ID, appointment.getPet_id_fk());
                 intent.putExtra(AppointmentDetailsActivity.EXTRA_EMPLOYEE_ID, appointment.getEmployee_id_fk());
+
 //                intent.putExtra(AppointmentDetailsActivity.EXTRA_CUSTOMER_SERVICE_ID, appointment.getService_id_fk());
 
                 startActivity(intent);
-//                startActivityForResult(intent, EDIT_APPOINTMENT_REQUEST);
-
-                Log.v(TAG, "Scheduler - AppointmentListActivity - onItemClick AppointmentDetails CustomerId " + appointment.getCustomer_id_fk());
             }
 
-
-
         });
-
-
 
 
         // FAB to add appointment in AppointmentAddActivity
@@ -129,7 +113,6 @@ public class AppointmentListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AppointmentListActivity.this, AppointmentAddActivity.class);
-//                startActivity(intent);
                 startActivityForResult(intent, ADD_APPOINTMENT_REQUEST);
             }
         });
@@ -157,14 +140,11 @@ public class AppointmentListActivity extends AppCompatActivity {
             serviceType = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_TYPE);
             option = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_OPTION);
 
-
             // Create new Appointment
             Appointment appointment = new Appointment(employeeId, customerId, petId, date, time);
             appointmentViewModel.insert(appointment);
 
-
             Log.v(TAG, "Scheduler - AppointmentListActivity //////////////////////////////////////////// ");
-
 
             Thread thread = new Thread();
             try {
@@ -182,10 +162,8 @@ public class AppointmentListActivity extends AppCompatActivity {
             newAppointmentId = appointmentViewModel.getAppointmentIdForService();
             newAppointmentId++;
 
-            appointmentId++;
 
             Log.v(TAG, "Scheduler - AppointmentListActivity ========" + appointmentViewModel.getAppointmentIdForService().toString());
-
 
 
             if (serviceType.equals("Walking")) {
@@ -201,18 +179,11 @@ public class AppointmentListActivity extends AppCompatActivity {
             }
 
 
-
-
-
-
-            Log.v(TAG, "Scheduler - AppointmentListActivity - onActivityResult " +
-                    "  employeeId " + employeeId +
-                    "customerId " + customerId + " petId " + petId);
+            Log.v(TAG, "Scheduler - AppointmentListActivity - onActivityResult " + "  employeeId " + employeeId + "customerId " + customerId + " petId " + petId);
 
             Toast.makeText(this, "Appointment saved", Toast.LENGTH_SHORT).show();
-        }
 
-        else {
+        } else {
             Toast.makeText(this, "Appointment not saved", Toast.LENGTH_SHORT).show();
         }
 

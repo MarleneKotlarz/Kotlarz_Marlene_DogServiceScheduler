@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kotlarz_marlene_dogservicescheduler.Adapter.CustomerAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Adapter.PetAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
@@ -83,7 +81,6 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Appointment Details");
 
-
         // Get the ViewModels
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         customerViewModel = new ViewModelProvider(this).get(CustomerViewModel.class);
@@ -107,7 +104,7 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         petId = intent.getIntExtra(EXTRA_PET_ID, -1);
         employeeId = intent.getIntExtra(EXTRA_EMPLOYEE_ID, -1);
 
-        Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate ");
+        Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate appointmentId " + appointmentId);
 
 
         // Reference to CustomerList RecyclerView
@@ -119,14 +116,15 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         recyclerView1.setAdapter(adapter);
         // Assign ViewModel
         customerViewModel = new ViewModelProvider(this).get(CustomerViewModel.class);
-        customerViewModel.getAllCustomers().observe(this, new Observer<List<Customer>>()
-        {
+
+
+        customerViewModel.getAllCustomers().observe(this, new Observer<List<Customer>>() {
             @Override
             public void onChanged(List<Customer> customers) { // Triggered every time data in liveData object changes.
                 // Update UI/ RecyclerView
                 filteredCustomer = new ArrayList<>();
                 for (Customer customer : customers)
-                    if (customer.getCustomer_id() == getIntent().getIntExtra(EXTRA_CUSTOMER_ID, 0))
+                    if (customer.getCustomer_id() == getIntent().getIntExtra(EXTRA_CUSTOMER_ID, -1))
                         filteredCustomer.add(customer);
                 adapter.setCustomers(filteredCustomer); // Retrieve list of customers
 
@@ -134,6 +132,25 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
 
             }
         });
+
+        // TODO decide on which implementation of the customer information should be used. Same for pet.
+
+        customerViewModel.getAllCustomers().observe(this, new Observer<List<Customer>>() {
+            @Override
+            public void onChanged(List<Customer> customers) {
+
+                for (Customer customer : customers)
+                    if (customer.getCustomer_id() == getIntent().getIntExtra(EXTRA_CUSTOMER_ID, -1)) {
+                        String customerName = customer.getCustomer_name().toString();
+                        textView_customerName.setText(customerName);
+                    }else {
+                        System.out.println("CustomerName not found");
+                    }
+
+            }
+        });
+
+
 
 
         // Reference to PetList RecyclerView
@@ -152,7 +169,7 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
             public void onChanged(List<Pet> pets) {
                 filteredPet = new ArrayList<>();
                 for (Pet pet : pets)
-                    if (pet.getPet_id() == getIntent().getIntExtra(EXTRA_PET_ID, 0))
+                    if (pet.getPet_id() == getIntent().getIntExtra(EXTRA_PET_ID, -1))
                         filteredPet.add(pet);
                 adapter2.setPets(filteredPet);
                 numPet = filteredPet.size();

@@ -66,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
                                     } else {
                                         Toast.makeText(MainActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
                                     }
-                            } catch (Exception e) {
+                            } catch (NullPointerException e) {
+                                System.out.println("NullPointerException caught");
                                 e.printStackTrace();
                             }
                         }

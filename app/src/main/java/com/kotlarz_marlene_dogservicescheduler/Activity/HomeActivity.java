@@ -50,7 +50,6 @@ public class HomeActivity extends AppCompatActivity {
         button_employeeInfo = findViewById(R.id.button_employeeInfo);
         button_report = findViewById(R.id.button_report);
 
-
         // Receiving data from MainActivity
         Intent intent = getIntent();
         textView_employeeName.setText(intent.getStringExtra(EXTRA_EMPLOYEE_NAME));
@@ -63,16 +62,13 @@ public class HomeActivity extends AppCompatActivity {
         button_employeeInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 employeeName = textView_employeeName.getText().toString();
-
                 Intent dataIntent = new Intent(HomeActivity.this, EmployeeDetailsActivity.class);
                 dataIntent.putExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_ID, employeeId);
                 dataIntent.putExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_NAME, employeeName);
                 dataIntent.putExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_PHONE, employeePhone);
                 dataIntent.putExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_PASSWORD, password);
                 startActivityForResult(dataIntent, EDIT_EMPLOYEE_REQUEST);
-
             }
         });
 
@@ -81,7 +77,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent1 = new Intent(HomeActivity.this, ReportActivity.class);
                 startActivity(intent1);
-
             }
         });
 
@@ -89,8 +84,6 @@ public class HomeActivity extends AppCompatActivity {
         Log.v(TAG, "Scheduler - HomeActivity - onCreate - password " + password + " employeeName " + employeeName);
 
     }
-
-
 
 
     public void onClick_appointmentList(View view) {
@@ -116,12 +109,10 @@ public class HomeActivity extends AppCompatActivity {
             employeePhone = data.getStringExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_PHONE);
             password = data.getStringExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_PASSWORD);
             employeeId = data.getIntExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_ID, -1);
-
             // Update employee
             employee = new Employee(employeeName, employeePhone, password);
             employee.setEmployee_id(employeeId);
             textView_employeeName.setText(employeeName);
-
             employeeViewModel.update(employee);
 
             Toast.makeText(this, "Employee updated", Toast.LENGTH_SHORT).show();
