@@ -5,57 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="32dp"
     tools:context=".Activity.CustomerAddEditActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:text="Customer name:" />
 
     <EditText
         android:id="@+id/editText_customerAddEdit_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:hint="Enter a customer name"
         android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:text="Customer address:" />
 
     <EditText
         android:id="@+id/editText_customerAddEdit_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:hint="Enter an address (e.g. Street, City, State, Zip)"
+        android:hint="e.g. Street, City, State, Zip"
         android:inputType="textMultiLine|textPostalAddress" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:text="Customer phone:" />
 
     <EditText
         android:id="@+id/editText_customerAddEdit_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:hint="Enter a phone number"
+        android:hint="e.g. ###-###- ####"
         android:inputType="phone" />
 
 </LinearLayout>

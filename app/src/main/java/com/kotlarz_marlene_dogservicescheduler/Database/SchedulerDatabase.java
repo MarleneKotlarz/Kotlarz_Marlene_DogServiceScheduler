@@ -98,10 +98,10 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 Employee employee1 = new Employee("Anna Conrad", "938-342-2342", "test");
                 employeeDao.insert(employee1);
 
-                Customer customer1 = new Customer(1, "Julia Roberts", "74 Rosebud, Charleston, SC 29414", "938-493 5323");
+                Customer customer1 = new Customer(1, "Julia Roberts", "74 Rosebud, Charleston, SC 29414", "938-493-5323");
                 customerDao.insert(customer1);
 
-                Customer customer2 = new Customer(1, "George Clooney", "38 Main Street, Charleston, SC 29492", "843-204 0394");
+                Customer customer2 = new Customer(1, "George Clooney", "38 Main Street, Charleston, SC 29492", "843-204-0394");
                 customerDao.insert(customer2);
 
                 Pet pet1 = new Pet(1, "8", "Bruno", "Dachshund", "Poultry food allergy");
