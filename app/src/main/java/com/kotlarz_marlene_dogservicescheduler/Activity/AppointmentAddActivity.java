@@ -322,16 +322,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         petName = textView_petName.getText().toString();
         serviceType = textView_serviceType.getText().toString();
 
-
-
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - date : " + date);
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - time : " + time);
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - customerId : " + customerId);
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - customerName : " + customerName);
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - petName : " + petName);
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - serviceType : " + serviceType);
-
-
         // Input validation for empty fields
         if (date.trim().isEmpty() || time.trim().isEmpty() || serviceType.trim().isEmpty() || customerName.trim().isEmpty() || petName.trim().isEmpty()) {
             Toast.makeText(this, "Please fill out all fields.", Toast.LENGTH_SHORT).show();

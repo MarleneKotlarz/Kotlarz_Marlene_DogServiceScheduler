@@ -24,7 +24,7 @@ public class AppointmentViewModel extends AndroidViewModel {
     // Member variables
     private SchedulerRepository schedulerRepository;
     private LiveData<List<Appointment>> allAppointments;
-//    LiveData<Integer> getAppointmentIdForService;
+
     Integer getAppointmentIdForService;
 
 
@@ -34,7 +34,7 @@ public class AppointmentViewModel extends AndroidViewModel {
         // Instantiate repository and allAppointments
         schedulerRepository = new SchedulerRepository(application);
         allAppointments = schedulerRepository.getAllAppointments();
-//        getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
+
         getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
     }
 

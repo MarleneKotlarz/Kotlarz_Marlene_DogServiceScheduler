@@ -31,7 +31,6 @@ public class SchedulerRepository {
     private LiveData<List<Employee>> allEmployees;
     private LiveData<List<Pet>> allPets;
     private LiveData<List<ServiceOption>> allServiceOptions;
-//    private LiveData<Integer> getAppointmentIdForService;
     private Integer getAppointmentIdForService = 0;
 
 
@@ -52,6 +51,7 @@ public class SchedulerRepository {
         allPets = petDao.getAllPets();
         allServiceOptions = serviceOptionDao.getAllServiceOptions();
         getAppointmentIdForService = appointmentDao.getAppointmentIdForService();
+
 
         int appointmentId;
 
@@ -87,7 +87,6 @@ public class SchedulerRepository {
     public LiveData<List<Appointment>> getAllAppointments() {
         return allAppointments;
     }
-
 
 
 
@@ -225,16 +224,6 @@ public class SchedulerRepository {
     public LiveData<List<ServiceOption>> getAllServiceOptions() {
         return allServiceOptions;
     }
-
-//    public int getApptIdForService(ServiceOption serviceOption) {
-//        SchedulerDatabase.executorServiceDB.execute(() -> {
-//            serviceOptionDao.getAppointmentIdForService();
-//        });
-//        return 0;
-//    }
-
-//    public LiveData<List<ServiceOption>> getAppointmentIdForService() {return allServiceOptions ; }
-//
 
 
 }
