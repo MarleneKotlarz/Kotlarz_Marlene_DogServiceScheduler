@@ -59,9 +59,6 @@ public class HomeActivity extends AppCompatActivity {
         employeePhone = intent.getStringExtra(EXTRA_EMPLOYEE_PHONE);
         password = intent.getStringExtra(EXTRA_EMPLOYEE_PASSWORD);
 
-
-        Log.v(TAG, "Scheduler - HomeActivity - onCreate - password and name " + password + " " + employeeName);
-
         // onClick - view employee details in EmployeeDetailsActivity
         button_employeeInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +71,7 @@ public class HomeActivity extends AppCompatActivity {
                 dataIntent.putExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_NAME, employeeName);
                 dataIntent.putExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_PHONE, employeePhone);
                 dataIntent.putExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_PASSWORD, password);
-
-                Log.v(TAG, "Scheduler - HomeActivity - onCreate - employeeName " + employeeName);
-
-//                startActivity(dataIntent);
                 startActivityForResult(dataIntent, EDIT_EMPLOYEE_REQUEST);
-
 
             }
         });
@@ -93,6 +85,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
+        Log.v(TAG, "Scheduler - HomeActivity - onCreate - password " + password + " employeeName " + employeeName);
 
     }
 

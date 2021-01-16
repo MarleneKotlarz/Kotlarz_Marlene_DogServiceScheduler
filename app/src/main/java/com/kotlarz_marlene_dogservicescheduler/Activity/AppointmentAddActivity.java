@@ -166,7 +166,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         });
 
 
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onCreate - employeeId " + employeeId);
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - onCreate ");
 
     }
 
@@ -289,10 +289,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             Toast.makeText(this, "Changes are not saved", Toast.LENGTH_SHORT).show();
         }
 
-
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onActivityResult - customerId " + customerId
-                + "petId" + petId);
-
     }
 
     // ImageButton Customer
@@ -309,7 +305,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         intent.putExtra(AppointmentPetListActivity.EXTRA_CUSTOMER_ID, customerId);
         startActivityForResult(intent, ADD_PET_TO_APPOINTMENT_REQUEST);
 
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - CustomerId " + customerId);
     }
 
 

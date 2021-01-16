@@ -107,7 +107,7 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         petId = intent.getIntExtra(EXTRA_PET_ID, -1);
         employeeId = intent.getIntExtra(EXTRA_EMPLOYEE_ID, -1);
 
-        Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate employeeId " + employeeId);
+        Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate ");
 
 
         // Reference to CustomerList RecyclerView
@@ -132,7 +132,6 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
 
                 numCustomer = filteredCustomer.size();
 
-                Log.v(TAG, "Scheduler - AppointmentDetailsActivity - CustomerList onChanged" + customerId);
             }
         });
 
@@ -157,7 +156,6 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
                         filteredPet.add(pet);
                 adapter2.setPets(filteredPet);
                 numPet = filteredPet.size();
-                Log.v(TAG, "Scheduler - AppointmentDetailsActivity - PetList onChanged");
             }
         });
 
@@ -184,8 +182,6 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
 ////                startActivity(intent);
 //            }
 //        });
-
-        Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onClick edit appointment " );
 
 
     }

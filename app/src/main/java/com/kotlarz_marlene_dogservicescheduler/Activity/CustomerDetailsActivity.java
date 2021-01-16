@@ -142,7 +142,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
             customer.setCustomer_id(customerId);
             customerViewModel.update(customer);
 
-            Log.v(TAG, "Scheduler - CustomerDetailsActivity - onCreate employeeId " + employeeId);
+            Log.v(TAG, "Scheduler - CustomerDetailsActivity - onActivityResult ");
 
             Toast.makeText(this, "Customer updated", Toast.LENGTH_SHORT).show();
 
