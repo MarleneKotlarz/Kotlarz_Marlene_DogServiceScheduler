@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,9 +23,10 @@ import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.AppointmentViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceOptionViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AppointmentListActivity extends AppCompatActivity {
+public class AppointmentListActivity extends AppCompatActivity implements AppointmentAdapter.OnItemClickListener {
 
     public static final int ADD_APPOINTMENT_REQUEST = 1;
 
@@ -39,11 +39,16 @@ public class AppointmentListActivity extends AppCompatActivity {
 
     private AppointmentViewModel appointmentViewModel;
     private ServiceOptionViewModel serviceOptionViewModel;
-    private String customerName, date, time,petName;
+    private String customerName, date, time, petName;
     private String location, duration, serviceType, option;
     private int customerId, petId, appointmentId;
-    private int employeeId=1;
+    private int employeeId = 1;
     int newAppointmentId = 0;
+    Appointment appointment;
+
+
+    private ArrayList<Appointment> mAppointments = new ArrayList<>();
+    private AppointmentAdapter mAppointmentAdapter;
 
 
     @Override
@@ -58,8 +63,13 @@ public class AppointmentListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true); // If size(height and width) doesn't change.
         // Reference Adapter
-        final AppointmentAdapter adapter = new AppointmentAdapter();
-        recyclerView.setAdapter(adapter);
+
+        mAppointmentAdapter = new AppointmentAdapter(mAppointments, this);
+        recyclerView.setAdapter(mAppointmentAdapter);
+
+
+//        final AppointmentAdapter adapter = new AppointmentAdapter();
+//        recyclerView.setAdapter(adapter);
         // Assign ViewModel
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
@@ -69,42 +79,43 @@ public class AppointmentListActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Appointment> appointments) {
                 // Update UI/ RecyclerView
-                adapter.setAppointments(appointments);
+//                adapter.setAppointments(appointments);
+                mAppointmentAdapter.setAppointments(appointments);
             }
         });
-
-        // RecyclerView - delete by swiping
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                // Get positionAt method from CourseAdapter
-                appointmentViewModel.delete(adapter.getAppointmentAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(AppointmentListActivity.this, "Appointment deleted", Toast.LENGTH_SHORT).show();
-            }
-        }).attachToRecyclerView(recyclerView);
-
-        // onClick - view appointment details in AppointmentDetailsActivity
-        adapter.setOnItemClickListener(new AppointmentAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Appointment appointment) {
-                Intent intent = new Intent(AppointmentListActivity.this, AppointmentDetailsActivity.class);
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_ID, appointment.getAppointment_id());
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_DATE, appointment.getDate());
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_TIME, appointment.getTime());
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_CUSTOMER_ID, appointment.getCustomer_id_fk());
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_PET_ID, appointment.getPet_id_fk());
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_EMPLOYEE_ID, appointment.getEmployee_id_fk());
-
-//                intent.putExtra(AppointmentDetailsActivity.EXTRA_CUSTOMER_SERVICE_ID, appointment.getService_id_fk());
-
-                startActivity(intent);
-            }
-
-        });
+//
+//        // RecyclerView - delete by swiping
+//        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+//            @Override
+//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+//                return false;
+//            }
+//            @Override
+//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+//                // Get positionAt method from CourseAdapter
+//                appointmentViewModel.delete(adapter.getAppointmentAt(viewHolder.getAdapterPosition()));
+//                Toast.makeText(AppointmentListActivity.this, "Appointment deleted", Toast.LENGTH_SHORT).show();
+//            }
+//        }).attachToRecyclerView(recyclerView);
+//
+//        // onClick - view appointment details in AppointmentDetailsActivity
+//        adapter.setOnItemClickListener(new AppointmentAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(Appointment appointment) {
+//                Intent intent = new Intent(AppointmentListActivity.this, AppointmentDetailsActivity.class);
+//                intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_ID, appointment.getAppointment_id());
+//                intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_DATE, appointment.getDate());
+//                intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_TIME, appointment.getTime());
+//                intent.putExtra(AppointmentDetailsActivity.EXTRA_CUSTOMER_ID, appointment.getCustomer_id_fk());
+//                intent.putExtra(AppointmentDetailsActivity.EXTRA_PET_ID, appointment.getPet_id_fk());
+//                intent.putExtra(AppointmentDetailsActivity.EXTRA_EMPLOYEE_ID, appointment.getEmployee_id_fk());
+//
+////                intent.putExtra(AppointmentDetailsActivity.EXTRA_CUSTOMER_SERVICE_ID, appointment.getService_id_fk());
+//
+//                startActivity(intent);
+//            }
+//
+//        });
 
 
         // FAB to add appointment in AppointmentAddActivity
@@ -202,4 +213,16 @@ public class AppointmentListActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(this, AppointmentDetailsActivity.class);
+//        intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_ID, appointment.getAppointment_id());
+//        intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_DATE, appointment.getDate());
+//        intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_TIME, appointment.getTime());
+//        intent.putExtra(AppointmentDetailsActivity.EXTRA_CUSTOMER_ID, appointment.getCustomer_id_fk());
+//        intent.putExtra(AppointmentDetailsActivity.EXTRA_PET_ID, appointment.getPet_id_fk());
+//        intent.putExtra(AppointmentDetailsActivity.EXTRA_EMPLOYEE_ID, appointment.getEmployee_id_fk());
+        startActivity(intent);
+
+    }
 }
