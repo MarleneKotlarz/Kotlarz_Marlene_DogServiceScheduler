@@ -110,9 +110,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         petViewModel = new ViewModelProvider(this).get(PetViewModel.class);
         serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
 
-
-
-
         // Assign fields
         textView_date = findViewById(R.id.textView_appointmentAdd_date);
         textView_time = findViewById(R.id.textView_appointmentAdd_time);
@@ -174,7 +171,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     }
 
 
-    // DatePicker - set up EditText to selected date
+    // DatePicker - set up textView to selected date
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         calendar = Calendar.getInstance();
@@ -324,24 +321,43 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         customerName = textView_customerName.getText().toString();
         petName = textView_petName.getText().toString();
         serviceType = textView_serviceType.getText().toString();
+
+
+
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - date : " + date);
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - time : " + time);
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - customerId : " + customerId);
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - customerName : " + customerName);
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - petName : " + petName);
+        Log.v(TAG, "Scheduler - AppointmentAddActivity - onClick - PetList - serviceType : " + serviceType);
+
+
         // Input validation for empty fields
         if (date.trim().isEmpty() || time.trim().isEmpty() || serviceType.trim().isEmpty() || customerName.trim().isEmpty() || petName.trim().isEmpty()) {
             Toast.makeText(this, "Please fill out all fields.", Toast.LENGTH_SHORT).show();
             return;
         }
+        else{
+            // Accept input and save appointment - send data back
+            Intent dataIntent = new Intent();
+            dataIntent.putExtra(EXTRA_APPOINTMENT_TIME, time);
+            dataIntent.putExtra(EXTRA_APPOINTMENT_DATE, date);
+            dataIntent.putExtra(EXTRA_CUSTOMER_ID, customerId);
+            dataIntent.putExtra(EXTRA_CUSTOMER_NAME, customerName);
+            dataIntent.putExtra(EXTRA_PET_ID, petId);
+            dataIntent.putExtra(EXTRA_SERVICE_DURATION, duration);
+            dataIntent.putExtra(EXTRA_SERVICE_LOCATION, location);
+            dataIntent.putExtra(EXTRA_SERVICE_TYPE, serviceType);
+            dataIntent.putExtra(EXTRA_SERVICE_OPTION, option);
+
+            Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment newAppointmentId" );
+
+            setResult(RESULT_OK, dataIntent);
+            finish();
+        }
 
 
-        // Accept input and save appointment - send data back
-        Intent dataIntent = new Intent();
-        dataIntent.putExtra(EXTRA_APPOINTMENT_TIME, time);
-        dataIntent.putExtra(EXTRA_APPOINTMENT_DATE, date);
-        dataIntent.putExtra(EXTRA_CUSTOMER_ID, customerId);
-        dataIntent.putExtra(EXTRA_CUSTOMER_NAME, customerName);
-        dataIntent.putExtra(EXTRA_PET_ID, petId);
-        dataIntent.putExtra(EXTRA_SERVICE_DURATION, duration);
-        dataIntent.putExtra(EXTRA_SERVICE_LOCATION, location);
-        dataIntent.putExtra(EXTRA_SERVICE_TYPE, serviceType);
-        dataIntent.putExtra(EXTRA_SERVICE_OPTION, option);
+
 
 
 
@@ -353,7 +369,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 //        appointmentViewModel.insert(appointment);
 
 
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment newAppointmentId" );
 
 //        int appointmentId = getIntent().getIntExtra(EXTRA_APPOINTMENT_ID, -1);
 //        if (appointmentId != -1) {
@@ -376,10 +391,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 //        }
 
 
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment appointmentId " + appointmentId);
 
-            setResult(RESULT_OK, dataIntent);
-            finish();
 
 
     }

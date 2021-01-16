@@ -149,8 +149,8 @@ public class AppointmentListActivity extends AppCompatActivity {
             // Get Intent Keys from other AppointmentAddActivity.
             date = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_DATE);
             time = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_TIME);
-            customerName = data.getStringExtra(AppointmentAddActivity.EXTRA_CUSTOMER_NAME);
             customerId = data.getIntExtra(AppointmentAddActivity.EXTRA_CUSTOMER_ID, -1);
+            customerName = data.getStringExtra(AppointmentAddActivity.EXTRA_CUSTOMER_NAME);
             petId = data.getIntExtra(AppointmentAddActivity.EXTRA_PET_ID, -1);
             duration = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_DURATION);
             location = data.getStringExtra(AppointmentAddActivity.EXTRA_SERVICE_LOCATION);
@@ -168,31 +168,37 @@ public class AppointmentListActivity extends AppCompatActivity {
 
             Thread thread = new Thread();
             try {
-                Log.v(TAG, "Scheduler - AppointmentListActiviy ===================SLEEP START========================================= ");
+                Log.v(TAG, "Scheduler - AppointmentListActivity ===================SLEEP START========================================= ");
                 thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
 
-            Log.v(TAG, "Scheduler - AppointmentListActiviy ===================SLEEP END========================================= ");
+            Log.v(TAG, "Scheduler - AppointmentListActivity ===================SLEEP END========================================= ");
+
+
 
 
             newAppointmentId = appointmentViewModel.getAppointmentIdForService();
+            newAppointmentId++;
+
+            Log.v(TAG, "Scheduler - AppointmentListActivity ========" + appointmentViewModel.getAppointmentIdForService().toString());
+
 
 
             if (serviceType.equals("Walking")) {
 
-                newAppointmentId++;
-                Log.v(TAG, "Scheduler - AppointmentListActiviy ===================newAppointmentId================ " +newAppointmentId);
+//                newAppointmentId++;
+                Log.v(TAG, "Scheduler - AppointmentListActivity ===================newAppointmentId================ " +newAppointmentId);
                 ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
                 serviceOptionViewModel.insert(serviceOption1);
             }
 
             if (serviceType.equals("Playing")) {
 
-                newAppointmentId++;
-                Log.v(TAG, "Scheduler - AppointmentListActiviy ===================newAppointmentId================ " +newAppointmentId);
+//                newAppointmentId++;
+                Log.v(TAG, "Scheduler - AppointmentListActivity ===================newAppointmentId================ " +newAppointmentId);
                 ServiceOption serviceOption = new ServiceOption(duration, serviceType, newAppointmentId, option);
                 serviceOptionViewModel.insert(serviceOption);
             }
@@ -208,7 +214,7 @@ public class AppointmentListActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Appointment saved", Toast.LENGTH_SHORT).show();
 
-            Log.v(TAG, "Scheduler - AppointmentListActiviy ============================================================ ");
+            Log.v(TAG, "Scheduler - AppointmentListActivity ============================================================ ");
         }
 
         else {

@@ -63,8 +63,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start/cancel date alarm:"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:text="Start/cancel optional date alarm:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
             <ImageButton
                 android:id="@+id/imageButton_alarmStart"
@@ -151,16 +151,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textStyle="bold"
-            android:text="Service type" />
+                android:textStyle="bold" />
 </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-
             android:text="Select a customer and pet by clicking the icons" />
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -176,15 +175,29 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_customer" />
 
-            <TextView
-                android:id="@+id/textView_appointmentAdd_customerName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:layout_gravity="center"
-                android:layout_marginLeft="32dp"
-                android:textStyle="bold"
-                android:text="Customer Name" />
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_appointmentAdd_customerName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:visibility="visible" />
+            </LinearLayout>
+
         </LinearLayout>
 
 
@@ -199,18 +212,30 @@
                 android:layout_height="50dp"
                 android:background="@color/colorPrimary"
                 android:onClick="enter_petList"
-                android:src="@drawable/ic_pet"/>
+                android:src="@drawable/ic_pet" />
 
-            <TextView
-                android:id="@+id/textView_appointmentAdd_petName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:layout_gravity="center"
-                android:layout_marginLeft="32dp"
-                android:textStyle="bold"
-                android:text="Pet Name" />
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/textView_appointmentAdd_petName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:visibility="visible" />
+            </LinearLayout>
         </LinearLayout>
 
 
