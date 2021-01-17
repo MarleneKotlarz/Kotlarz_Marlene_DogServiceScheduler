@@ -15,6 +15,7 @@ import androidx.lifecycle.LiveData;
 import com.kotlarz_marlene_dogservicescheduler.Database.SchedulerDatabase;
 import com.kotlarz_marlene_dogservicescheduler.Database.SchedulerRepository;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
+import com.kotlarz_marlene_dogservicescheduler.Entity.AppointmentAndServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Pet;
 
 import java.util.List;
@@ -28,6 +29,9 @@ public class AppointmentViewModel extends AndroidViewModel {
     Integer getAppointmentIdForService;
 
 
+    private LiveData<List<AppointmentAndServiceOption>> allApptServices;
+
+
     // Constructor
     public AppointmentViewModel(@NonNull Application application) {
         super(application);
@@ -36,6 +40,9 @@ public class AppointmentViewModel extends AndroidViewModel {
         allAppointments = schedulerRepository.getAllAppointments();
 
         getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
+
+        allApptServices = schedulerRepository.getAppointmentAndServiceOptions();
+
     }
 
    public int grabNewApptIDForService() {
@@ -65,10 +72,12 @@ public class AppointmentViewModel extends AndroidViewModel {
         return allAppointments;
     }
 
-
-
     public Integer getAppointmentIdForService() {return getAppointmentIdForService;}
 
 
+
+    public LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceOptions() {
+        return allApptServices;
+    }
 
 }

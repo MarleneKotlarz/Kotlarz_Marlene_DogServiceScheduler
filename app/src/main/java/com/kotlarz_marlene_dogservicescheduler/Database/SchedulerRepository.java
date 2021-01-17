@@ -10,6 +10,7 @@ import com.kotlarz_marlene_dogservicescheduler.DAO.EmployeeDao;
 import com.kotlarz_marlene_dogservicescheduler.DAO.PetDao;
 import com.kotlarz_marlene_dogservicescheduler.DAO.ServiceOptionDao;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
+import com.kotlarz_marlene_dogservicescheduler.Entity.AppointmentAndServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Customer;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Employee;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Pet;
@@ -33,6 +34,9 @@ public class SchedulerRepository {
     private LiveData<List<ServiceOption>> allServiceOptions;
     private Integer getAppointmentIdForService = 0;
 
+    private LiveData<List<AppointmentAndServiceOption>> allApptServices;
+
+
 
     // Constructor = Application is a subclass of Context
     public SchedulerRepository(Application application) {
@@ -51,6 +55,8 @@ public class SchedulerRepository {
         allPets = petDao.getAllPets();
         allServiceOptions = serviceOptionDao.getAllServiceOptions();
         getAppointmentIdForService = appointmentDao.getAppointmentIdForService();
+
+        allApptServices = appointmentDao.getAppointmentAndServiceOptions();
 
 
 
@@ -93,6 +99,10 @@ public class SchedulerRepository {
         return getAppointmentIdForService;
     }
 
+
+    public LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceOptions() {
+        return allApptServices;
+    }
 
     //************ CUSTOMER DB OPERATIONS ************//
 

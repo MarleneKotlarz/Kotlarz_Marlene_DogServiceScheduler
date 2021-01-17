@@ -43,9 +43,9 @@ public interface AppointmentDao {
     @Query("SELECT appointment_id FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
     Integer getAppointmentIdForService();
 
-//    @Transaction
-//    @Query("SELECT * FROM service_option_table")
-//    List<AppointmentAndServiceOption> getAppointmentAndServiceOptions();
+    @Transaction
+    @Query("SELECT * FROM appointment_table")
+    LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceOptions();
 
 
 //    @Query("SELECT * FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
