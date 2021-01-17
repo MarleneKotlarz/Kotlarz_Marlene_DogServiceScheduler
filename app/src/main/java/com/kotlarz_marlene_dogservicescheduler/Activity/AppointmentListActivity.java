@@ -172,17 +172,25 @@ public class AppointmentListActivity extends AppCompatActivity{
                 Log.v(TAG, "Scheduler - AppointmentListActivity ===================newAppointmentId================ " +newAppointmentId);
                 ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
                 serviceOptionViewModel.insert(serviceOption1);
+
+                Toast.makeText(AppointmentListActivity.this, "Appointment saved!" +"\n"+ "Service type: " + serviceOption1.serviceDetails(serviceType) , Toast.LENGTH_SHORT).show();
+
+
+
             }
 
             if (serviceType.equals("Playing")) {
-                ServiceOption serviceOption = new ServiceOption(duration, serviceType, newAppointmentId, option);
-                serviceOptionViewModel.insert(serviceOption);
+                ServiceOption serviceOption2 = new ServiceOption(duration, serviceType, newAppointmentId, option);
+                serviceOptionViewModel.insert(serviceOption2);
+
+                Toast.makeText(AppointmentListActivity.this, "Appointment saved!" +"\n"+ "Service type: " + serviceOption2.serviceDetails(serviceType) , Toast.LENGTH_SHORT).show();
+
+
             }
 
 
             Log.v(TAG, "Scheduler - AppointmentListActivity - onActivityResult " + "  employeeId " + employeeId + "customerId " + customerId + " petId " + petId);
 
-            Toast.makeText(this, "Appointment saved", Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(this, "Appointment not saved", Toast.LENGTH_SHORT).show();

@@ -28,6 +28,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
+import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.Utilities.AppointmentAddReceiver;
 import com.kotlarz_marlene_dogservicescheduler.Utilities.DatePickerFragment;
@@ -91,6 +92,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     private int employeeId = 1;
     private Button buttonService;
     Appointment appointment;
+    ServiceOption serviceOption;
 
     private AppointmentViewModel appointmentViewModel;
     private CustomerViewModel customerViewModel;
@@ -261,30 +263,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             textView_serviceType.setText(serviceType);
             option = data.getStringExtra(AppointmentServiceActivity.EXTRA_SERVICE_OPTION);
 
-
-//            if (serviceType.equals("Walking")) {
-//
-//                int newAppointmentId = appointmentViewModel.getAppointmentIdForService();
-//                newAppointmentId++;
-//
-//
-//                Log.v(TAG, "Scheduler - AppointmentAddActivity - onActivityResult getAppointmentIdForService " + appointmentViewModel.getAppointmentIdForService()
-//                        + " newAppointmentId " + newAppointmentId);
-//
-//                ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, option);
-//                serviceOptionViewModel.insert(serviceOption1);
-//                Toast.makeText(this, "Service saved", Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//            if (serviceType.equals("Playing")) {
-
-//                int newAppointmentId = appointmentViewModel.getAppointmentIdForService();
-//                newAppointmentId++;
-//                ServiceOption serviceOption = new ServiceOption(duration, serviceType, newAppointmentId,  option);
-//                serviceOptionViewModel.insert(serviceOption);
-//                Toast.makeText(this, "Service saved", Toast.LENGTH_SHORT).show();
-//            }
         } else {
             Toast.makeText(this, "Changes are not saved", Toast.LENGTH_SHORT).show();
         }

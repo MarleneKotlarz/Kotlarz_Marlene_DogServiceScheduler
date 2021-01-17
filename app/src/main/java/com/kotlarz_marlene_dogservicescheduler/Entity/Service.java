@@ -1,6 +1,5 @@
 package com.kotlarz_marlene_dogservicescheduler.Entity;
 
-import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 
@@ -23,6 +22,13 @@ public abstract class Service {
 
         this.type = type;
     }
+
+    public String serviceDetails(String type) {
+        this.type = type;
+        return type;
+    }
+
+
 
     // Getters and Setters
     public int getService_id() {
