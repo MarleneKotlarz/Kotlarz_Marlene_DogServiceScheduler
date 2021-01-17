@@ -58,8 +58,6 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
     private CustomerViewModel customerViewModel;
     private PetViewModel petViewModel;
 
-    Appointment appointment;
-    AppointmentAndServiceOption appointmentAndServiceOption;
 
     TextView textView_date, textView_time, textView_customerName, textView_customerAddress, textView_customerPhone;
     TextView textView_petName, textView_petBreed, textView_petAge, textView_petNote;
@@ -68,11 +66,6 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
     private int appointmentId, customerId, petId, employeeId;
     private String date, time, customerName, customerAddress, customerPhone,  petName, petBreed, petAge, petNote;
     private String serviceDuration, serviceLocation, serviceType, serviceOption;
-
-    public static int numCustomer;
-    private List<Customer> filteredCustomer;
-    public static int numPet;
-    private List<Pet> filteredPet;
 
 
 
@@ -118,40 +111,8 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         petId = intent.getIntExtra(EXTRA_PET_ID, -1);
         employeeId = intent.getIntExtra(EXTRA_EMPLOYEE_ID, -1);
 
-        Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate appointmentId " + appointmentId);
 
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView_apptServiceList);
-
-
-
-        // Reference to CustomerList RecyclerView
-        RecyclerView recyclerView1 = findViewById(R.id.recyclerView_customerList);
-        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView1.setHasFixedSize(true);
-        // Reference adapter
-        final CustomerAdapter adapter = new CustomerAdapter();
-        recyclerView1.setAdapter(adapter);
-        // Assign ViewModel
-        customerViewModel = new ViewModelProvider(this).get(CustomerViewModel.class);
-
-
-        customerViewModel.getAllCustomers().observe(this, new Observer<List<Customer>>() {
-            @Override
-            public void onChanged(List<Customer> customers) { // Triggered every time data in liveData object changes.
-                // Update UI/ RecyclerView
-                filteredCustomer = new ArrayList<>();
-                for (Customer customer : customers)
-                    if (customer.getCustomer_id() == getIntent().getIntExtra(EXTRA_CUSTOMER_ID, -1))
-                        filteredCustomer.add(customer);
-                adapter.setCustomers(filteredCustomer); // Retrieve list of customers
-
-                numCustomer = filteredCustomer.size();
-
-            }
-        });
-
-        // TODO decide on which implementation of the customer information should be used. Same for pet.
 
         customerViewModel.getAllCustomers().observe(this, new Observer<List<Customer>>() {
             @Override
@@ -199,10 +160,6 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         });
 
 
-
-        Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate appointmentId --test-- " + appointmentId);
-
-
         appointmentViewModel.getAppointmentAndServiceByApptId(appointmentId).observe(this, new Observer<List<AppointmentAndServiceOption>>() {
             @Override
             public void onChanged(List<AppointmentAndServiceOption> appointmentAndServiceOptions) {
@@ -229,29 +186,7 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
             }
         });
 
-
-        // Reference to PetList RecyclerView
-        RecyclerView recyclerView2 = findViewById(R.id.recyclerView_petList);
-        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView2.setHasFixedSize(true);
-
-        // Reference adapter
-        final PetAdapter adapter2 = new PetAdapter();
-        recyclerView2.setAdapter(adapter2);
-
-        // Assign ViewModel
-        petViewModel = new ViewModelProvider(this).get(PetViewModel.class);
-        petViewModel.getPetByCustomerId(customerId).observe(this, new Observer<List<Pet>>() {
-            @Override
-            public void onChanged(List<Pet> pets) {
-                filteredPet = new ArrayList<>();
-                for (Pet pet : pets)
-                    if (pet.getPet_id() == getIntent().getIntExtra(EXTRA_PET_ID, -1))
-                        filteredPet.add(pet);
-                adapter2.setPets(filteredPet);
-                numPet = filteredPet.size();
-            }
-        });
+        Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate appointmentId " + appointmentId);
 
 
 // TODO remove appointmentEditActivity
