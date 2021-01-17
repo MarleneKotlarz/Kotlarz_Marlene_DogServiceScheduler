@@ -53,7 +53,6 @@ public class SchedulerRepository {
         getAppointmentIdForService = appointmentDao.getAppointmentIdForService();
 
 
-        int appointmentId;
 
     }
 
@@ -89,19 +88,10 @@ public class SchedulerRepository {
     }
 
 
-
     public int getAppointmentIdForService() {
         getAppointmentIdForService = appointmentDao.getAppointmentIdForService();
         return getAppointmentIdForService;
     }
-
-//    public int getAppointmentIdForService() {
-//        SchedulerDatabase.executorServiceDB.execute(() -> {
-//            appointmentDao.getAppointmentIdForService();
-//
-//        });
-//        return getAppointmentIdForService;
-//    }
 
 
     //************ CUSTOMER DB OPERATIONS ************//

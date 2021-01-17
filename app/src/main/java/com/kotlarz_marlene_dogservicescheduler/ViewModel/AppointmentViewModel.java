@@ -66,14 +66,9 @@ public class AppointmentViewModel extends AndroidViewModel {
     }
 
 
-//    public LiveData<List<Appointment>> getAppointmentIdForService(int appointmentId) {
-//        return schedulerRepository.getAppointmentIdForService(appointmentId);
-//    }
 
     public Integer getAppointmentIdForService() {return getAppointmentIdForService;}
 
-
-//    public  LiveData<Integer> getAppointmentIdForService() {return getAppointmentIdForService;}
 
 
 }

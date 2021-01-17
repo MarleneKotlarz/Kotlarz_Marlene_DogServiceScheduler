@@ -119,7 +119,7 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 ServiceOption service1 = new ServiceOption("45 minutes", "Park", "Walking", 1, "Moderate intensity");
                 serviceOptionDao.insert(service1);
 
-                ServiceOption service2 = new ServiceOption("30 minutes", "Playing", 2, "Ball");
+                ServiceOption service2 = new ServiceOption("30 minutes", "Home", "Playing", 2, "Ball");
                 serviceOptionDao.insert(service2);
 
 

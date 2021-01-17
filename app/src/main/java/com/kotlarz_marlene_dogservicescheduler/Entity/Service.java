@@ -17,13 +17,9 @@ public abstract class Service {
 
     }
 
-    public Service(String duration, String type) {
-        this.duration = duration;
 
-        this.type = type;
-    }
-
-    public String serviceDetails(String type) {
+    // Method to get the correct service type
+    public String serviceTypeSelection(String type) {
         this.type = type;
         return type;
     }

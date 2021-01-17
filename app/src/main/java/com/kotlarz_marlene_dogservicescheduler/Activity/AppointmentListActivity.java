@@ -24,7 +24,6 @@ import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.AppointmentViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceOptionViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentListActivity extends AppCompatActivity{
@@ -173,17 +172,17 @@ public class AppointmentListActivity extends AppCompatActivity{
                 ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
                 serviceOptionViewModel.insert(serviceOption1);
 
-                Toast.makeText(AppointmentListActivity.this, "Appointment saved!" +"\n"+ "Service type: " + serviceOption1.serviceDetails(serviceType) , Toast.LENGTH_SHORT).show();
+                Toast.makeText(AppointmentListActivity.this, "Appointment saved" +"\n"+ "Service type: " + serviceOption1.serviceTypeSelection(serviceType) , Toast.LENGTH_SHORT).show();
 
 
 
             }
 
             if (serviceType.equals("Playing")) {
-                ServiceOption serviceOption2 = new ServiceOption(duration, serviceType, newAppointmentId, option);
+                ServiceOption serviceOption2 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
                 serviceOptionViewModel.insert(serviceOption2);
 
-                Toast.makeText(AppointmentListActivity.this, "Appointment saved!" +"\n"+ "Service type: " + serviceOption2.serviceDetails(serviceType) , Toast.LENGTH_SHORT).show();
+                Toast.makeText(AppointmentListActivity.this, "Appointment saved" +"\n"+ "Service type: " + serviceOption2.serviceTypeSelection(serviceType) , Toast.LENGTH_SHORT).show();
 
 
             }

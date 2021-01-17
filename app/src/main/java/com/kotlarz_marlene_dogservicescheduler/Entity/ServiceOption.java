@@ -17,8 +17,6 @@ public class ServiceOption extends Service {
     private String option;
 
 
-
-
     // Constructor ServiceWalking
     public ServiceOption(String duration, String location, String type, int appointment_id_fk, String option) {
         super(duration, location, type);
@@ -26,14 +24,14 @@ public class ServiceOption extends Service {
         this.option = option;
     }
 
-    @Ignore
-    // Constructor ServiceOption
-    public ServiceOption(String duration, String type, int appointment_id_fk, String option) {
-        super(duration, type);
-        setLocation("Home");
-        this.appointment_id_fk = appointment_id_fk;
-        this.option = option;
-    }
+//    @Ignore
+//    // Constructor ServiceOption
+//    public ServiceOption(String duration, String type, int appointment_id_fk, String option) {
+//        super(duration, type);
+//        setLocation("Home");
+//        this.appointment_id_fk = appointment_id_fk;
+//        this.option = option;
+//    }
 
 
     // Getter and Setter
