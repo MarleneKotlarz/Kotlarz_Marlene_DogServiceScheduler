@@ -12,11 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.kotlarz_marlene_dogservicescheduler.Database.SchedulerDatabase;
 import com.kotlarz_marlene_dogservicescheduler.Database.SchedulerRepository;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
 import com.kotlarz_marlene_dogservicescheduler.Entity.AppointmentAndServiceOption;
-import com.kotlarz_marlene_dogservicescheduler.Entity.Pet;
 
 import java.util.List;
 
@@ -25,13 +23,8 @@ public class AppointmentViewModel extends AndroidViewModel {
     // Member variables
     private SchedulerRepository schedulerRepository;
     private LiveData<List<Appointment>> allAppointments;
-
-    Integer getAppointmentIdForService;
-
-
     private LiveData<List<AppointmentAndServiceOption>> allApptServices;
-
-//    private LiveData<List<AppointmentAndServiceOption>> deleteAllApptServices;
+    Integer getAppointmentIdForService;
 
 
     // Constructor
@@ -42,10 +35,7 @@ public class AppointmentViewModel extends AndroidViewModel {
         allAppointments = schedulerRepository.getAllAppointments();
 
         getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
-
         allApptServices = schedulerRepository.getAppointmentAndServiceOptions();
-
-//        deleteAllApptServices = schedulerRepository.deleteAppointmentAndServiceOptions();
 
     }
 
@@ -71,13 +61,14 @@ public class AppointmentViewModel extends AndroidViewModel {
         schedulerRepository.deleteAllAppointments();
     }
 
-    // Return the liveData list
+
     public LiveData<List<Appointment>> getAllAppointments() {
         return allAppointments;
     }
 
-    public Integer getAppointmentIdForService() {return getAppointmentIdForService;}
-
+    public Integer getAppointmentIdForService() {
+        return getAppointmentIdForService;
+    }
 
 
     public LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceOptions() {
@@ -85,8 +76,9 @@ public class AppointmentViewModel extends AndroidViewModel {
     }
 
 
-//    public LiveData<List<AppointmentAndServiceOption>> deleteAppointmentAndServiceOptions() {
-//        return deleteAllApptServices;
-//    }
+    public LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceByApptId(int appointmentId) {
+        return schedulerRepository.getAppointmentAndServiceByApptId(appointmentId);
+    }
+
 
 }

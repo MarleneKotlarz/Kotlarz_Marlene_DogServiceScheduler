@@ -25,19 +25,18 @@ public class SchedulerRepository {
     private CustomerDao customerDao;
     private EmployeeDao employeeDao;
     private PetDao petDao;
-    public ServiceOptionDao serviceOptionDao;
+    private ServiceOptionDao serviceOptionDao;
 
     private LiveData<List<Appointment>> allAppointments;
     private LiveData<List<Customer>> allCustomers;
     private LiveData<List<Employee>> allEmployees;
     private LiveData<List<Pet>> allPets;
     private LiveData<List<ServiceOption>> allServiceOptions;
-    private Integer getAppointmentIdForService = 0;
-
     private LiveData<List<AppointmentAndServiceOption>> allApptServices;
-
-
-    private LiveData<List<AppointmentAndServiceOption>> deleteAllApptServices;
+    private Integer getAppointmentIdForService = 0;
+//    private LiveData<List<AppointmentAndServiceOption>> apptServiceApptId;
+//
+//    private LiveData<List<AppointmentAndServiceOption>> deleteAllApptServices;
 
 
     // Constructor = Application is a subclass of Context
@@ -50,18 +49,13 @@ public class SchedulerRepository {
         petDao = schedulerDatabase.petDao();
         serviceOptionDao = schedulerDatabase.serviceOptionDao();
 
-
         allAppointments = appointmentDao.getAllAppointments();
         allCustomers = customerDao.getAllCustomers();
         allEmployees = employeeDao.getAllEmployees();
         allPets = petDao.getAllPets();
         allServiceOptions = serviceOptionDao.getAllServiceOptions();
         getAppointmentIdForService = appointmentDao.getAppointmentIdForService();
-
         allApptServices = appointmentDao.getAppointmentAndServiceOptions();
-
-//        deleteAllApptServices = appointmentDao.deleteAppointmentAndServiceOptions();
-
 
 
     }
@@ -108,9 +102,9 @@ public class SchedulerRepository {
         return allApptServices;
     }
 
-//    public LiveData<List<AppointmentAndServiceOption>> deleteAppointmentAndServiceOptions() {
-//        return deleteAllApptServices;
-//    }
+    public LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceByApptId(int appointmentId) {
+        return appointmentDao.getAppointmentAndServiceByApptId(appointmentId);
+    }
 
 
     //************ CUSTOMER DB OPERATIONS ************//

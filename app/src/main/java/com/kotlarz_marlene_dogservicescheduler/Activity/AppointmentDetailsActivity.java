@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kotlarz_marlene_dogservicescheduler.Adapter.CustomerAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Adapter.PetAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
+import com.kotlarz_marlene_dogservicescheduler.Entity.AppointmentAndServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Customer;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Pet;
 import com.kotlarz_marlene_dogservicescheduler.R;
@@ -58,12 +59,15 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
     private PetViewModel petViewModel;
 
     Appointment appointment;
+    AppointmentAndServiceOption appointmentAndServiceOption;
 
-    TextView textView_date;
-    TextView textView_time;
+    TextView textView_date, textView_time, textView_customerName, textView_customerAddress, textView_customerPhone;
+    TextView textView_petName, textView_petBreed, textView_petAge, textView_petNote;
+    TextView textView_serviceDuration, textView_serviceLocation, textView_serviceType, textView_serviceOption;
 
     private int appointmentId, customerId, petId, employeeId;
-    private String date, time, customerName, petName;
+    private String date, time, customerName, customerAddress, customerPhone,  petName, petBreed, petAge, petNote;
+    private String serviceDuration, serviceLocation, serviceType, serviceOption;
 
     public static int numCustomer;
     private List<Customer> filteredCustomer;
@@ -89,7 +93,17 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         // Assign fields
         textView_date = findViewById(R.id.textView_appointmentDetails_appointment_date);
         textView_time = findViewById(R.id.textView_appointmentDetails_appointment_time);
-        TextView textView_customerName = findViewById(R.id.textView_appointmentDetails_customerName);
+        textView_customerName = findViewById(R.id.textView_appointmentDetails_customerName);
+        textView_customerAddress = findViewById(R.id.textView_appointmentDetails_customerAddress);
+        textView_customerPhone = findViewById(R.id.textView_appointmentDetails_customerPhone);
+        textView_petName = findViewById(R.id.textView_appointmentDetails_petName);
+        textView_petBreed = findViewById(R.id.textView_appointmentDetails_petBreed);
+        textView_petAge = findViewById(R.id.textView_appointmentDetails_petAge);
+        textView_petNote = findViewById(R.id.textView_appointmentDetails_petNote);
+        textView_serviceDuration= findViewById(R.id.textView_appointmentDetails_serviceDuration);
+        textView_serviceLocation = findViewById(R.id.textView_appointmentDetails_serviceLocation);
+        textView_serviceType = findViewById(R.id.textView_appointmentDetails_serviceType);
+        textView_serviceOption = findViewById(R.id.textView_appointmentDetails_serviceOption);
 
         // Populate fields
         Intent intent = getIntent();
@@ -105,6 +119,10 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         employeeId = intent.getIntExtra(EXTRA_EMPLOYEE_ID, -1);
 
         Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate appointmentId " + appointmentId);
+
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_apptServiceList);
+
 
 
         // Reference to CustomerList RecyclerView
@@ -141,9 +159,15 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
 
                 for (Customer customer : customers)
                     if (customer.getCustomer_id() == getIntent().getIntExtra(EXTRA_CUSTOMER_ID, -1)) {
-                        String customerName = customer.getCustomer_name().toString();
+                        customerName = customer.getCustomer_name();
                         textView_customerName.setText(customerName);
-                    }else {
+
+                        customerAddress = customer.getCustomer_address();
+                        textView_customerAddress.setText(customerAddress);
+
+                        customerPhone = customer.getCustomer_phone();
+                        textView_customerPhone.setText(customerPhone);
+                    } else {
                         System.out.println("CustomerName not found");
                     }
 
@@ -151,6 +175,59 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         });
 
 
+        petViewModel.getPetByCustomerId(customerId).observe(this, new Observer<List<Pet>>() {
+            @Override
+            public void onChanged(List<Pet> pets) {
+
+                for (Pet pet : pets)
+                    if (pet.getPet_id() == getIntent().getIntExtra(EXTRA_PET_ID, -1)) {
+                        petName = pet.getPet_name();
+                        textView_petName.setText(petName);
+
+                        petBreed = pet.getPet_breed();
+                        textView_petBreed.setText(petBreed);
+
+                        petAge = pet.getPet_age();
+                        textView_petAge.setText(petAge);
+
+                        petNote = pet.getPet_note();
+                        textView_petNote.setText(petNote);
+                    }
+
+
+            }
+        });
+
+
+
+        Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate appointmentId --test-- " + appointmentId);
+
+
+        appointmentViewModel.getAppointmentAndServiceByApptId(appointmentId).observe(this, new Observer<List<AppointmentAndServiceOption>>() {
+            @Override
+            public void onChanged(List<AppointmentAndServiceOption> appointmentAndServiceOptions) {
+
+                for (AppointmentAndServiceOption appointmentAndServiceOption : appointmentAndServiceOptions) {
+
+                    if(appointmentAndServiceOption.appointment.getAppointment_id() == getIntent().getIntExtra(EXTRA_APPOINTMENT_ID, -1)) {
+                        serviceDuration = appointmentAndServiceOption.serviceOption.getDuration();
+                        textView_serviceDuration.setText(serviceDuration);
+
+                        serviceLocation = appointmentAndServiceOption.serviceOption.getLocation();
+                        textView_serviceLocation.setText(serviceLocation);
+
+                        serviceType = appointmentAndServiceOption.serviceOption.getType();
+                        textView_serviceType.setText(serviceType);
+
+                        serviceOption = appointmentAndServiceOption.serviceOption.getOption();
+                        textView_serviceOption.setText(serviceOption);
+
+                    } else {
+                        System.out.println("Service type not found");
+                    }
+                }
+            }
+        });
 
 
         // Reference to PetList RecyclerView
