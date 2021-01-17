@@ -97,18 +97,20 @@ public class AppointmentListActivity extends AppCompatActivity implements Appoin
 //        });
 
         // RecyclerView - delete by swiping
-//        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-//            @Override
-//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-//                return false;
-//            }
-//            @Override
-//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-//                // Get positionAt method from CourseAdapter
-//                appointmentViewModel.delete(adapter.getAppointmentAt(viewHolder.getAdapterPosition()));
-//                Toast.makeText(AppointmentListActivity.this, "Appointment deleted", Toast.LENGTH_SHORT).show();
-//            }
-//        }).attachToRecyclerView(recyclerView);
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                // Get positionAt method from AppointmentAdapter
+            appointmentViewModel.delete(mAppointmentAdapter.getAppointmentAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(AppointmentListActivity.this, "Appointment deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(recyclerView);
+        
 
         // onClick - view appointment details in AppointmentDetailsActivity
 //        adapter.setOnItemClickListener(new AppointmentAdapter.OnItemClickListener() {

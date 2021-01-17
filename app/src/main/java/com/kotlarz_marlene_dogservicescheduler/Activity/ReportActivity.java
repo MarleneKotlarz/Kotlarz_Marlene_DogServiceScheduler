@@ -13,19 +13,24 @@ import android.view.MenuItem;
 
 import com.kotlarz_marlene_dogservicescheduler.Adapter.ReportAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
+import com.kotlarz_marlene_dogservicescheduler.Entity.AppointmentAndServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.AppointmentViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.CustomerViewModel;
+import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceOptionViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReportActivity extends AppCompatActivity {
 
+    private AppointmentViewModel appointmentViewModel;
+    private ServiceOptionViewModel serviceOptionViewModel;
+
     RecyclerView recyclerView;
     ReportAdapter adapter;
+    private List<AppointmentAndServiceOption> apptServiceList = new ArrayList<>();
 
-    private AppointmentViewModel appointmentViewModel;
 
 
     @Override
@@ -38,22 +43,23 @@ public class ReportActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView_reportList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
+        serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
 
         adapter = new ReportAdapter();
         recyclerView.setAdapter(adapter);
 
-        appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
-        appointmentViewModel.getAllAppointments().observe(this, new Observer<List<Appointment>>() {
+
+        appointmentViewModel.getAppointmentAndServiceOptions().observe(this, new Observer<List<AppointmentAndServiceOption>>() {
             @Override
-            public void onChanged(List<Appointment> appointments) {
-                adapter.setAppointmentList(appointments); // retrieve list of appointments
+            public void onChanged(List<AppointmentAndServiceOption> appointmentAndServiceOptions) {
 
-
+                adapter.setAppointmentServiceList(appointmentAndServiceOptions);
             }
         });
-
     }
+
 
     // Handle backwards arrow in actionbar
     @Override
@@ -66,5 +72,6 @@ public class ReportActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
 }

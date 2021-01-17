@@ -31,6 +31,8 @@ public class AppointmentViewModel extends AndroidViewModel {
 
     private LiveData<List<AppointmentAndServiceOption>> allApptServices;
 
+//    private LiveData<List<AppointmentAndServiceOption>> deleteAllApptServices;
+
 
     // Constructor
     public AppointmentViewModel(@NonNull Application application) {
@@ -42,6 +44,8 @@ public class AppointmentViewModel extends AndroidViewModel {
         getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
 
         allApptServices = schedulerRepository.getAppointmentAndServiceOptions();
+
+//        deleteAllApptServices = schedulerRepository.deleteAppointmentAndServiceOptions();
 
     }
 
@@ -79,5 +83,10 @@ public class AppointmentViewModel extends AndroidViewModel {
     public LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceOptions() {
         return allApptServices;
     }
+
+
+//    public LiveData<List<AppointmentAndServiceOption>> deleteAppointmentAndServiceOptions() {
+//        return deleteAllApptServices;
+//    }
 
 }

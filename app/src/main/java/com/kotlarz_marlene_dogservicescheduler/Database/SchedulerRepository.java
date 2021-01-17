@@ -37,6 +37,8 @@ public class SchedulerRepository {
     private LiveData<List<AppointmentAndServiceOption>> allApptServices;
 
 
+    private LiveData<List<AppointmentAndServiceOption>> deleteAllApptServices;
+
 
     // Constructor = Application is a subclass of Context
     public SchedulerRepository(Application application) {
@@ -57,6 +59,8 @@ public class SchedulerRepository {
         getAppointmentIdForService = appointmentDao.getAppointmentIdForService();
 
         allApptServices = appointmentDao.getAppointmentAndServiceOptions();
+
+//        deleteAllApptServices = appointmentDao.deleteAppointmentAndServiceOptions();
 
 
 
@@ -103,6 +107,11 @@ public class SchedulerRepository {
     public LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceOptions() {
         return allApptServices;
     }
+
+//    public LiveData<List<AppointmentAndServiceOption>> deleteAppointmentAndServiceOptions() {
+//        return deleteAllApptServices;
+//    }
+
 
     //************ CUSTOMER DB OPERATIONS ************//
 

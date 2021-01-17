@@ -44,8 +44,12 @@ public interface AppointmentDao {
     Integer getAppointmentIdForService();
 
     @Transaction
-    @Query("SELECT * FROM appointment_table")
+    @Query("SELECT * FROM appointment_table ORDER BY date ASC")
     LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceOptions();
+
+//    @Transaction
+//    @Query("DELETE FROM appointment_table")
+//    LiveData<List<AppointmentAndServiceOption>> deleteAppointmentAndServiceOptions();
 
 
 //    @Query("SELECT * FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
