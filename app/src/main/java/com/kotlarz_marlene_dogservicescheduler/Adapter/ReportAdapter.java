@@ -45,7 +45,6 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
         holder.tv_report_serviceType.setText(currentItem.serviceOption.getType());
         holder.tv_report_serviceDuration.setText(currentItem.serviceOption.getDuration());
         holder.tv_report_apptId.setText(String.valueOf(currentItem.appointment.getAppointment_id()));
-        holder.tv_report_serviceId.setText(String.valueOf(currentItem.serviceOption.getService_id()));
         holder.tv_report_customerId.setText(String.valueOf(currentItem.appointment.getCustomer_id_fk()));
         holder.tv_report_petId.setText(String.valueOf(currentItem.appointment.getPet_id_fk()));
 
@@ -73,7 +72,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_report_apptDate, tv_report_apptTime, tv_report_serviceType, tv_report_serviceDuration;
-        TextView tv_report_apptId, tv_report_serviceId, tv_report_customerId, tv_report_petId;
+        TextView tv_report_apptId, tv_report_customerId, tv_report_petId;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -85,7 +84,6 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
             tv_report_serviceType = itemView.findViewById(R.id.report_serviceType);
             tv_report_serviceDuration = itemView.findViewById(R.id.report_serviceDuration);
             tv_report_apptId = itemView.findViewById(R.id.report_apptId);
-            tv_report_serviceId = itemView.findViewById(R.id.report_serviceId);
             tv_report_customerId = itemView.findViewById(R.id.report_customerId);
             tv_report_petId = itemView.findViewById(R.id.report_petId);
 
