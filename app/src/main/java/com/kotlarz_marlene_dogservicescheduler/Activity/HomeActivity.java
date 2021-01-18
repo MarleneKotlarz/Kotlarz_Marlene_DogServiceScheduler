@@ -73,13 +73,14 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // onClick - view current appointment details in ReportActivity
-        button_report.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(HomeActivity.this, ReportActivity.class);
-                startActivity(intent1);
-            }
-        });
+            button_report.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent1 = new Intent(HomeActivity.this, ReportActivity.class);
+                    startActivity(intent1);
+                }
+            });
+
 
 
         Log.v(TAG, "Scheduler - HomeActivity - onCreate - password " + password + " employeeName " + employeeName);
@@ -87,10 +88,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     // onClick - view appointment list in AppointmentListActivity
+
     public void onClick_appointmentList(View view) {
-        Intent intent = new Intent(HomeActivity.this, AppointmentListActivity.class);
-        intent.putExtra(CustomerListActivity.EXTRA_CUSTOMER_EMPLOYEE_ID, employeeId);
-        startActivity(intent);
+            Intent intent = new Intent(HomeActivity.this, AppointmentListActivity.class);
+            intent.putExtra(CustomerListActivity.EXTRA_CUSTOMER_EMPLOYEE_ID, employeeId);
+            startActivity(intent);
     }
 
     // onClick - view customer list in CustomerListActivity

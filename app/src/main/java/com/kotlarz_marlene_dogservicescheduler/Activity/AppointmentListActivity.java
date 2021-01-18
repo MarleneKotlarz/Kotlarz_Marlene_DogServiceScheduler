@@ -41,9 +41,9 @@ public class AppointmentListActivity extends AppCompatActivity {
 
     private AppointmentViewModel appointmentViewModel;
     private ServiceOptionViewModel serviceOptionViewModel;
-    private String customerName, date, time, petName;
+    private String customerName, date, time;
     private String location, duration, serviceType, option;
-    private int customerId, petId, appointmentId;
+    private int customerId, petId;
     private int employeeId = 1;
     int newAppointmentId = 0;
 
@@ -56,6 +56,9 @@ public class AppointmentListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Appointment List by date");
 
+
+        try {
+
         // Reference RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView_appointmentList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -65,49 +68,56 @@ public class AppointmentListActivity extends AppCompatActivity {
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
 
+
         // Reference adapter
         adapter = new AppointmentAdapter();
         recyclerView.setAdapter(adapter);
 
-        appointmentViewModel.getAllAppointments().observe(this, new Observer<List<Appointment>>() {
-            @Override
-            public void onChanged(List<Appointment> appointments) {
-                // Update UI/ RecyclerView
-                adapter.setAppointments(appointments);
-            }
-        });
-
-        // RecyclerView - delete by swiping
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                // Get positionAt method from AppointmentAdapter
-            appointmentViewModel.delete(adapter.getAppointmentAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(AppointmentListActivity.this, "Appointment deleted", Toast.LENGTH_SHORT).show();
-            }
-        }).attachToRecyclerView(recyclerView);
 
 
-        // onClick - view appointment details in AppointmentDetailsActivity
-        adapter.setOnItemClickListener(new AppointmentAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Appointment appointment) {
-                Intent intent = new Intent(AppointmentListActivity.this, AppointmentDetailsActivity.class);
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_ID, appointment.getAppointment_id());
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_DATE, appointment.getDate());
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_TIME, appointment.getTime());
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_CUSTOMER_ID, appointment.getCustomer_id_fk());
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_PET_ID, appointment.getPet_id_fk());
-                intent.putExtra(AppointmentDetailsActivity.EXTRA_EMPLOYEE_ID, appointment.getEmployee_id_fk());
-                startActivity(intent);
-            }
+            appointmentViewModel.getAllAppointments().observe(this, new Observer<List<Appointment>>() {
+                @Override
+                public void onChanged(List<Appointment> appointments) {
+                    // Update UI/ RecyclerView
+                    adapter.setAppointments(appointments);
+                }
+            });
 
-        });
+            // RecyclerView - delete by swiping
+            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                @Override
+                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    // Get positionAt method from AppointmentAdapter
+                appointmentViewModel.delete(adapter.getAppointmentAt(viewHolder.getAdapterPosition()));
+                    Toast.makeText(AppointmentListActivity.this, "Appointment deleted", Toast.LENGTH_SHORT).show();
+                }
+            }).attachToRecyclerView(recyclerView);
+
+
+            // onClick - view appointment details in AppointmentDetailsActivity
+            adapter.setOnItemClickListener(new AppointmentAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(Appointment appointment) {
+                    Intent intent = new Intent(AppointmentListActivity.this, AppointmentDetailsActivity.class);
+                    intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_ID, appointment.getAppointment_id());
+                    intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_DATE, appointment.getDate());
+                    intent.putExtra(AppointmentDetailsActivity.EXTRA_APPOINTMENT_TIME, appointment.getTime());
+                    intent.putExtra(AppointmentDetailsActivity.EXTRA_CUSTOMER_ID, appointment.getCustomer_id_fk());
+                    intent.putExtra(AppointmentDetailsActivity.EXTRA_PET_ID, appointment.getPet_id_fk());
+                    intent.putExtra(AppointmentDetailsActivity.EXTRA_EMPLOYEE_ID, appointment.getEmployee_id_fk());
+                    startActivity(intent);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(AppointmentListActivity.this, "No appointments found", Toast.LENGTH_SHORT).show();
+        }
 
 
         // FAB to add appointment in AppointmentAddActivity
@@ -115,6 +125,7 @@ public class AppointmentListActivity extends AppCompatActivity {
         fabAddCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                appointmentViewModel = new ViewModelProvider(AppointmentListActivity.this).get(AppointmentViewModel.class);
                 Intent intent = new Intent(AppointmentListActivity.this, AppointmentAddActivity.class);
                 startActivityForResult(intent, ADD_APPOINTMENT_REQUEST);
             }

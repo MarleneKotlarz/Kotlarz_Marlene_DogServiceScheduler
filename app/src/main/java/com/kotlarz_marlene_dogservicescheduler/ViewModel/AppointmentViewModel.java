@@ -26,6 +26,7 @@ public class AppointmentViewModel extends AndroidViewModel {
     private LiveData<List<AppointmentAndServiceOption>> allApptServices;
     Integer getAppointmentIdForService;
 
+    // TODO remove getAppointmentIdForService
 
     // Constructor
     public AppointmentViewModel(@NonNull Application application) {
@@ -33,7 +34,7 @@ public class AppointmentViewModel extends AndroidViewModel {
         // Instantiate repository and allAppointments
         schedulerRepository = new SchedulerRepository(application);
         allAppointments = schedulerRepository.getAllAppointments();
-        getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
+//        getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
         allApptServices = schedulerRepository.getAppointmentAndServiceOptions();
     }
 
