@@ -39,7 +39,10 @@ import com.kotlarz_marlene_dogservicescheduler.ViewModel.PetViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceOptionViewModel;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AppointmentAddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -189,8 +192,36 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     // TimePicker - set up textView to selected time
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        String currentTime = String.format("%02d:%02d", hourOfDay, minute); // set date as String to include leading zeros
-        textView_time.setText(currentTime);
+        String currentTime = String.format("%02d:%02d", hourOfDay, minute);
+
+        // Current format from TimePicker - 24hr
+        DateFormat df = new SimpleDateFormat("HH:mm");
+
+        // Format that we want to use and display - 12hr with AM/PM
+        DateFormat outputformat = new SimpleDateFormat("hh:mm aa");
+
+        Date date = null;
+        String output = null;
+
+
+        try {
+            // Convert inputFromTimePicker String to Date format
+            date= df.parse(currentTime);
+
+            // Convert original format to new format
+            output = outputformat.format(date);
+
+            // Set textfield to updated time
+            textView_time.setText(output);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
 
 //        String am_pm = "";
 //

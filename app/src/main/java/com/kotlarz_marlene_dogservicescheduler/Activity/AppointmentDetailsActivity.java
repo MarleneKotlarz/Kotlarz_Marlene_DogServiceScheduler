@@ -78,6 +78,10 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Appointment Details");
 
+
+
+
+
         // Get the ViewModels
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         customerViewModel = new ViewModelProvider(this).get(CustomerViewModel.class);
@@ -187,6 +191,53 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate appointmentId " + appointmentId);
     }
 
+    // Share appointment details
+    private void shareAppointment() {
+
+String concatDetails = "Employee Id: " + employeeId +
+                        "\nApptId/ ServiceId: " + appointmentId +
+                        "\nCustomer Id: " + customerId +
+                        "\nCustomer Name: " + customerName +
+                        "\nPet Id: " + petId +
+                        "\nPet name: " + petName +
+                        "\nService Type: " + serviceType +
+                        "\nService Duration: " + serviceDuration;
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+        sendIntent.putExtra(Intent.EXTRA_TITLE, "Appointment Details");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, concatDetails);
+        sendIntent.setType("text/plain");
+
+        Intent shareIntent = Intent.createChooser(sendIntent,null);
+        startActivity(shareIntent);
+
+
+
+
+
+
+//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_customerAddress.getText().toString());
+//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
+//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
+//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
+//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
+//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
+//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
+//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
+//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
+//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
+
+
+
+
+
+    }
+
+//    TextView textView_date, textView_time, textView_customerName, textView_customerAddress, textView_customerPhone;
+//    TextView textView_petName, textView_petBreed, textView_petAge, textView_petNote;
+//    TextView textView_serviceDuration, textView_serviceLocation, textView_serviceType, textView_serviceOption;
+
 
         // Create actionbar menu
         @Override
@@ -203,6 +254,8 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
                 case android.R.id.home:
                     finish();
                     return true;
+                case R.id.share_appointment:
+                    shareAppointment();
                 default:
                     return super.onOptionsItemSelected(item);
             }
