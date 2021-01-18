@@ -19,7 +19,6 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Activity.AppointmentEditActivity" />
         <activity android:name=".Activity.AppointmentPetListActivity" />
         <activity android:name=".Activity.AppointmentCustomerListActivity" />
         <activity android:name=".Activity.CustomerAddEditActivity" />

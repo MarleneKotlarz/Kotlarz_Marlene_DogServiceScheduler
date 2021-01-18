@@ -12,12 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.kotlarz_marlene_dogservicescheduler.Adapter.CustomerAdapter;
-import com.kotlarz_marlene_dogservicescheduler.Adapter.PetAdapter;
-import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
 import com.kotlarz_marlene_dogservicescheduler.Entity.AppointmentAndServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Customer;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Pet;
@@ -26,7 +21,6 @@ import com.kotlarz_marlene_dogservicescheduler.ViewModel.AppointmentViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.CustomerViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.PetViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentDetailsActivity extends AppCompatActivity {
@@ -194,7 +188,7 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
     // Share appointment details
     private void shareAppointment() {
 
-String concatDetails = "Employee Id: " + employeeId +
+    String concatDetails = "Employee Id: " + employeeId +
                         "\nApptId/ ServiceId: " + appointmentId +
                         "\nCustomer Id: " + customerId +
                         "\nCustomer Name: " + customerName +
@@ -213,30 +207,7 @@ String concatDetails = "Employee Id: " + employeeId +
         startActivity(shareIntent);
 
 
-
-
-
-
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_customerAddress.getText().toString());
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView_date.getText().toString());
-
-
-
-
-
     }
-
-//    TextView textView_date, textView_time, textView_customerName, textView_customerAddress, textView_customerPhone;
-//    TextView textView_petName, textView_petBreed, textView_petAge, textView_petNote;
-//    TextView textView_serviceDuration, textView_serviceLocation, textView_serviceType, textView_serviceOption;
 
 
         // Create actionbar menu

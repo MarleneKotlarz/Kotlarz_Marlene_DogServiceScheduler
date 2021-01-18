@@ -72,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // onClick - view current appointment details in ReportActivity
         button_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,13 +86,14 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-
+    // onClick - view appointment list in AppointmentListActivity
     public void onClick_appointmentList(View view) {
         Intent intent = new Intent(HomeActivity.this, AppointmentListActivity.class);
         intent.putExtra(CustomerListActivity.EXTRA_CUSTOMER_EMPLOYEE_ID, employeeId);
         startActivity(intent);
     }
 
+    // onClick - view customer list in CustomerListActivity
     public void onClick_customerList(View view) {
         Intent intent = new Intent(HomeActivity.this, CustomerListActivity.class);
         intent.putExtra(CustomerListActivity.EXTRA_CUSTOMER_EMPLOYEE_ID, employeeId);
@@ -116,7 +118,6 @@ public class HomeActivity extends AppCompatActivity {
             employeeViewModel.update(employee);
 
             Toast.makeText(this, "Employee updated", Toast.LENGTH_SHORT).show();
-
         }
         else {
             Toast.makeText(this, "Employee not updated", Toast.LENGTH_SHORT).show();

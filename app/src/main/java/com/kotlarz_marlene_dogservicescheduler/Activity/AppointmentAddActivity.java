@@ -85,8 +85,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 
 
     private Calendar calendar;
-    private EditText editText_appointmentDate;
-    private EditText editText_appointmentTime;
     private TextView textView_date, textView_time, textView_customerName, textView_petName, textView_serviceType;
     private String date, time, customerName, petName;
     private String location, duration, serviceType, option;
@@ -219,25 +217,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         }
 
 
-
-
-
-
-//        String am_pm = "";
-//
-//        Calendar datetime = Calendar.getInstance();
-//        datetime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-//        datetime.set(Calendar.MINUTE, minute);
-//
-//        if (datetime.get(Calendar.AM_PM) == Calendar.AM)
-//            am_pm = "AM";
-//        else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
-//            am_pm = "PM";
-//
-//        String strHrsToShow = (datetime.get(Calendar.HOUR_OF_DAY) == 0) ?"12":datetime.get(Calendar.HOUR_OF_DAY)+"";
-//
-//        textView_time.setText(strHrsToShow+":"+datetime.get(Calendar.MINUTE)+ " " + am_pm);
-
     }
 
     // Create alarm for due date
@@ -365,44 +344,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             setResult(RESULT_OK, dataIntent);
             finish();
         }
-
-
-
-
-
-
-//                int newAppointmentId = appointmentViewModel.getAppointmentIdForService();
-//                newAppointmentId++;
-
-
-//        Appointment appointment = new Appointment(employeeId, customerId, petId, date, time);
-//        appointmentViewModel.insert(appointment);
-
-
-
-//        int appointmentId = getIntent().getIntExtra(EXTRA_APPOINTMENT_ID, -1);
-//        if (appointmentId != -1) {
-//            dataIntent.putExtra(EXTRA_APPOINTMENT_ID, appointmentId);
-//        }
-
-        //        int newAppointmentId = appointmentViewModel.getAppointmentIdForService();
-//        newAppointmentId++;
-//
-
-
-//        if (serviceType.equals("Walking")) {
-//            ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
-//            serviceOptionViewModel.insert(serviceOption1);
-//        } else if (serviceType.equals("Playing")) {
-//            ServiceOption serviceOption = new ServiceOption(duration, serviceType, newAppointmentId, option);
-//            serviceOptionViewModel.insert(serviceOption);
-//        }else {
-//            Toast.makeText(this, "Service not saved", Toast.LENGTH_SHORT).show();
-//        }
-
-
-
-
 
     }
 

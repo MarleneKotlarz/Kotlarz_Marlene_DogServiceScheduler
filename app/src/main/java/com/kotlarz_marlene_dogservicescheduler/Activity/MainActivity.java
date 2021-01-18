@@ -20,10 +20,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private static final String TAG = "Scheduler";
 
-    int employeeId;
     Button button_login;
     EditText editText_password;
     EmployeeViewModel employeeViewModel;
