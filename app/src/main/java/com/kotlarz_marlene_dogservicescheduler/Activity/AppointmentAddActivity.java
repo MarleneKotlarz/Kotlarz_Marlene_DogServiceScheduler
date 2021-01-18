@@ -189,8 +189,29 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     // TimePicker - set up textView to selected time
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        String currentTime = String.format("%02d:%02d", hourOfDay, minute); // set date as String to include leading zeros
-        textView_time.setText(currentTime);
+        String timeSet;
+        if (hourOfDay > 12) {
+            hourOfDay -= 12;
+            timeSet = "PM";
+        } else if (hourOfDay == 0) {
+            hourOfDay += 12;
+            timeSet = "AM";
+        } else if (hourOfDay == 12) timeSet = "PM";
+        else
+            timeSet = "AM";
+        String selectedMinutes = "";
+        if (minute <10)
+            selectedMinutes = "0" + minute;
+        else
+            selectedMinutes = String.valueOf(minute);
+
+        String time = new StringBuilder().append(hourOfDay).append(':').append(selectedMinutes).toString();
+
+        textView_time.setText(time);
+
+
+//        String currentTime = String.format("%02d:%02d", hourOfDay, minute); // set date as String to include leading zeros
+//        textView_time.setText(currentTime);
     }
 
     // Create alarm for due date
