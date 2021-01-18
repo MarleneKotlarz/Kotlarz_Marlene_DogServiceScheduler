@@ -1,9 +1,6 @@
 package com.kotlarz_marlene_dogservicescheduler.DAO;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -50,11 +47,5 @@ public interface AppointmentDao {
     @Transaction
     @Query("SELECT * FROM appointment_table WHERE appointment_id = :appointmentId")
     LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceByApptId(int appointmentId);
-
-
-//    @Transaction
-//    @Query("SELECT * FROM customer_table INNER JOIN appointment_table ON appointment_id = :appointmentIdFK")
-//    LiveData<List<AppointmentAndServiceOption>> getReportInfo(int appointmentIdFK);
-
 
 }

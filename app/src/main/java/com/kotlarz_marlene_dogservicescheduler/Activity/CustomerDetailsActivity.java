@@ -44,8 +44,8 @@ public class CustomerDetailsActivity extends AppCompatActivity {
     private String customerName;
     private String customerAddress;
     private String customerPhone;
-    private int petId;
     private ImageButton imageButtonPet;
+    TextView textView_customerName, textView_customerAddress, textView_customerPhone;
 
 
     @Override
@@ -59,9 +59,9 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         customerViewModel = new ViewModelProvider(this).get(CustomerViewModel.class);
 
         // Assign fields
-        TextView textView_customerName = findViewById(R.id.textView_customer_name);
-        TextView textView_customerAddress = findViewById(R.id.textView_customer_address);
-        TextView textView_customerPhone = findViewById(R.id.textView_customer_phone);
+        textView_customerName = findViewById(R.id.textView_customer_name);
+        textView_customerAddress = findViewById(R.id.textView_customer_address);
+        textView_customerPhone = findViewById(R.id.textView_customer_phone);
         imageButtonPet = findViewById(R.id.imageButton_pet);
 
         // Populate fields by getting data from CustomerListActivity
@@ -120,9 +120,9 @@ public class CustomerDetailsActivity extends AppCompatActivity {
 
         if (requestCode == EDIT_CUSTOMER_REQUEST && resultCode == RESULT_OK) {
             // Get Intent Keys from CustomerAddEditActivity
-            TextView textView_customerName = findViewById(R.id.textView_customer_name);
-            TextView textView_customerAddress = findViewById(R.id.textView_customer_address);
-            TextView textView_customerPhone = findViewById(R.id.textView_customer_phone);
+            textView_customerName = findViewById(R.id.textView_customer_name);
+            textView_customerAddress = findViewById(R.id.textView_customer_address);
+            textView_customerPhone = findViewById(R.id.textView_customer_phone);
 
             customerName = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_NAME);
             customerAddress = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_ADDRESS);

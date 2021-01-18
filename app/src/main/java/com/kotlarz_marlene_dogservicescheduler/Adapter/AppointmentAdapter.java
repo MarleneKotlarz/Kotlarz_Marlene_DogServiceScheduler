@@ -5,18 +5,15 @@ package com.kotlarz_marlene_dogservicescheduler.Adapter;
 // Adapter is used to get the data from the appointment objects into the recyclerView items.
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
-import com.kotlarz_marlene_dogservicescheduler.Entity.AppointmentAndServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.R;
 
 import java.util.ArrayList;
@@ -24,12 +21,10 @@ import java.util.List;
 
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder> {
 
-    // Set to new ArrayList, otherwise it would be set to null to avoid null-checks
-//    private List<Appointment> appointments = new ArrayList<>();
-
     private static final String TAG = "ServiceScheduler";
-    private List<Appointment> appointments = new ArrayList<>();
 
+    // Set to new ArrayList, otherwise it would be set to null to avoid null-checks
+    private List<Appointment> appointments = new ArrayList<>();
     private OnItemClickListener listener; // First create the methods at the end of this code, then choose the one with my package name.
 
     public AppointmentAdapter() {
@@ -41,11 +36,9 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     public AppointmentHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View itemView = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.list_item_appointment, viewGroup, false);
-
         return new AppointmentHolder(itemView);
     }
 
-    // TODO remove appointmentId from List
 
     // Takes care of getting the data from the single AppointmentList java objects into the
     // views of the AppointmentHolder. Get item and pass it into the textView
@@ -57,11 +50,13 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.textView_time.setText(currentAppointment.getTime());
     }
 
+
     // Returns how many items you want to display in the RecyclerView
     @Override
     public int getItemCount() {
         return appointments.size();
     }
+
 
     // AppointmentListActivity observes liveData, onChanged methods passes List of terms.
     // We need to get this list into the RecyclerView by calling this method

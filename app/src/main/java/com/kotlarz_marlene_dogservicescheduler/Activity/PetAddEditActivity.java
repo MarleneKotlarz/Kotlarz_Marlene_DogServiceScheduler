@@ -29,9 +29,9 @@ public class PetAddEditActivity extends AppCompatActivity {
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_PET_NOTE";
 
     private static final String TAG = "Scheduler";
-    // Member variables
-    private EditText editText_petName, editText_petBreed, editText_petAge, editText_noteTitle, editText_note;
 
+    // Member variables
+    private EditText editText_petName, editText_petBreed, editText_petAge, editText_note;
     private String petName, petBreed, petAge, petNote;
 
     @Override
@@ -57,6 +57,7 @@ public class PetAddEditActivity extends AppCompatActivity {
         } else {
             setTitle("Add pet");
         }
+
         Log.v(TAG, "Scheduler - PetAddEditActivity - onCreate ");
 
     }

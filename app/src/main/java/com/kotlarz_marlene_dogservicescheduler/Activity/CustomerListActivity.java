@@ -115,13 +115,9 @@ public class CustomerListActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         Log.v(TAG, "Scheduler - CustomerListActivity - onCreate ");
 
     }
-
 
 
     // Get results back from CustomerAddEditActivity saveCustomer method.

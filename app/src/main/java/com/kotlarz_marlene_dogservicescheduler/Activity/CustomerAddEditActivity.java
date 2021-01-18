@@ -71,10 +71,14 @@ public class CustomerAddEditActivity extends AppCompatActivity {
         customerAddress = editText_customerAddress.getText().toString();
         customerPhone = editText_customerPhone.getText().toString();
 
-        // Input validation for empty fields
-        if (customerName.trim().isEmpty() || customerAddress.trim().isEmpty() || customerPhone.trim().isEmpty()) {
-            Toast.makeText(this, "Please fill out all fields.", Toast.LENGTH_SHORT).show();
-            return;
+        try {
+            // Input validation for empty fields
+            if (customerName.trim().isEmpty() || customerAddress.trim().isEmpty() || customerPhone.trim().isEmpty()) {
+                Toast.makeText(this, "Please fill out all fields.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         // Accept input and save customer - send data back

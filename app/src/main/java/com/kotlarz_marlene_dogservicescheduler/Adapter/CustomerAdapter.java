@@ -25,13 +25,12 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
     public List<Customer> getOriginalCustomers() {
         return originalCustomers;
     }
+    public List<Customer> getCustomers() {
+        return customers;
+    }
 
     public void setOriginalCustomers(List<Customer> originalCustomers) {
         this.originalCustomers = originalCustomers;
-    }
-
-    public List<Customer> getCustomers() {
-        return customers;
     }
 
     // Create and return CustomerHolder, this is the layout you want to use for the single items in RecyclerView.

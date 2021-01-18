@@ -40,10 +40,10 @@ public class PetDetailsActivity extends AppCompatActivity {
 
 
     private static final String TAG = "Scheduler";
+
     private PetViewModel petViewModel;
     TextView textView_petName, textView_petBreed, textView_petAge, textView_petNote;
-    private int petId;
-    private int customerId;
+    private int customerId, petId;
     private String petName, petBreed, petAge, petNote;
 
     @Override
@@ -77,7 +77,6 @@ public class PetDetailsActivity extends AppCompatActivity {
         petAge = intent.getStringExtra(EXTRA_PET_AGE);
         petNote = intent.getStringExtra(EXTRA_PET_NOTE);
 
-
         // FAB edit customer button - open PetAddEditActivity
         FloatingActionButton fabEditPet = findViewById(R.id.fab_pet_edit);
         fabEditPet.setOnClickListener(new View.OnClickListener() {
@@ -98,10 +97,10 @@ public class PetDetailsActivity extends AppCompatActivity {
                     editIntent.putExtra(EXTRA_PET_ID, petId);
                 }
                 startActivityForResult(editIntent, EDIT_PET_REQUEST);
-                Log.v(TAG, "Scheduler - PetDetailsActivity - onCreate ");
             }
         });
 
+        Log.v(TAG, "Scheduler - PetDetailsActivity - onCreate ");
     }
 
     // Get results back from editing a pet

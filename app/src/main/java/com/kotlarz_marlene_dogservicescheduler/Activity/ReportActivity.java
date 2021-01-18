@@ -27,13 +27,8 @@ import java.util.List;
 public class ReportActivity extends AppCompatActivity {
 
     private AppointmentViewModel appointmentViewModel;
-    private ServiceOptionViewModel serviceOptionViewModel;
-
     RecyclerView recyclerView;
     ReportAdapter adapter;
-    private List<AppointmentAndServiceOption> apptServiceList = new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +36,8 @@ public class ReportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm a"); //MUST USE LOWERCASE 'y'. API 23- can't use uppercase
-        String currentDateTime = dateFormat.format(new Date()); // Find todays date
-
-
-
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm a");
+        String currentDateTime = dateFormat.format(new Date());
         setTitle("Report: " + currentDateTime);
 
         recyclerView = findViewById(R.id.recyclerView_reportList);
@@ -54,11 +45,8 @@ public class ReportActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
-        serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
-
         adapter = new ReportAdapter();
         recyclerView.setAdapter(adapter);
-
 
         appointmentViewModel.getAppointmentAndServiceOptions().observe(this, new Observer<List<AppointmentAndServiceOption>>() {
             @Override
@@ -68,12 +56,6 @@ public class ReportActivity extends AppCompatActivity {
             }
         });
     }
-
-    // Share report details
-    private void shareReport() {
-
-    }
-
 
 
     // Handle backwards arrow in actionbar

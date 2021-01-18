@@ -38,6 +38,7 @@ public class PetListActivity extends AppCompatActivity {
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_ID";
 
     private static final String TAG = "Scheduler";
+
     private PetViewModel petViewModel;
 
     @Override
@@ -132,8 +133,6 @@ public class PetListActivity extends AppCompatActivity {
             petViewModel.insert(pet);
 
             Toast.makeText(this, "Pet saved", Toast.LENGTH_SHORT).show();
-
-            Log.v(TAG, "Scheduler - PetListActivity - onActivityResult ");
 
         } else {
             Toast.makeText(this, "Pet not saved", Toast.LENGTH_SHORT).show();
