@@ -23,9 +23,6 @@ public interface PetDao {
     @Delete
     void delete(Pet pet);
 
-    @Query("DELETE FROM pet_table")
-    void deleteAllPets();
-
     @Query("SELECT * FROM pet_table")
     LiveData<List<Pet>> getAllPets();
 

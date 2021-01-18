@@ -15,7 +15,6 @@ public class EmployeeViewModel extends AndroidViewModel {
 
     private SchedulerRepository schedulerRepository;
     private LiveData<List<Employee>> allEmployees;
-    String password;
 
     // Constructor
     public EmployeeViewModel(@NonNull Application application) {

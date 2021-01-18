@@ -17,14 +17,11 @@ public abstract class Service {
 
     }
 
-
     // Method to get the correct service type
     public String serviceTypeSelection(String type) {
         this.type = type;
         return type;
     }
-
-
 
     // Getters and Setters
     public int getService_id() {

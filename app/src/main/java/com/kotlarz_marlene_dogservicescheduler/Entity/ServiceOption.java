@@ -2,7 +2,6 @@ package com.kotlarz_marlene_dogservicescheduler.Entity;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Ignore;
 
 @Entity(tableName = "service_option_table",
         foreignKeys = {
@@ -16,7 +15,6 @@ public class ServiceOption extends Service {
     private int appointment_id_fk;
     private String option;
 
-
     // Constructor ServiceWalking
     public ServiceOption(String duration, String location, String type, int appointment_id_fk, String option) {
         super(duration, location, type);
@@ -24,18 +22,7 @@ public class ServiceOption extends Service {
         this.option = option;
     }
 
-//    @Ignore
-//    // Constructor ServiceOption
-//    public ServiceOption(String duration, String type, int appointment_id_fk, String option) {
-//        super(duration, type);
-//        setLocation("Home");
-//        this.appointment_id_fk = appointment_id_fk;
-//        this.option = option;
-//    }
-
-
     // Getter and Setter
-
     public int getAppointment_id_fk() {
         return appointment_id_fk;
     }

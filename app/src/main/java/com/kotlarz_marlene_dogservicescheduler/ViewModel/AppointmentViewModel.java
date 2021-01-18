@@ -33,10 +33,8 @@ public class AppointmentViewModel extends AndroidViewModel {
         // Instantiate repository and allAppointments
         schedulerRepository = new SchedulerRepository(application);
         allAppointments = schedulerRepository.getAllAppointments();
-
         getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
         allApptServices = schedulerRepository.getAppointmentAndServiceOptions();
-
     }
 
     // Used to get last appointmentId for service.insert method in AppointmentList Activity
@@ -44,11 +42,6 @@ public class AppointmentViewModel extends AndroidViewModel {
         getAppointmentIdForService = schedulerRepository.getAppointmentIdForService();
        return getAppointmentIdForService;
     }
-
-    public Integer getAppointmentIdForService() {
-        return getAppointmentIdForService;
-    }
-
 
     // Wrapper methods for the data operation methods(created in the repository).
     public void insert(Appointment appointment) {
@@ -71,8 +64,6 @@ public class AppointmentViewModel extends AndroidViewModel {
     public LiveData<List<Appointment>> getAllAppointments() {
         return allAppointments;
     }
-
-
 
 // Used in ReportActivity to get list of appt and services
     public LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceOptions() {

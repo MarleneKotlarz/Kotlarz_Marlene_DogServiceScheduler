@@ -88,10 +88,6 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 // Keep this code if you want to start a clean database every time.
                 // This is not needed if you only populate on creation.
                 appointmentDao.deleteAllAppointments();
-                customerDao.deleteAllCustomers();
-                employeeDao.deleteAllEmployees();
-                petDao.deleteAllPets();
-
 
                 // Sample Code - make sure FK entity is created first
 

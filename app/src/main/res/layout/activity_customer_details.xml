@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="64dp"
-            android:text="Pet information"
+            android:text="Add/ select pet information"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <ImageButton

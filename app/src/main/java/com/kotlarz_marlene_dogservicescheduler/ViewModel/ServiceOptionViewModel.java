@@ -38,6 +38,4 @@ public class ServiceOptionViewModel extends AndroidViewModel {
 
     public LiveData<List<ServiceOption>> getAllServiceOptions() { return allServiceOptions; }
 
-    public LiveData<List<ServiceOption>> getAppointmentIdForService() { return allServiceOptions; }
-
 }

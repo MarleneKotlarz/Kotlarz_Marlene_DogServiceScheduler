@@ -34,12 +34,8 @@ public class SchedulerRepository {
     private LiveData<List<ServiceOption>> allServiceOptions;
     private LiveData<List<AppointmentAndServiceOption>> allApptServices;
     private Integer getAppointmentIdForService = 0;
-//    private LiveData<List<AppointmentAndServiceOption>> apptServiceApptId;
-//
-//    private LiveData<List<AppointmentAndServiceOption>> deleteAllApptServices;
 
-
-    // Constructor = Application is a subclass of Context
+    // Constructor - Application is a subclass of Context
     public SchedulerRepository(Application application) {
         SchedulerDatabase schedulerDatabase = SchedulerDatabase.getDatabase(application);
         // Call abstract dao interfaces from DB class
@@ -129,12 +125,6 @@ public class SchedulerRepository {
         });
     }
 
-    public void deleteAllCustomers() {
-        SchedulerDatabase.executorServiceDB.execute(() -> {
-            customerDao.deleteAllCustomers();
-        });
-    }
-
     public LiveData<List<Customer>> getAllCustomers() {
         return allCustomers;
     }
@@ -160,12 +150,6 @@ public class SchedulerRepository {
         });
     }
 
-    public void deleteAllEmployees() {
-        SchedulerDatabase.executorServiceDB.execute(() -> {
-            employeeDao.deleteAllEmployees();
-        });
-    }
-
     public LiveData<List<Employee>> getAllEmployees() {
         return allEmployees;
     }
@@ -188,12 +172,6 @@ public class SchedulerRepository {
     public void delete(Pet pet) {
         SchedulerDatabase.executorServiceDB.execute(() -> {
             petDao.delete(pet);
-        });
-    }
-
-    public void deleteAllPets() {
-        SchedulerDatabase.executorServiceDB.execute(() -> {
-            petDao.deleteAllPets();
         });
     }
 

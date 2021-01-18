@@ -25,5 +25,5 @@ public interface ServiceOptionDao {
 
     @Query("SELECT * FROM service_option_table")
     LiveData<List<ServiceOption>> getAllServiceOptions();
-    
+
 }

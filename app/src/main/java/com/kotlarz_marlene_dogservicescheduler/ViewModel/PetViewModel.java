@@ -38,10 +38,6 @@ public class PetViewModel extends AndroidViewModel {
         schedulerRepository.delete(pet);
     }
 
-    public void deleteAllPets() {
-        schedulerRepository.deleteAllPets();
-    }
-
     // Return the liveData list
     public LiveData<List<Pet>> getAllPets() {
         return allPets;

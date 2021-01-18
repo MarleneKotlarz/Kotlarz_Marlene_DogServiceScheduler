@@ -16,7 +16,6 @@ public class CustomerViewModel extends AndroidViewModel {
     // Member variables
     private SchedulerRepository schedulerRepository;
     private LiveData<List<Customer>> allCustomers;
-    private LiveData<List<Customer>> allCustomersAfterSelection;
 
     // Constructor
     public CustomerViewModel(@NonNull Application application) {
@@ -40,10 +39,6 @@ public class CustomerViewModel extends AndroidViewModel {
         schedulerRepository.delete(customer);
     }
 
-    public void deleteAllCustomers() {
-        schedulerRepository.deleteAllCustomers();
-    }
-
     // Return the liveData list
     public LiveData<List<Customer>> getAllCustomers() {
         if (allCustomers == null) {
@@ -53,8 +48,5 @@ public class CustomerViewModel extends AndroidViewModel {
         return allCustomers;
     }
 
-    public LiveData<List<Customer>> getAllCustomersAfterSelection() {return allCustomersAfterSelection;}
-
-//    public void getSelectedCustomer(int id) {schedulerRepository.getSelectedCustomer(id);}
 
 }

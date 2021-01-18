@@ -55,8 +55,5 @@ public class AppointmentAddReceiver extends BroadcastReceiver {
         // Notify
         notificationManager.notify(notificationId, builder.build());
 
-
-
-
     }
 }

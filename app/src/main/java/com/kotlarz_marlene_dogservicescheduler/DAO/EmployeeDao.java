@@ -23,9 +23,6 @@ public interface EmployeeDao {
     @Delete
     void delete(Employee employee);
 
-    @Query("DELETE FROM employee_table")
-    void deleteAllEmployees();
-
     @Query("SELECT * FROM employee_table")
     LiveData<List<Employee>> getAllEmployees();
 
