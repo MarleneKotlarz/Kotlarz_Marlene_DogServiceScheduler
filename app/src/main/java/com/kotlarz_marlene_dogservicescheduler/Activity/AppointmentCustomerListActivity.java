@@ -28,8 +28,6 @@ public class AppointmentCustomerListActivity extends AppCompatActivity {
     public static final String EXTRA_CUSTOMER_NAME =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_NAME";
 
-
-    private static final String TAG = "Scheduler";
     private CustomerViewModel customerViewModel;
 
 
@@ -66,8 +64,6 @@ public class AppointmentCustomerListActivity extends AppCompatActivity {
                 Intent intent = new Intent(AppointmentCustomerListActivity.this, AppointmentAddActivity.class);
                 intent.putExtra(AppointmentCustomerListActivity.EXTRA_CUSTOMER_ID, customer.getCustomer_id());
                 intent.putExtra(AppointmentCustomerListActivity.EXTRA_CUSTOMER_NAME, customer.getCustomer_name());
-//                intent.putExtra(CustomerDetailsActivity.EXTRA_CUSTOMER_ADDRESS, customer.getCustomer_address());
-//                intent.putExtra(CustomerDetailsActivity.EXTRA_CUSTOMER_PHONE, customer.getCustomer_phone());
 
                 setResult(RESULT_OK, intent);
                 finish();

@@ -25,8 +25,6 @@ import java.util.List;
 
 public class AppointmentDetailsActivity extends AppCompatActivity {
 
-    public static final int EDIT_APPOINTMENT_REQUEST = 2;
-
     // Intent Extra Keys
     public static final String EXTRA_APPOINTMENT_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_APPOINTMENT_ID";
@@ -71,10 +69,6 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_appointment_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Appointment Details");
-
-
-
-
 
         // Get the ViewModels
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);

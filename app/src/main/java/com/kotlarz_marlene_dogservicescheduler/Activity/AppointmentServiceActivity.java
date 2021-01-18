@@ -21,8 +21,6 @@ import java.util.ArrayList;
 
 public class AppointmentServiceActivity extends AppCompatActivity {
 
-    //implements AdapterView.OnItemSelectedListener
-
     public static final String EXTRA_SERVICE_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_ID";
     public static final String EXTRA_SERVICE_DURATION =
@@ -36,9 +34,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
 
 
     private static final String TAG = "Scheduler";
-
-
-    ServiceOption serviceOption;
 
     Spinner spinnerDuration;
     Spinner spinnerLocation;
@@ -57,7 +52,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
     ArrayList<String> arrayList_intensity, arrayList_toy;
     ArrayAdapter<String> arrayAdapter_option;
 
-    // ADD NOTES
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +65,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         spinnerType = (Spinner) findViewById(R.id.spinner_appointmentAdd_type);
         spinnerOption = (Spinner) findViewById(R.id.spinner_appointmentAdd_option);
 
-
         // Assign Duration spinner
         arrayList_duration = new ArrayList<>();
         arrayList_duration.add("15 minutes");
@@ -82,7 +75,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         arrayAdapter_duration = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_duration);
         spinnerDuration.setAdapter(arrayAdapter_duration);
 
-
         // Assign Type spinner
         arrayList_type = new ArrayList<>();
         arrayList_type.add("Walking");
@@ -90,7 +82,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
 
         arrayAdapter_type = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_type);
         spinnerType.setAdapter(arrayAdapter_type);
-
 
         // Assign Location spinner
         arrayList_walking_location = new ArrayList<>();
@@ -100,7 +91,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
 
         arrayList_playing_location = new ArrayList<>();
         arrayList_playing_location.add("Home");
-
 
         // Assign Option spinner
         arrayList_intensity = new ArrayList<>();
@@ -153,11 +143,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         dataIntent.putExtra(EXTRA_SERVICE_LOCATION, location);
         dataIntent.putExtra(EXTRA_SERVICE_TYPE, type);
         dataIntent.putExtra(EXTRA_SERVICE_OPTION, option);
-//        int id = getIntent().getIntExtra(EXTRA_SERVICE_ID, -1);
-//        if (id != -1) {
-//            dataIntent.putExtra(EXTRA_SERVICE_ID, id);
-//        }
-
 
         Log.v(TAG, "Scheduler - AppointmentServiceActivity - save Service ");
 
@@ -171,7 +156,7 @@ public class AppointmentServiceActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.appointment_add_menu, menu);
+        menuInflater.inflate(R.menu.appointment_service_menu, menu);
         return true;
     }
 
@@ -182,7 +167,7 @@ public class AppointmentServiceActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.save_appointment:
+            case R.id.save_service:
                 saveService();
             default:
                 return super.onOptionsItemSelected(item);
