@@ -1,52 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.ReportActivity"
-    android:stretchColumns="1,2,3,4,5"
     android:layout_margin="8dp">
 
 
     <TableRow>
 
         <TextView
-            android:layout_column="1"
+            android:layout_marginLeft="8dp"
             android:textSize="16dp"
             android:padding="10dp"
-            android:gravity="center"
-            android:text="Appt"/>
-        <TextView
-            android:layout_column="2"
-            android:textSize="16dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:text="Cus"/>
-        <TextView
-            android:layout_column="3"
-            android:textSize="16dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:text="Pet"/>
+            android:text="Date/Time"
+            android:textStyle="bold"/>
 
         <TextView
-            android:layout_column="4"
-            android:textSize="16dp"
+            android:layout_marginLeft="28dp"
             android:padding="10dp"
-            android:gravity="center"
-            android:text="Service"/>
+            android:text="Service"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_marginLeft="76dp"
+            android:text="ID"
+            android:padding="10dp"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+
 
     </TableRow>
-
-
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="4dp"
+        android:layout_marginLeft="8dp"
+        android:visibility="visible"
+        android:background="@color/colorLightGrey"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_reportList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        />
+        android:padding="10dp"/>
 
 
 </TableLayout>

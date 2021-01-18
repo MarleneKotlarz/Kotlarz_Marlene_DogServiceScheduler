@@ -43,7 +43,7 @@ public class ReportActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView_reportList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-//        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
 
