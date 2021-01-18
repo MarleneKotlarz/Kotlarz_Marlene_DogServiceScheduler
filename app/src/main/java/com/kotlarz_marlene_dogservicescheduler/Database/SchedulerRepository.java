@@ -98,10 +98,12 @@ public class SchedulerRepository {
     }
 
 
+    // Used in ReportActivity to get list of appt and services
     public LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceOptions() {
         return allApptServices;
     }
 
+    // Used for AppointmentDetails Activity to get Service by appointmentId
     public LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceByApptId(int appointmentId) {
         return appointmentDao.getAppointmentAndServiceByApptId(appointmentId);
     }

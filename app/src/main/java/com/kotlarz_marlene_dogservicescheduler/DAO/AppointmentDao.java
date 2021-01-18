@@ -51,12 +51,10 @@ public interface AppointmentDao {
     @Query("SELECT * FROM appointment_table WHERE appointment_id = :appointmentId")
     LiveData<List<AppointmentAndServiceOption>> getAppointmentAndServiceByApptId(int appointmentId);
 
+
 //    @Transaction
-//    @Query("DELETE FROM appointment_table")
-//    LiveData<List<AppointmentAndServiceOption>> deleteAppointmentAndServiceOptions();
+//    @Query("SELECT * FROM customer_table INNER JOIN appointment_table ON appointment_id = :appointmentIdFK")
+//    LiveData<List<AppointmentAndServiceOption>> getReportInfo(int appointmentIdFK);
 
-
-//    @Query("SELECT * FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
-//    LiveData<List<Appointment>> getAppointmentIdForService();
 
 }
