@@ -19,7 +19,9 @@ import com.kotlarz_marlene_dogservicescheduler.ViewModel.AppointmentViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.CustomerViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceOptionViewModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ReportActivity extends AppCompatActivity {
@@ -38,7 +40,14 @@ public class ReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Report");
+
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm a"); //MUST USE LOWERCASE 'y'. API 23- can't use uppercase
+        String currentDateTime = dateFormat.format(new Date()); // Find todays date
+
+
+
+        setTitle("Report: " + currentDateTime);
 
         recyclerView = findViewById(R.id.recyclerView_reportList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -59,6 +68,12 @@ public class ReportActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Share report details
+    private void shareReport() {
+
+    }
+
 
 
     // Handle backwards arrow in actionbar

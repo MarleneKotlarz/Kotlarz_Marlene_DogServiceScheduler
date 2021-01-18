@@ -191,6 +191,22 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String currentTime = String.format("%02d:%02d", hourOfDay, minute); // set date as String to include leading zeros
         textView_time.setText(currentTime);
+
+//        String am_pm = "";
+//
+//        Calendar datetime = Calendar.getInstance();
+//        datetime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//        datetime.set(Calendar.MINUTE, minute);
+//
+//        if (datetime.get(Calendar.AM_PM) == Calendar.AM)
+//            am_pm = "AM";
+//        else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
+//            am_pm = "PM";
+//
+//        String strHrsToShow = (datetime.get(Calendar.HOUR_OF_DAY) == 0) ?"12":datetime.get(Calendar.HOUR_OF_DAY)+"";
+//
+//        textView_time.setText(strHrsToShow+":"+datetime.get(Calendar.MINUTE)+ " " + am_pm);
+
     }
 
     // Create alarm for due date
