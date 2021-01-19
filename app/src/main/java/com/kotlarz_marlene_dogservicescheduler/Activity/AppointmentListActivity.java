@@ -19,13 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kotlarz_marlene_dogservicescheduler.Adapter.AppointmentAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
-import com.kotlarz_marlene_dogservicescheduler.Entity.AppointmentAndServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.AppointmentViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceOptionViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentListActivity extends AppCompatActivity {
@@ -57,8 +55,6 @@ public class AppointmentListActivity extends AppCompatActivity {
         setTitle("Appointment List by date");
 
 
-        try {
-
         // Reference RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView_appointmentList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -67,17 +63,18 @@ public class AppointmentListActivity extends AppCompatActivity {
         // Assign ViewModel
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         serviceOptionViewModel = new ViewModelProvider(this).get(ServiceOptionViewModel.class);
-
-
         // Reference adapter
         adapter = new AppointmentAdapter();
         recyclerView.setAdapter(adapter);
 
-
-
             appointmentViewModel.getAllAppointments().observe(this, new Observer<List<Appointment>>() {
                 @Override
                 public void onChanged(List<Appointment> appointments) {
+
+                    if (appointments.isEmpty()) {
+                        Toast.makeText(AppointmentListActivity.this, "No appointments found", Toast.LENGTH_SHORT).show();
+                    }
+
                     // Update UI/ RecyclerView
                     adapter.setAppointments(appointments);
                 }
@@ -114,10 +111,6 @@ public class AppointmentListActivity extends AppCompatActivity {
                 }
 
             });
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(AppointmentListActivity.this, "No appointments found", Toast.LENGTH_SHORT).show();
-        }
 
 
         // FAB to add appointment in AppointmentAddActivity

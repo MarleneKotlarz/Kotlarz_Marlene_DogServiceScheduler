@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.kotlarz_marlene_dogservicescheduler.Adapter.ReportAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Appointment;
@@ -51,7 +52,9 @@ public class ReportActivity extends AppCompatActivity {
         appointmentViewModel.getAppointmentAndServiceOptions().observe(this, new Observer<List<AppointmentAndServiceOption>>() {
             @Override
             public void onChanged(List<AppointmentAndServiceOption> appointmentAndServiceOptions) {
-
+                if (appointmentAndServiceOptions.isEmpty()) {
+                    Toast.makeText(ReportActivity.this, "No appointments found", Toast.LENGTH_SHORT).show();
+                }
                 adapter.setAppointmentServiceList(appointmentAndServiceOptions);
             }
         });

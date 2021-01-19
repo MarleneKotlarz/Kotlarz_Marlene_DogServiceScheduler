@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.kotlarz_marlene_dogservicescheduler.Adapter.CustomerAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Customer;
@@ -53,7 +54,13 @@ public class AppointmentCustomerListActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Customer> customers) { // Triggered every time data in liveData object changes.
                 // Update UI/ RecyclerView
-                adapter.setCustomers(customers); // Retrieve list of customers
+
+                if(customers.isEmpty()) {
+                    Toast.makeText(AppointmentCustomerListActivity.this, "No customers found", Toast.LENGTH_SHORT).show();
+                }else {
+
+                    adapter.setCustomers(customers); // Retrieve list of customers
+                }
             }
         });
 

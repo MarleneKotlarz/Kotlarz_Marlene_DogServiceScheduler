@@ -67,6 +67,11 @@ public class CustomerListActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Customer> customers) { // Triggered every time data in liveData object changes.
                 // Update UI/ RecyclerView
+
+                if(customers.isEmpty()) {
+                    Toast.makeText(CustomerListActivity.this, "No customers found", Toast.LENGTH_SHORT).show();
+                }
+
                 customerAdapter.setCustomers(customers); // Retrieve list of customers
                 customerAdapter.setOriginalCustomers(customers);
             }

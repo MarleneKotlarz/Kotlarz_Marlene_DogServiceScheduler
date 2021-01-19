@@ -1,5 +1,6 @@
 package com.kotlarz_marlene_dogservicescheduler.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.kotlarz_marlene_dogservicescheduler.Adapter.PetAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Pet;
@@ -41,10 +44,11 @@ public class AppointmentPetListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment_pet_list);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Appointment Pet List");
 
         // Set values - get customerId so it can be passed into the ViewModel.
-        Intent intent =getIntent();
+        Intent intent = getIntent();
         int customerId = intent.getIntExtra(EXTRA_CUSTOMER_ID, -1);
         String customerName = intent.getStringExtra(EXTRA_CUSTOMER_NAME);
 
@@ -59,9 +63,13 @@ public class AppointmentPetListActivity extends AppCompatActivity {
 
         // Assign ViewModel
         petViewModel = new ViewModelProvider(this).get(PetViewModel.class);
+
         petViewModel.getPetByCustomerId(customerId).observe(this, new Observer<List<Pet>>() {
             @Override
             public void onChanged(List<Pet> pets) {
+                if (pets.isEmpty()) {
+                    Toast.makeText(AppointmentPetListActivity.this, "No pets found", Toast.LENGTH_SHORT).show();
+                }
                 adapter.setPets(pets);
             }
         });
@@ -84,7 +92,19 @@ public class AppointmentPetListActivity extends AppCompatActivity {
             }
         });
 
+        Log.v(TAG, "Scheduler - AppointmentPetListActivity - onCreate ");
     }
 
+    // Handle backwards arrow in actionbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

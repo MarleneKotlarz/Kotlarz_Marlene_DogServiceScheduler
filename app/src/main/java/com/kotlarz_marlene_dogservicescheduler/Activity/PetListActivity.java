@@ -1,14 +1,5 @@
 package com.kotlarz_marlene_dogservicescheduler.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,13 +9,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.kotlarz_marlene_dogservicescheduler.Adapter.CustomerAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Adapter.PetAdapter;
-import com.kotlarz_marlene_dogservicescheduler.Entity.Customer;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Pet;
 import com.kotlarz_marlene_dogservicescheduler.R;
-import com.kotlarz_marlene_dogservicescheduler.ViewModel.CustomerViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.PetViewModel;
 
 import java.util.List;
@@ -66,6 +63,9 @@ public class PetListActivity extends AppCompatActivity {
         petViewModel.getPetByCustomerId(customerId).observe(this, new Observer<List<Pet>>() {
             @Override
             public void onChanged(List<Pet> pets) {
+                if(pets.isEmpty()) {
+                    Toast.makeText(PetListActivity.this, "No pets found", Toast.LENGTH_SHORT).show();
+                }
                 adapter.setPets(pets);
             }
         });

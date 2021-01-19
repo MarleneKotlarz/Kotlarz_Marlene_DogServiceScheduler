@@ -303,12 +303,10 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
 
     // ImageButton Pet
     public void enter_petList(View view) {
-        Intent intent = new Intent(AppointmentAddActivity.this, AppointmentPetListActivity.class);
-        customerId = getIntent().getIntExtra(EXTRA_CUSTOMER_ID, customerId);
-        petViewModel.getPetByCustomerId(customerId);
-        intent.putExtra(AppointmentPetListActivity.EXTRA_CUSTOMER_ID, customerId);
-        startActivityForResult(intent, ADD_PET_TO_APPOINTMENT_REQUEST);
-
+            Intent intent = new Intent(AppointmentAddActivity.this, AppointmentPetListActivity.class);
+            customerId = getIntent().getIntExtra(EXTRA_CUSTOMER_ID, customerId);
+            intent.putExtra(AppointmentPetListActivity.EXTRA_CUSTOMER_ID, customerId);
+            startActivityForResult(intent, ADD_PET_TO_APPOINTMENT_REQUEST);
     }
 
 
