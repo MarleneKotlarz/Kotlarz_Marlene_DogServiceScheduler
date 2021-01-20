@@ -91,7 +91,7 @@ public abstract class SchedulerDatabase extends RoomDatabase {
 
                 // Sample Code - make sure FK entity is created first
 
-                Employee employee1 = new Employee("Anna Conrad", "938-342-2342", "test");
+                Employee employee1 = new Employee("FirstName LastName", "###-###-####", "capstone");
                 employeeDao.insert(employee1);
 
                 Customer customer1 = new Customer(1, "Julia Roberts", "74 Rosebud, Charleston, SC 29414", "938-493-5323");
