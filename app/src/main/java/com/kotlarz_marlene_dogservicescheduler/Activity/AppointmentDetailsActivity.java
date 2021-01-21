@@ -179,30 +179,6 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         Log.v(TAG, "Scheduler - AppointmentDetailsActivity - onCreate appointmentId " + appointmentId);
     }
 
-    // Share appointment details
-    private void shareAppointment() {
-
-    String concatDetails = "Employee Id: " + employeeId +
-                        "\nApptId/ ServiceId: " + appointmentId +
-                        "\nCustomer Id: " + customerId +
-                        "\nCustomer Name: " + customerName +
-                        "\nPet Id: " + petId +
-                        "\nPet name: " + petName +
-                        "\nService Type: " + serviceType +
-                        "\nService Duration: " + serviceDuration;
-
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
-        sendIntent.putExtra(Intent.EXTRA_TITLE, "Appointment Details");
-        sendIntent.putExtra(Intent.EXTRA_TEXT, concatDetails);
-        sendIntent.setType("text/plain");
-
-        Intent shareIntent = Intent.createChooser(sendIntent,null);
-        startActivity(shareIntent);
-
-
-    }
-
 
         // Create actionbar menu
         @Override
@@ -219,8 +195,6 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
                 case android.R.id.home:
                     finish();
                     return true;
-                case R.id.share_appointment:
-                    shareAppointment();
                 default:
                     return super.onOptionsItemSelected(item);
             }

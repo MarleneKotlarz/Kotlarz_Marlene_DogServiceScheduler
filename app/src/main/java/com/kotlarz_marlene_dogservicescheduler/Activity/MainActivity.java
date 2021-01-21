@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                                         intent.putExtra(HomeActivity.EXTRA_EMPLOYEE_PHONE, employee.getEmployee_phone());
                                         intent.putExtra(HomeActivity.EXTRA_EMPLOYEE_PASSWORD, password);
                                         startActivity(intent);
-
+                                        editText_password.setText("");
                                         Log.v(TAG, "Scheduler - MainActivity - onClick - password enter " + password);
 
                                     } else {
