@@ -37,6 +37,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
         holder.textView_name.setText(currentPet.getPet_name());
         holder.textView_breed.setText(currentPet.getPet_breed());
         holder.textView_age.setText(String.valueOf(currentPet.getPet_age()));
+        holder.textView_id.setText(String.valueOf(currentPet.getPet_id()));
     }
 
     // Returns how many items you want to display in the RecyclerView
@@ -61,6 +62,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
         private TextView textView_name;
         private TextView textView_breed;
         private TextView textView_age;
+        private TextView textView_id;
 
         // Constructor
         public PetHolder(@NonNull View itemView) {
@@ -68,6 +70,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
             textView_name = itemView.findViewById(R.id.textView_pet_name);
             textView_breed = itemView.findViewById(R.id.textView_pet_breed);
             textView_age = itemView.findViewById(R.id.textView_pet_age);
+            textView_id = itemView.findViewById(R.id.textView_pet_id);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

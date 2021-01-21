@@ -50,6 +50,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         holder.textView_name.setText(currentCustomer.getCustomer_name());
         holder.textView_address.setText(currentCustomer.getCustomer_address());
         holder.textView_phone.setText(currentCustomer.getCustomer_phone());
+        holder.textView_id.setText(String.valueOf(currentCustomer.getCustomer_id()));
     }
 
     // Returns how many items you want to display in the RecyclerView
@@ -76,6 +77,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         private TextView textView_name;
         private TextView textView_address;
         private TextView textView_phone;
+        private TextView textView_id;
 
         // Constructor
         // Assign the textViews - itemView is the card itself from the cardView list item.
@@ -84,6 +86,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
             textView_name = itemView.findViewById(R.id.textView_customer_name);
             textView_address = itemView.findViewById(R.id.textView_customer_address);
             textView_phone = itemView.findViewById(R.id.textView_customer_phone);
+            textView_id = itemView.findViewById(R.id.textView_customer_id);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

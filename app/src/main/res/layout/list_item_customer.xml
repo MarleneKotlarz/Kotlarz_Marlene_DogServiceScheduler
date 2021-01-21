@@ -23,6 +23,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/textView_customer_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer phone"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView_customer_name"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
             android:id="@+id/textView_customer_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,13 +42,24 @@
             app:layout_constraintTop_toBottomOf="@id/textView_customer_name" />
 
         <TextView
-            android:id="@+id/textView_customer_phone"
+            android:id="@+id/textView_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Customer phone"
+            android:text="Id:"
+            android:layout_marginRight="2dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView_customer_name"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView_customer_address"
+            app:layout_constraintEnd_toStartOf="@+id/textView_customer_id" />
+
+        <TextView
+            android:id="@+id/textView_customer_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Id"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView_1"
             app:layout_constraintEnd_toEndOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
