@@ -16,11 +16,9 @@ import java.util.List;
 
 public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
 
-    // Set to new ArrayList, otherwise it would be set to null to avoid null-checks
     private List<Pet> pets = new ArrayList<>();
     private OnItemClickListener listener;
 
-    // Create and return PetHolder, this is the layout you want to use for the single items in RecyclerView.
     @NonNull
     @Override
     public PetAdapter.PetHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -29,8 +27,6 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
         return new PetHolder(itemView);
     }
 
-    // Takes care of getting the data from the single PetList java objects into the
-    // views of the PetHolder. Get item and pass it into the textView
     @Override
     public void onBindViewHolder(@NonNull PetAdapter.PetHolder holder, int position) {
         Pet currentPet = pets.get(position);
@@ -40,24 +36,22 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
         holder.textView_id.setText(String.valueOf(currentPet.getPet_id()));
     }
 
-    // Returns how many items you want to display in the RecyclerView
     @Override
     public int getItemCount() { return pets.size(); }
 
-    // PetListActivity observes liveData, onChanged methods passes List of terms.
-    // We need to get this list into the RecyclerView by calling this method
+
     public void setPets(List<Pet> pets) {
         this.pets = pets;
-        // Tell adapter to redraw the layout.
         notifyDataSetChanged();
     }
 
-    // Return Pet at this position - created for swipe delete method in PetListActivity
+
     public Pet getPetAt(int position) {
         return pets.get(position);
     }
 
-    // Create ViewHolder class - Will hold the views in our single RecyclerView items
+
+    // Create ViewHolder class
     public class PetHolder extends RecyclerView.ViewHolder {
         private TextView textView_name;
         private TextView textView_breed;
@@ -90,7 +84,6 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
     }
 
     // Reference onItemClickListener
-    // Choose onItemClickListener with my package name
     public void setOnItemClickListener(OnItemClickListener listener) {this.listener = listener;}
 
 }
