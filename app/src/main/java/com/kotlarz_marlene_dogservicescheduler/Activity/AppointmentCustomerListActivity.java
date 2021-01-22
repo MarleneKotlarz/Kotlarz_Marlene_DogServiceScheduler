@@ -52,19 +52,16 @@ public class AppointmentCustomerListActivity extends AppCompatActivity {
         customerViewModel = new ViewModelProvider(this).get(CustomerViewModel.class);
         customerViewModel.getAllCustomers().observe(this, new Observer<List<Customer>>() {
             @Override
-            public void onChanged(List<Customer> customers) { // Triggered every time data in liveData object changes.
-                // Update UI/ RecyclerView
-
+            public void onChanged(List<Customer> customers) {
                 if(customers.isEmpty()) {
                     Toast.makeText(AppointmentCustomerListActivity.this, "No customers found", Toast.LENGTH_SHORT).show();
                 }else {
-
-                    adapter.setCustomers(customers); // Retrieve list of customers
+                    adapter.setCustomers(customers);
                 }
             }
         });
 
-        // onClick - return details to AppointmentAddActivity
+        // onClick - return selection to AppointmentAddActivity
         adapter.setOnItemClickListener(new CustomerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Customer customer) {
