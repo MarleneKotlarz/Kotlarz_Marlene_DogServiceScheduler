@@ -2,7 +2,6 @@ package com.kotlarz_marlene_dogservicescheduler.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +18,6 @@ import com.kotlarz_marlene_dogservicescheduler.ViewModel.EmployeeViewModel;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = "Scheduler";
 
     Button button_login;
     EditText editText_password;
@@ -39,16 +36,13 @@ public class MainActivity extends AppCompatActivity {
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String password = editText_password.getText().toString().trim();
-
                 if (password.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Please enter a password", Toast.LENGTH_SHORT).show();
                 } else {
                     employeeViewModel.getAllEmployees().observe(MainActivity.this, new Observer<List<Employee>>() {
                         @Override
                         public void onChanged(List<Employee> employees) {
-
                             try {
                                 for (Employee employee : employees)
                                     if (employee.getEmployee_password().equals(password)) {
@@ -59,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
                                         intent.putExtra(HomeActivity.EXTRA_EMPLOYEE_PASSWORD, password);
                                         startActivity(intent);
                                         editText_password.setText("");
-                                        Log.v(TAG, "Scheduler - MainActivity - onClick - password enter " + password);
-
                                     } else {
                                         Toast.makeText(MainActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
                                     }
@@ -72,10 +64,8 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
             }
-
         });
     }
-
 
 }
 

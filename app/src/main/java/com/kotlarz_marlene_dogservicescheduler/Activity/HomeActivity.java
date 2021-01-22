@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.kotlarz_marlene_dogservicescheduler.Adapter.ReportAdapter;
 import com.kotlarz_marlene_dogservicescheduler.Entity.Employee;
 import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.EmployeeViewModel;
@@ -81,14 +80,11 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
 
-
-
         Log.v(TAG, "Scheduler - HomeActivity - onCreate - password " + password + " employeeName " + employeeName);
 
     }
 
     // onClick - view appointment list in AppointmentListActivity
-
     public void onClick_appointmentList(View view) {
             Intent intent = new Intent(HomeActivity.this, AppointmentListActivity.class);
             intent.putExtra(AppointmentListActivity.EXTRA_EMPLOYEE_ID, employeeId);
@@ -108,11 +104,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == EDIT_EMPLOYEE_REQUEST && resultCode == RESULT_OK) {
-            // Get Intent Keys from other EmployeeDetailsActivity
             employeeName = data.getStringExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_NAME);
             employeePhone = data.getStringExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_PHONE);
             password = data.getStringExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_PASSWORD);
             employeeId = data.getIntExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE_ID, -1);
+
             // Update employee
             employee = new Employee(employeeName, employeePhone, password);
             employee.setEmployee_id(employeeId);
@@ -125,6 +121,5 @@ public class HomeActivity extends AppCompatActivity {
             Toast.makeText(this, "Employee not updated", Toast.LENGTH_SHORT).show();
         }
     }
-
 
 }
