@@ -31,12 +31,7 @@ public class AppointmentPetListActivity extends AppCompatActivity {
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_PET_ID";
     public static final String EXTRA_PET_NAME =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_PET_NAME";
-    public static final String EXTRA_PET_BREED =
-            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_PET_BREED";
-    public static final String EXTRA_PET_AGE =
-            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_PET_AGE";
 
-    private static final String TAG = "Scheduler";
     private PetViewModel petViewModel;
 
 
@@ -47,7 +42,7 @@ public class AppointmentPetListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Appointment Pet List");
 
-        // Set values - get customerId so it can be passed into the ViewModel.
+        // Set values
         Intent intent = getIntent();
         int customerId = intent.getIntExtra(EXTRA_CUSTOMER_ID, -1);
         String customerName = intent.getStringExtra(EXTRA_CUSTOMER_NAME);
@@ -87,12 +82,9 @@ public class AppointmentPetListActivity extends AppCompatActivity {
 
                 setResult(RESULT_OK, data);
                 finish();
-                Log.v(TAG, "Scheduler - AppointmentPetListActivity - onItemClick ");
-
             }
         });
 
-        Log.v(TAG, "Scheduler - AppointmentPetListActivity - onCreate ");
     }
 
     // Handle backwards arrow in actionbar
