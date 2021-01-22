@@ -2,7 +2,6 @@ package com.kotlarz_marlene_dogservicescheduler.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,8 +33,6 @@ public class PetListActivity extends AppCompatActivity {
     public static final String EXTRA_CUSTOMER_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_ID";
 
-    private static final String TAG = "Scheduler";
-
     private PetViewModel petViewModel;
 
     @Override
@@ -45,7 +42,6 @@ public class PetListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Pet List");
 
-        // Set values - get customerId so it can be passed into the ViewModel.
         Intent intent =getIntent();
         int customerId = intent.getIntExtra(EXTRA_CUSTOMER_ID, -1);
 
@@ -110,8 +106,6 @@ public class PetListActivity extends AppCompatActivity {
             }
         });
 
-        Log.v(TAG, "Scheduler - PetListActivity - onCreate ");
-
     }
 
     // Get results back from PetAddEditActivity savepet method.
@@ -133,7 +127,6 @@ public class PetListActivity extends AppCompatActivity {
             petViewModel.insert(pet);
 
             Toast.makeText(this, "Pet saved", Toast.LENGTH_SHORT).show();
-
         } else {
             Toast.makeText(this, "Pet not saved", Toast.LENGTH_SHORT).show();
         }
@@ -158,6 +151,5 @@ public class PetListActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
+    
 }
