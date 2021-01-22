@@ -2,7 +2,6 @@ package com.kotlarz_marlene_dogservicescheduler.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,9 +36,6 @@ public class PetDetailsActivity extends AppCompatActivity {
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_PET_AGE";
     public static final String EXTRA_PET_NOTE =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_PET_NOTE";
-
-
-    private static final String TAG = "Scheduler";
 
     private PetViewModel petViewModel;
     TextView textView_petName, textView_petBreed, textView_petAge, textView_petNote;
@@ -100,7 +96,6 @@ public class PetDetailsActivity extends AppCompatActivity {
             }
         });
 
-        Log.v(TAG, "Scheduler - PetDetailsActivity - onCreate ");
     }
 
     // Get results back from editing a pet
@@ -109,7 +104,6 @@ public class PetDetailsActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == EDIT_PET_REQUEST && resultCode == RESULT_OK) {
-            // Get Intent Keys from CourseAddEditActivity
             textView_petName = findViewById(R.id.textView_pet_name1);
             textView_petBreed = findViewById(R.id.textView_pet_breed1);
             textView_petAge = findViewById(R.id.textView_pet_age1);
@@ -130,13 +124,12 @@ public class PetDetailsActivity extends AppCompatActivity {
                 Toast.makeText(this, "Pet can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
-
+            // Update pet
             Pet pet = new Pet(customerId, petAge, petName, petBreed, petNote);
             pet.setPet_id(petId);
             petViewModel.update(pet);
 
             Toast.makeText(this, "Pet updated", Toast.LENGTH_SHORT).show();
-
         } else {
             Toast.makeText(this, "Pet not updated", Toast.LENGTH_SHORT).show();
         }
