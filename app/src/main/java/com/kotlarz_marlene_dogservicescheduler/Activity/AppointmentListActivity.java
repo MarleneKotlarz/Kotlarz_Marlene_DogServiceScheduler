@@ -30,22 +30,20 @@ public class AppointmentListActivity extends AppCompatActivity {
 
     public static final int ADD_APPOINTMENT_REQUEST = 1;
 
-//    public static final String EXTRA_EMPLOYEE_ID =
-//            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_EMPLOYEE_ID";
-//    public static final String EXTRA_APPOINTMENT_ID =
-//            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_APPOINTMENT_ID";
+    public static final String EXTRA_EMPLOYEE_ID =
+            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_EMPLOYEE_ID";
 
     private static final String TAG = "ServiceScheduler";
 
     private AppointmentViewModel appointmentViewModel;
     private ServiceOptionViewModel serviceOptionViewModel;
+    private AppointmentAdapter adapter;
     private String customerName, date, time;
     private String location, duration, serviceType, option;
     private int customerId, petId;
-    private int employeeId = 1;
     int newAppointmentId = 0;
+    private int employeeId;
 
-    private AppointmentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +52,13 @@ public class AppointmentListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Appointment List by date");
 
+        Intent intent = getIntent();
+        employeeId = intent.getIntExtra(EXTRA_EMPLOYEE_ID, -1);
 
         // Reference RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView_appointmentList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true); // If size(height and width) doesn't change.
+        recyclerView.setHasFixedSize(true);
 
         // Assign ViewModel
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
@@ -70,12 +70,9 @@ public class AppointmentListActivity extends AppCompatActivity {
             appointmentViewModel.getAllAppointments().observe(this, new Observer<List<Appointment>>() {
                 @Override
                 public void onChanged(List<Appointment> appointments) {
-
                     if (appointments.isEmpty()) {
                         Toast.makeText(AppointmentListActivity.this, "No appointments found", Toast.LENGTH_SHORT).show();
                     }
-
-                    // Update UI/ RecyclerView
                     adapter.setAppointments(appointments);
                 }
             });
@@ -89,12 +86,10 @@ public class AppointmentListActivity extends AppCompatActivity {
 
                 @Override
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                    // Get positionAt method from AppointmentAdapter
                 appointmentViewModel.delete(adapter.getAppointmentAt(viewHolder.getAdapterPosition()));
                     Toast.makeText(AppointmentListActivity.this, "Appointment deleted", Toast.LENGTH_SHORT).show();
                 }
             }).attachToRecyclerView(recyclerView);
-
 
             // onClick - view appointment details in AppointmentDetailsActivity
             adapter.setOnItemClickListener(new AppointmentAdapter.OnItemClickListener() {
@@ -109,9 +104,7 @@ public class AppointmentListActivity extends AppCompatActivity {
                     intent.putExtra(AppointmentDetailsActivity.EXTRA_EMPLOYEE_ID, appointment.getEmployee_id_fk());
                     startActivity(intent);
                 }
-
             });
-
 
         // FAB to add appointment in AppointmentAddActivity
         FloatingActionButton fabAddCustomer = findViewById(R.id.fab_appointment_add);
@@ -125,7 +118,7 @@ public class AppointmentListActivity extends AppCompatActivity {
         });
 
 
-        Log.v(TAG, "Scheduler - AppointmentListActivity - onCreate ");
+        Log.v(TAG, "Scheduler - AppointmentListActivity - onCreate employeeId " + employeeId);
 
 
     }
@@ -136,7 +129,6 @@ public class AppointmentListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_APPOINTMENT_REQUEST && resultCode == RESULT_OK) {
-            // Get Intent Keys from other AppointmentAddActivity.
             date = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_DATE);
             time = data.getStringExtra(AppointmentAddActivity.EXTRA_APPOINTMENT_TIME);
             customerId = data.getIntExtra(AppointmentAddActivity.EXTRA_CUSTOMER_ID, -1);
@@ -163,17 +155,13 @@ public class AppointmentListActivity extends AppCompatActivity {
             if (serviceType.equals("Walking")) {
                 ServiceOption serviceOption1 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
                 serviceOptionViewModel.insert(serviceOption1);
-
                 Toast.makeText(AppointmentListActivity.this, "Appointment saved" +"\n"+ "Service type: " + serviceOption1.serviceTypeSelection(serviceType) , Toast.LENGTH_SHORT).show();
-
             }
 
             if (serviceType.equals("Playing")) {
                 ServiceOption serviceOption2 = new ServiceOption(duration, location, serviceType, newAppointmentId, option);
                 serviceOptionViewModel.insert(serviceOption2);
-
                 Toast.makeText(AppointmentListActivity.this, "Appointment saved" +"\n"+ "Service type: " + serviceOption2.serviceTypeSelection(serviceType) , Toast.LENGTH_SHORT).show();
-
             }
 
             Log.v(TAG, "Scheduler - AppointmentListActivity - onActivityResult " + "  employeeId " + employeeId + "customerId " + customerId + " petId " + petId);
@@ -181,8 +169,6 @@ public class AppointmentListActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Appointment not saved", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     // Handle backwards arrow in actionbar

@@ -91,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onClick_appointmentList(View view) {
             Intent intent = new Intent(HomeActivity.this, AppointmentListActivity.class);
-            intent.putExtra(CustomerListActivity.EXTRA_CUSTOMER_EMPLOYEE_ID, employeeId);
+            intent.putExtra(AppointmentListActivity.EXTRA_EMPLOYEE_ID, employeeId);
             startActivity(intent);
     }
 

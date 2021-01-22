@@ -38,9 +38,11 @@ public class CustomerListActivity extends AppCompatActivity {
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_EMPLOYEE_ID";
 
     private static final String TAG = "Scheduler";
+
     private CustomerViewModel customerViewModel;
     private CustomerAdapter customerAdapter;
-    private int employeeId = 1;
+    private int employeeId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class CustomerListActivity extends AppCompatActivity {
         setTitle("Customer List");
 
         Intent intent = getIntent();
-        intent.getIntExtra(EXTRA_CUSTOMER_EMPLOYEE_ID, -1);
+        employeeId = intent.getIntExtra(EXTRA_CUSTOMER_EMPLOYEE_ID, -1);
 
         // Reference to RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView_customerList);
@@ -65,14 +67,11 @@ public class CustomerListActivity extends AppCompatActivity {
         customerViewModel = new ViewModelProvider(this).get(CustomerViewModel.class);
         customerViewModel.getAllCustomers().observe(this, new Observer<List<Customer>>() {
             @Override
-            public void onChanged(List<Customer> customers) { // Triggered every time data in liveData object changes.
-                // Update UI/ RecyclerView
-
-                if(customers.isEmpty()) {
+            public void onChanged(List<Customer> customers) {
+                if (customers.isEmpty()) {
                     Toast.makeText(CustomerListActivity.this, "No customers found", Toast.LENGTH_SHORT).show();
                 }
-
-                customerAdapter.setCustomers(customers); // Retrieve list of customers
+                customerAdapter.setCustomers(customers);
                 customerAdapter.setOriginalCustomers(customers);
             }
         });
@@ -86,7 +85,6 @@ public class CustomerListActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                // Get positionAt method from CourseAdapter
                 customerViewModel.delete(customerAdapter.getCustomerAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(CustomerListActivity.this, "Customer deleted", Toast.LENGTH_SHORT).show();
             }
@@ -103,12 +101,9 @@ public class CustomerListActivity extends AppCompatActivity {
                 intent.putExtra(CustomerDetailsActivity.EXTRA_CUSTOMER_PHONE, customer.getCustomer_phone());
                 intent.putExtra(CustomerDetailsActivity.EXTRA_CUSTOMER_EMPLOYEE_ID, customer.getEmployee_id_fk());
 
-                Log.v(TAG, "Scheduler - CustomerListActivity - onItemClick employeeId " + customer.getEmployee_id_fk());
-
                 startActivity(intent);
             }
         });
-
 
         // FAB to add customer in CustomerAddEditActivity
         FloatingActionButton fabAddCustomer = findViewById(R.id.fab_customer_add);
@@ -120,10 +115,9 @@ public class CustomerListActivity extends AppCompatActivity {
             }
         });
 
-        Log.v(TAG, "Scheduler - CustomerListActivity - onCreate ");
+        Log.v(TAG, "Scheduler - CustomerListActivity - onCreate employeeId " + employeeId);
 
     }
-
 
     // Get results back from CustomerAddEditActivity saveCustomer method.
     @Override
@@ -131,11 +125,9 @@ public class CustomerListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_CUSTOMER_REQUEST && resultCode == RESULT_OK) {
-            // Get Intent Keys from other CustomerAddEditActivity.
             String customerName = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_NAME);
             String customerAddress = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_ADDRESS);
             String customerPhone = data.getStringExtra(CustomerAddEditActivity.EXTRA_CUSTOMER_PHONE);
-
             // Create new Customer
             Customer customer = new Customer(employeeId, customerName, customerAddress, customerPhone);
             customerViewModel.insert(customer);
@@ -143,7 +135,6 @@ public class CustomerListActivity extends AppCompatActivity {
             Log.v(TAG, "Scheduler - onActivityResult - employeeId " + employeeId );
 
             Toast.makeText(this, "Customer saved", Toast.LENGTH_SHORT).show();
-
         } else {
             Toast.makeText(this, "Customer not saved", Toast.LENGTH_SHORT).show();
         }
@@ -154,15 +145,14 @@ public class CustomerListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.customer_list_menu, menu);
-
         SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
+
             search.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
             search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
                 @Override
                 public boolean onQueryTextChange(String query) {
-                    Log.i("search bar change", query);
+                    Log.i("Search bar change", query);
                     ArrayList<Customer> currentList = new ArrayList<>();
                     if(query.isEmpty()){
                         customerAdapter.setCustomers(customerAdapter.getOriginalCustomers());
@@ -181,7 +171,7 @@ public class CustomerListActivity extends AppCompatActivity {
 
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    Log.i("search text submitted", query);
+                    Log.i("Search text submitted", query);
                     return false;
                 }
             });
