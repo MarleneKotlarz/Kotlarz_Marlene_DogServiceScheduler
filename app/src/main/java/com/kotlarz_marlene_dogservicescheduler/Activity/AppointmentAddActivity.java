@@ -286,7 +286,8 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         serviceType = textView_serviceType.getText().toString();
 
         // Input validation for empty fields
-        if (date.trim().isEmpty() || time.trim().isEmpty() || serviceType.trim().isEmpty() || customerName.trim().isEmpty() || petName.trim().isEmpty()) {
+        if (date.trim().isEmpty() || time.trim().isEmpty() || serviceType.trim().isEmpty()
+                || customerName.trim().isEmpty() || petName.trim().isEmpty()) {
             Toast.makeText(this, "Please fill out all fields.", Toast.LENGTH_SHORT).show();
             return;
         }
