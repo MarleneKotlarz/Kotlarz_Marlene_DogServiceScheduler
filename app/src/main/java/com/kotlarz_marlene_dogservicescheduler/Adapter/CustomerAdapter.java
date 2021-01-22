@@ -3,8 +3,6 @@ package com.kotlarz_marlene_dogservicescheduler.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +31,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         this.originalCustomers = originalCustomers;
     }
 
-    // Create and return CustomerHolder, this is the layout you want to use for the single items in RecyclerView.
     @NonNull
     @Override
     public CustomerAdapter.CustomerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,8 +39,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         return new CustomerHolder(itemView);
     }
 
-    // Takes care of getting the data from the single CustomerList java objects into the
-    // views of the CustomerHolder. Get item and pass it into the textView
     @Override
     public void onBindViewHolder(@NonNull CustomerAdapter.CustomerHolder holder, int position) {
         Customer currentCustomer = customers.get(position);
@@ -53,26 +48,21 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         holder.textView_id.setText(String.valueOf(currentCustomer.getCustomer_id()));
     }
 
-    // Returns how many items you want to display in the RecyclerView
     @Override
     public int getItemCount() { return customers.size(); }
 
-    // CustomerListActivity observes liveData, onChanged methods passes List of customers.
-    // We need to get this list into the RecyclerView by calling this method
+
     public void setCustomers(List<Customer> customers) {
         this.customers = customers;
-        // Tell adapter to redraw the layout.
         notifyDataSetChanged();
     }
 
-
-    // Return Customer at this position - created for swipe delete method in CustomerListActivity
     public Customer getCustomerAt(int position) {
         return customers.get(position);
     }
 
 
-    // Create ViewHolder class - Will hold the views in our single RecyclerView items
+    // Create ViewHolder class
     public class CustomerHolder extends RecyclerView.ViewHolder {
         private TextView textView_name;
         private TextView textView_address;
@@ -80,7 +70,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         private TextView textView_id;
 
         // Constructor
-        // Assign the textViews - itemView is the card itself from the cardView list item.
         public CustomerHolder(@NonNull View itemView) {
             super(itemView);
             textView_name = itemView.findViewById(R.id.textView_customer_name);
@@ -100,15 +89,12 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         }
     }
 
-
-
     // onClick event interface
     public interface OnItemClickListener {
         void onItemClick(Customer customer);
     }
 
     // Reference onItemClickListener
-    // Choose onItemClickListener with my package name
     public void setOnItemClickListener(OnItemClickListener listener) {this.listener = listener;}
 
 }
