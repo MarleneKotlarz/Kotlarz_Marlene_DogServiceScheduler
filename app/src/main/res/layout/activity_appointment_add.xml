@@ -145,13 +145,27 @@
                 android:text="Select pet service"
                 android:textColor="@color/colorWhite" />
 
-            <TextView
-                android:id="@+id/textView_appointmentAdd_serviceType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_appointmentAdd_serviceType"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:visibility="visible" />
+            </LinearLayout>
 </LinearLayout>
 
         <TextView
@@ -176,7 +190,7 @@
                 android:src="@drawable/ic_customer" />
 
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="170dp"
                 android:layout_height="fill_parent"
                 android:orientation="vertical"
                 android:gravity="center_vertical">
@@ -215,7 +229,7 @@
                 android:src="@drawable/ic_pet" />
 
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="170dp"
                 android:layout_height="fill_parent"
                 android:gravity="center_vertical"
                 android:orientation="vertical">

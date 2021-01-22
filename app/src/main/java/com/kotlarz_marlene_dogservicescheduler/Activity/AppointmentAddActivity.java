@@ -50,8 +50,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     public static final int ADD_PET_TO_APPOINTMENT_REQUEST = 2;
     public static final int ADD_SERVICE_TO_APPOINTMENT_REQUEST = 3;
 
-
-
     // Intent Extra Keys
     public static final String EXTRA_EMPLOYEE_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_EMPLOYEE_ID";
@@ -78,29 +76,17 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     public static final String EXTRA_SERVICE_OPTION =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_OPTION";
 
-
-
-
-    private static final String TAG = "Scheduler";
-
-
     private Calendar calendar;
     private TextView textView_date, textView_time, textView_customerName, textView_petName, textView_serviceType;
     private String date, time, customerName, petName;
     private String location, duration, serviceType, option;
-    private int customerId, petId, serviceId, appointmentId;
+    private int customerId, petId;
     private int notificationId = 1;
-    private int employeeId = 1;
     private Button buttonService;
-    Appointment appointment;
-    ServiceOption serviceOption;
 
     private AppointmentViewModel appointmentViewModel;
-    private CustomerViewModel customerViewModel;
     private PetViewModel petViewModel;
     private ServiceOptionViewModel serviceOptionViewModel;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,11 +154,7 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             }
         });
 
-
-        Log.v(TAG, "Scheduler - AppointmentAddActivity - onCreate ");
-
     }
-
 
     // DatePicker - set up textView to selected date
     @Override
@@ -191,32 +173,18 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String currentTime = String.format("%02d:%02d", hourOfDay, minute);
-
-        // Current format from TimePicker - 24hr
         DateFormat df = new SimpleDateFormat("HH:mm");
-
-        // Format that we want to use and display - 12hr with AM/PM
         DateFormat outputformat = new SimpleDateFormat("hh:mm aa");
-
         Date date = null;
         String output = null;
 
-
         try {
-            // Convert inputFromTimePicker String to Date format
             date= df.parse(currentTime);
-
-            // Convert original format to new format
             output = outputformat.format(date);
-
-            // Set textfield to updated time
             textView_time.setText(output);
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
     }
 
     // Create alarm for due date
@@ -253,7 +221,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
         Toast.makeText(this, "Alarm canceled", Toast.LENGTH_SHORT).show();
 
     }
-
 
     // Get selection back from AppointmentCustomerListActivity, AppointmentPetListActivity and AppointmentServiceActivity
     @Override
@@ -309,10 +276,9 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             startActivityForResult(intent, ADD_PET_TO_APPOINTMENT_REQUEST);
     }
 
-
     // Save appointment iconButton method
     private void saveAppointment() {
-        // Get input from editText views
+
         date = textView_date.getText().toString();
         time = textView_time.getText().toString();
         customerName = textView_customerName.getText().toString();
@@ -325,7 +291,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             return;
         }
         else{
-            // Accept input and save appointment - send data back
             Intent dataIntent = new Intent();
             dataIntent.putExtra(EXTRA_APPOINTMENT_TIME, time);
             dataIntent.putExtra(EXTRA_APPOINTMENT_DATE, date);
@@ -336,8 +301,6 @@ public class AppointmentAddActivity extends AppCompatActivity implements DatePic
             dataIntent.putExtra(EXTRA_SERVICE_LOCATION, location);
             dataIntent.putExtra(EXTRA_SERVICE_TYPE, serviceType);
             dataIntent.putExtra(EXTRA_SERVICE_OPTION, option);
-
-            Log.v(TAG, "Scheduler - AppointmentAddActivity - saveAppointment newAppointmentId" );
 
             setResult(RESULT_OK, dataIntent);
             finish();
