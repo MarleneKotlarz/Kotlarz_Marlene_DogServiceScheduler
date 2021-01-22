@@ -82,15 +82,9 @@ public abstract class SchedulerDatabase extends RoomDatabase {
                 PetDao petDao = INSTANCE.petDao();
                 ServiceOptionDao serviceOptionDao = INSTANCE.serviceOptionDao();
 
-
                 Log.v(TAG, "Scheduler SchedulerDatabase - roomCallback method ");
 
-                // Keep this code if you want to start a clean database every time.
-                // This is not needed if you only populate on creation.
-                appointmentDao.deleteAllAppointments();
-
                 // Sample Code - make sure FK entity is created first
-
                 Employee employee1 = new Employee("FirstName LastName", "###-###-####", "capstone");
                 employeeDao.insert(employee1);
 
