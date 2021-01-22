@@ -58,15 +58,15 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
 
     public void setAppointmentServiceList(List<AppointmentAndServiceOption> list) {
         this.apptServicelist = list;
-        // Tell adapter to redraw the layout.
         notifyDataSetChanged();
     }
 
-
+    // Create ViewHolder class
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_report_apptDate, tv_report_apptTime, tv_report_serviceType, tv_report_serviceDuration;
         TextView tv_report_apptId, tv_report_customerId, tv_report_petId;
 
+        // Constructor
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_report_apptDate = itemView.findViewById(R.id.report_apptDate);
