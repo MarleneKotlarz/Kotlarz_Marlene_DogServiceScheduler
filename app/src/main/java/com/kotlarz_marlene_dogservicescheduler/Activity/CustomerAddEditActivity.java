@@ -2,7 +2,6 @@ package com.kotlarz_marlene_dogservicescheduler.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,8 +25,6 @@ public class CustomerAddEditActivity extends AppCompatActivity {
     public static final String EXTRA_CUSTOMER_PHONE =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_PHONE";
 
-
-    private static final String TAG = "Scheduler";
     // Member variables
     private EditText editText_customerName;
     private EditText editText_customerAddress;
@@ -59,10 +56,7 @@ public class CustomerAddEditActivity extends AppCompatActivity {
             setTitle("Add Customer");
         }
 
-
-        Log.v(TAG, "Scheduler - CustomerAddEditActivity - onCreate ");
     }
-
 
     // Save customer iconButton method
     private void saveCustomer() {
@@ -86,12 +80,11 @@ public class CustomerAddEditActivity extends AppCompatActivity {
         dataIntent.putExtra(EXTRA_CUSTOMER_NAME, customerName);
         dataIntent.putExtra(EXTRA_CUSTOMER_ADDRESS, customerAddress);
         dataIntent.putExtra(EXTRA_CUSTOMER_PHONE, customerPhone);
-
         int id = getIntent().getIntExtra(EXTRA_CUSTOMER_ID, -1);
         if(id != -1) {
             dataIntent.putExtra(EXTRA_CUSTOMER_ID, id);
         }
-        Log.v(TAG, "Scheduler - CustomerAddEditActivity - saveCustomer ");
+
         setResult(RESULT_OK, dataIntent);
         finish();
     }
@@ -115,7 +108,6 @@ public class CustomerAddEditActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-
     }
+
 }
