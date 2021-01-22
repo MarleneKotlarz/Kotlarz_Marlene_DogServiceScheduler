@@ -28,14 +28,8 @@ public interface AppointmentDao {
     @Delete
     void delete(Appointment appointment);
 
-    @Query("DELETE FROM appointment_table")
-    void deleteAllAppointments();
-
     @Query("SELECT * FROM appointment_table ORDER BY date ASC")
     LiveData<List<Appointment>> getAllAppointments();
-
-    @Query("SELECT * FROM appointment_table WHERE customer_id_fk = :customerIdFk")
-    LiveData<List<Appointment>> getAppointmentByCustomerId(int customerIdFk);
 
     @Query("SELECT appointment_id FROM appointment_table ORDER BY appointment_id DESC LIMIT 1")
     Integer getAppointmentIdForService();

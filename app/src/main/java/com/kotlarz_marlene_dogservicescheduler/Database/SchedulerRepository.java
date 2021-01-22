@@ -77,11 +77,6 @@ public class SchedulerRepository {
         });
     }
 
-    public void deleteAllAppointments() {
-        SchedulerDatabase.executorServiceDB.execute(() -> {
-            appointmentDao.deleteAllAppointments();
-        });
-    }
 
     public LiveData<List<Appointment>> getAllAppointments() {
         return allAppointments;

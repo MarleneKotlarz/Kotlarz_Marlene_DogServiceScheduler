@@ -55,11 +55,6 @@ public class AppointmentViewModel extends AndroidViewModel {
         schedulerRepository.delete(appointment);
     }
 
-    public void deleteAllAppointments() {
-        schedulerRepository.deleteAllAppointments();
-    }
-
-
     public LiveData<List<Appointment>> getAllAppointments() {
         return allAppointments;
     }
