@@ -2,7 +2,6 @@ package com.kotlarz_marlene_dogservicescheduler.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,15 +13,12 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.kotlarz_marlene_dogservicescheduler.Entity.ServiceOption;
 import com.kotlarz_marlene_dogservicescheduler.R;
 
 import java.util.ArrayList;
 
 public class AppointmentServiceActivity extends AppCompatActivity {
 
-    public static final String EXTRA_SERVICE_ID =
-            "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_ID";
     public static final String EXTRA_SERVICE_DURATION =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_DURATION";
     public static final String EXTRA_SERVICE_LOCATION =
@@ -31,9 +27,6 @@ public class AppointmentServiceActivity extends AppCompatActivity {
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_TYPE";
     public static final String EXTRA_SERVICE_OPTION =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_SERVICE_OPTION";
-
-
-    private static final String TAG = "Scheduler";
 
     Spinner spinnerDuration;
     Spinner spinnerLocation;
@@ -60,10 +53,10 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Add Service");
 
-        spinnerDuration = (Spinner) findViewById(R.id.spinner_appointmentAdd_duration);
-        spinnerLocation = (Spinner) findViewById(R.id.spinner_appointmentAdd_location);
-        spinnerType = (Spinner) findViewById(R.id.spinner_appointmentAdd_type);
-        spinnerOption = (Spinner) findViewById(R.id.spinner_appointmentAdd_option);
+        spinnerDuration = findViewById(R.id.spinner_appointmentAdd_duration);
+        spinnerLocation = findViewById(R.id.spinner_appointmentAdd_location);
+        spinnerType = findViewById(R.id.spinner_appointmentAdd_type);
+        spinnerOption = findViewById(R.id.spinner_appointmentAdd_option);
 
         // Assign Duration spinner
         arrayList_duration = new ArrayList<>();
@@ -106,20 +99,16 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 if (position == 0) {
                     arrayAdapter_location = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_walking_location);
                     arrayAdapter_option = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_intensity);
-
                 }
                 if (position == 1) {
                     arrayAdapter_location = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_playing_location);
                     arrayAdapter_option = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_toy);
-
                 }
                 spinnerLocation.setAdapter(arrayAdapter_location);
                 spinnerOption.setAdapter(arrayAdapter_option);
-
             }
 
             @Override
@@ -129,10 +118,8 @@ public class AppointmentServiceActivity extends AppCompatActivity {
 
     }
 
-
     // Save service to appointment
     private void saveService() {
-
         String duration = spinnerDuration.getSelectedItem().toString();
         String location = spinnerLocation.getSelectedItem().toString();
         String type = spinnerType.getSelectedItem().toString();
@@ -144,13 +131,9 @@ public class AppointmentServiceActivity extends AppCompatActivity {
         dataIntent.putExtra(EXTRA_SERVICE_TYPE, type);
         dataIntent.putExtra(EXTRA_SERVICE_OPTION, option);
 
-        Log.v(TAG, "Scheduler - AppointmentServiceActivity - save Service ");
-
         setResult(RESULT_OK, dataIntent);
         finish();
-
     }
-
 
     // Create actionbar menu
     @Override
