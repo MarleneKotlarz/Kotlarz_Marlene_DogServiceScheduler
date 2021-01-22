@@ -151,5 +151,5 @@ public class PetListActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    
+
 }
