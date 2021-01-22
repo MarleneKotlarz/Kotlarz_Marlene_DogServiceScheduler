@@ -2,7 +2,6 @@ package com.kotlarz_marlene_dogservicescheduler.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kotlarz_marlene_dogservicescheduler.R;
-import com.kotlarz_marlene_dogservicescheduler.ViewModel.EmployeeViewModel;
 
 public class EmployeeDetailsActivity extends AppCompatActivity {
 
@@ -25,8 +23,6 @@ public class EmployeeDetailsActivity extends AppCompatActivity {
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_EMPLOYEE_PHONE";
     public static final String EXTRA_EMPLOYEE_PASSWORD =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_EMPLOYEE_PASSWORD";
-
-    private static final String TAG = "Scheduler";
 
     EditText editText_employeeName, editText_employeePhone, editText_employeePassword;
     String employeeName, employeePhone, employeePassword;
@@ -55,8 +51,6 @@ public class EmployeeDetailsActivity extends AppCompatActivity {
         employeePhone = intent.getStringExtra(EXTRA_EMPLOYEE_PHONE);
         employeePassword = intent.getStringExtra(EXTRA_EMPLOYEE_PASSWORD);
 
-        Log.v(TAG,"Scheduler - EmployeeDetailsActivity - onCreate employeeId " + employeeId);
-
     }
 
     private void saveEmployee() {
@@ -70,7 +64,7 @@ public class EmployeeDetailsActivity extends AppCompatActivity {
             return;
         }
 
-        // Accept input and save employee - send data back
+        // Accept input and save employee
         Intent dataIntent = new Intent();
         dataIntent.putExtra(EXTRA_EMPLOYEE_NAME, employeeName);
         dataIntent.putExtra(EXTRA_EMPLOYEE_PHONE, employeePhone);
@@ -101,9 +95,6 @@ public class EmployeeDetailsActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-
     }
-
 
 }
