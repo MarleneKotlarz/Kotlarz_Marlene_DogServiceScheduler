@@ -1,16 +1,15 @@
 package com.kotlarz_marlene_dogservicescheduler.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.kotlarz_marlene_dogservicescheduler.R;
 
@@ -28,8 +27,6 @@ public class PetAddEditActivity extends AppCompatActivity {
     public static final String EXTRA_PET_NOTE =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_PET_NOTE";
 
-    private static final String TAG = "Scheduler";
-
     // Member variables
     private EditText editText_petName, editText_petBreed, editText_petAge, editText_note;
     private String petName, petBreed, petAge, petNote;
@@ -46,7 +43,7 @@ public class PetAddEditActivity extends AppCompatActivity {
         editText_petAge = findViewById(R.id.editText_petAddEdit_age);
         editText_note = findViewById(R.id.editText_petAddEdit_note);
 
-        // Receiving data form CustomerListActivity and CustomerDetailsActivity
+        // Receiving data form PetListActivity and PetDetailsActivity
         Intent dataIntent = getIntent();
         if (dataIntent.hasExtra(EXTRA_PET_ID)) {
             setTitle("Edit pet");
@@ -58,12 +55,9 @@ public class PetAddEditActivity extends AppCompatActivity {
             setTitle("Add pet");
         }
 
-        Log.v(TAG, "Scheduler - PetAddEditActivity - onCreate ");
-
     }
 
     private void savePet() {
-        // Get input from editText views
         petName = editText_petName.getText().toString();
         petBreed = editText_petBreed.getText().toString();
         petAge = editText_petAge.getText().toString();
@@ -74,7 +68,7 @@ public class PetAddEditActivity extends AppCompatActivity {
             Toast.makeText(this, "Please fill out all fields.", Toast.LENGTH_SHORT).show();
             return;
         }
-        // Accept input and save Pet - requires Intent extra key -Create intent to send back data.
+        // Accept input and save Pet
         Intent data = new Intent();
         data.putExtra(EXTRA_PET_NAME, petName);
         data.putExtra(EXTRA_PET_BREED, petBreed);
@@ -85,7 +79,6 @@ public class PetAddEditActivity extends AppCompatActivity {
         if (id != -1) {
             data.putExtra(EXTRA_PET_ID, id);
         }
-        Log.v(TAG, "Scheduler - PetAddEditActivity - savePet");
 
         setResult(RESULT_OK, data);
         finish();
@@ -98,7 +91,6 @@ public class PetAddEditActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.pet_add_edit_menu, menu);
         return true;
     }
-
 
     // Handle backwards arrow and save Course in actionbar.
     @Override
@@ -113,6 +105,5 @@ public class PetAddEditActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
+    
 }
