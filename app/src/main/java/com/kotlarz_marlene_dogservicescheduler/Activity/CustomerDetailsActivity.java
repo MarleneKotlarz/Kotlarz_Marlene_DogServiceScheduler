@@ -2,7 +2,6 @@ package com.kotlarz_marlene_dogservicescheduler.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,8 +36,6 @@ public class CustomerDetailsActivity extends AppCompatActivity {
     public static final String EXTRA_CUSTOMER_EMPLOYEE_ID =
             "com.kotlarz_marlene_dogservicescheduler.Activity.EXTRA_CUSTOMER_EMPLOYEE_ID";
 
-    private static final String TAG = "Scheduler";
-
     private CustomerViewModel customerViewModel;
     private int customerId, employeeId;
     private String customerName;
@@ -69,6 +66,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         textView_customerName.setText(intent.getStringExtra(EXTRA_CUSTOMER_NAME));
         textView_customerAddress.setText(intent.getStringExtra(EXTRA_CUSTOMER_ADDRESS));
         textView_customerPhone.setText(intent.getStringExtra(EXTRA_CUSTOMER_PHONE));
+
         // Set field values
         customerId = intent.getIntExtra(EXTRA_CUSTOMER_ID, -1);
         customerName = intent.getStringExtra(EXTRA_CUSTOMER_NAME);
@@ -94,9 +92,6 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                     intent.putExtra(EXTRA_CUSTOMER_ID, customerId);
                 }
                 startActivityForResult(intent, EDIT_CUSTOMER_REQUEST);
-                Log.v(TAG, "Scheduler - CustomerDetailsActivity - onCreate ");
-
-
             }
         });
 
@@ -112,14 +107,12 @@ public class CustomerDetailsActivity extends AppCompatActivity {
 
     }
 
-
     // Get results back from editing a customer
     @Override
     protected  void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == EDIT_CUSTOMER_REQUEST && resultCode == RESULT_OK) {
-            // Get Intent Keys from CustomerAddEditActivity
             textView_customerName = findViewById(R.id.textView_customer_name);
             textView_customerAddress = findViewById(R.id.textView_customer_address);
             textView_customerPhone = findViewById(R.id.textView_customer_phone);
@@ -142,14 +135,10 @@ public class CustomerDetailsActivity extends AppCompatActivity {
             customer.setCustomer_id(customerId);
             customerViewModel.update(customer);
 
-            Log.v(TAG, "Scheduler - CustomerDetailsActivity - onActivityResult ");
-
             Toast.makeText(this, "Customer updated", Toast.LENGTH_SHORT).show();
-
         } else {
             Toast.makeText(this, "Customer not updated", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     // Create actionbar menu
@@ -171,6 +160,5 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 }
