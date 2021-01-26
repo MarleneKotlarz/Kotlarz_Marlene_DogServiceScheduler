@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.kotlarz_marlene_dogservicescheduler.R;
 
+//---------- DATABASE COMPONENT WITH FUNCTIONALITY TO ADD, MODIFY, DELETE DATA ----------//
+
 public class CustomerAddEditActivity extends AppCompatActivity {
 
     // Intent Extra Keys

@@ -3,6 +3,8 @@ package com.kotlarz_marlene_dogservicescheduler.Entity;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
+//---------- CODE INCLUDING INHERITANCE, POLYMORPHISM, AND ENCAPSULATION ----------//
+
 @Entity(tableName = "service_option_table",
         foreignKeys = {
                 @ForeignKey(

@@ -74,6 +74,8 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         customerPhone = intent.getStringExtra(EXTRA_CUSTOMER_PHONE);
         employeeId = intent.getIntExtra(EXTRA_CUSTOMER_EMPLOYEE_ID, -1);
 
+//---------- DATABASE COMPONENT WITH FUNCTIONALITY TO ADD, MODIFY, DELETE DATA ----------//
+
         // FAB edit customer button - open CustomerAddEditActivity
         FloatingActionButton fabEditCustomer = findViewById(R.id.fab_customer_edit);
         fabEditCustomer.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +108,8 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         });
 
     }
+
+//---------- DATABASE COMPONENT WITH FUNCTIONALITY TO ADD, MODIFY, DELETE DATA ----------//
 
     // Get results back from editing a customer
     @Override

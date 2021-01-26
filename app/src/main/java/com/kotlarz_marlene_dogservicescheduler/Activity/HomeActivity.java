@@ -16,6 +16,8 @@ import com.kotlarz_marlene_dogservicescheduler.Entity.Employee;
 import com.kotlarz_marlene_dogservicescheduler.R;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.EmployeeViewModel;
 
+//---------- USER-FRIENDLY, FUNCTIONAL UI ----------//
+
 public class HomeActivity extends AppCompatActivity {
 
     public static final int EDIT_EMPLOYEE_REQUEST = 1;

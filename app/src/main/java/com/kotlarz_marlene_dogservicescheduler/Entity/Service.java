@@ -2,6 +2,7 @@ package com.kotlarz_marlene_dogservicescheduler.Entity;
 
 import androidx.room.PrimaryKey;
 
+//---------- CODE INCLUDING INHERITANCE, POLYMORPHISM, AND ENCAPSULATION ----------//
 
 public abstract class Service {
 

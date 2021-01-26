@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         editText_password = findViewById(R.id.editText_password);
         button_login = findViewById(R.id.button_login);
 
+//---------- EXCEPTION CONTROL ----------//
+//---------- VALIDATION FUNCTIONALITY ----------//
+//---------- SECURITY FEATURE ----------//
+
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

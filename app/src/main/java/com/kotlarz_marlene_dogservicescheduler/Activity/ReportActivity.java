@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+//---------- ABILITY TO GENERATE REPORTS ----------//
+
 public class ReportActivity extends AppCompatActivity {
 
     private AppointmentViewModel appointmentViewModel;

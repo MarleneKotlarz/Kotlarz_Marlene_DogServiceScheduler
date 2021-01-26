@@ -54,6 +54,8 @@ public class CustomerListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         employeeId = intent.getIntExtra(EXTRA_CUSTOMER_EMPLOYEE_ID, -1);
 
+//---------- DESIGN ELEMENT THAT MAKE APPLICATION SCALABLE ----------//
+
         // Reference to RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView_customerList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -76,6 +78,8 @@ public class CustomerListActivity extends AppCompatActivity {
             }
         });
 
+//---------- DATABASE COMPONENT WITH FUNCTIONALITY TO ADD, MODIFY, DELETE DATA ----------//
+
         // RecyclerView - delete by swiping
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -89,6 +93,8 @@ public class CustomerListActivity extends AppCompatActivity {
                 Toast.makeText(CustomerListActivity.this, "Customer deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
+
+//---------- DATABASE COMPONENT WITH FUNCTIONALITY TO ADD, MODIFY, DELETE DATA ----------//
 
         // onClick - view customer details in CustomerDetailsActivity
         customerAdapter.setOnItemClickListener(new CustomerAdapter.OnItemClickListener() {
@@ -105,6 +111,8 @@ public class CustomerListActivity extends AppCompatActivity {
             }
         });
 
+//---------- DATABASE COMPONENT WITH FUNCTIONALITY TO ADD, MODIFY, DELETE DATA ----------//
+
         // FAB to add customer in CustomerAddEditActivity
         FloatingActionButton fabAddCustomer = findViewById(R.id.fab_customer_add);
         fabAddCustomer.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +126,8 @@ public class CustomerListActivity extends AppCompatActivity {
         Log.v(TAG, "Scheduler - CustomerListActivity - onCreate employeeId " + employeeId);
 
     }
+
+//---------- DATABASE COMPONENT WITH FUNCTIONALITY TO ADD, MODIFY, DELETE DATA ----------//
 
     // Get results back from CustomerAddEditActivity saveCustomer method.
     @Override
@@ -139,6 +149,8 @@ public class CustomerListActivity extends AppCompatActivity {
             Toast.makeText(this, "Customer not saved", Toast.LENGTH_SHORT).show();
         }
     }
+
+//---------- SEARCH FUNCTIONALITY ----------//
 
     // Create actionbar menu
     @Override
