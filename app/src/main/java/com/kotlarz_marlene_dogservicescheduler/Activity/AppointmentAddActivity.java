@@ -1,5 +1,4 @@
 package com.kotlarz_marlene_dogservicescheduler.Activity;
-
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -20,7 +19,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +35,6 @@ import com.kotlarz_marlene_dogservicescheduler.ViewModel.AppointmentViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.CustomerViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.PetViewModel;
 import com.kotlarz_marlene_dogservicescheduler.ViewModel.ServiceOptionViewModel;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
