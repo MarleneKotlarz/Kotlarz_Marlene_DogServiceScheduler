@@ -1,5 +1,6 @@
 # Kotlarz_Marlene_DogServiceScheduler
- WGU_C868_Capstone
+
+WGU_C868_Capstone
 
 
 # 1.	Project topic AND description: 
